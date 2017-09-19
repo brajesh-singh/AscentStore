@@ -1,0 +1,13 @@
+# ImpEx for Importing Products Stock Levels and Warehouses
+# English localisation
+
+# Macros / Replacement Parameter definitions
+$lang=en
+
+# Update Vendor Name
+INSERT_UPDATE Vendor;code[unique=true];name[lang=$lang]
+;ascent;Ascent Vendor
+
+# Update Warehouses
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=$lang]
+;BP01;ERP Warehouse

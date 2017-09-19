@@ -1,0 +1,193 @@
+###########################################################################
+###########################################################################
+## Environment Configuration
+###########################################################################
+#
+# hybris Managed Services
+# 
+# configuration template : v 1.0
+# 
+# customer       : pdh
+# datacenter     : MA
+# environment    : d
+# hybris         : 6.2.0
+#
+
+yms.hostname=pdh-d-ma-app-001
+
+
+backoffice.cockpitng.hotDeployment.enabled=@backoffice.cockpitng.hotDeployment.enabled@
+
+###########################################################################
+## DB Connection
+###########################################################################
+
+db.url=@db.url@
+db.driver=@db.driver@
+db.username=@db.username@
+db.password=@db.password@
+db.tableprefix=@db.tableprefix@
+
+# Multi Tenant
+installed.tenants=@installed.tenants@
+
+
+
+###########################################################################
+## Media Folder Settings
+###########################################################################
+
+media.read.dir=@media.read.dir@
+media.replication.dirs=@media.replication.dirs@
+
+
+
+###########################################################################
+## Cluster Settings
+###########################################################################
+clustermode=@clustermode@
+cluster.id=${CLUSTER_ID}
+cluster.maxid=@cluster.maxid@
+cluster.broadcast.methods=@cluster.broadcast.methods@
+cluster.broadcast.method.jgroups=@cluster.broadcast.method.jgroups@
+cluster.broadcast.method.jgroups.configuration=@cluster.broadcast.method.jgroups.configuration@
+cluster.broadcast.method.jgroups.channel.name=@cluster.broadcast.method.jgroups.channel.name@
+cluster.broadcast.method.jgroups.udp.mcast_port=@cluster.broadcast.method.jgroups.udp.mcast_port@
+cluster.broadcast.senderthreads.disable=@cluster.broadcast.senderthreads.disable@
+
+###########################################################################
+## Mail Settings
+###########################################################################
+
+mail.smtp.server=@mail.smtp.server@
+mail.smtp.port=@mail.smtp.port@
+
+
+
+###########################################################################
+## Solr Instances Auto Start
+###########################################################################
+
+solrserver.instances.default.autostart=@solrserver.instances.default.autostart@
+
+
+
+###########################################################################
+## Dynatrace Settings
+###########################################################################
+
+dynatrace.agentlib=@dynatrace.agentlib@
+dynatrace.server=@dynatrace.server@
+
+#dynatrace.enabled=true
+#tomcat.generaloptions.dynatrace= -agentpath:${dynatrace.agentlib}=name=${yms.hostname},server=${dynatrace.server},wait=30
+tomcat.generaloptions.dynatrace=@tomcat.generaloptions.dynatrace@
+
+
+
+###########################################################################
+## Port Settings
+###########################################################################
+
+# HTTP/HTTPS ports
+tomcat.http.port=@tomcat.http.port@
+tomcat.ssl.port=@tomcat.ssl.port@
+# AJP ports
+tomcat.ajp.port=@tomcat.ajp.port@
+tomcat.ajp.secureport=@tomcat.ajp.secureport@
+# Proxy ports
+proxy.http.port=@proxy.http.port@
+proxy.ssl.port=@proxy.ssl.port@
+
+
+
+###########################################################################
+## Log level Settings
+###########################################################################
+
+# uncomment in production
+log4j.threshold=@log4j.threshold@
+
+###########################################################################
+## Webroot Settings 
+###########################################################################
+
+hac.webroot=/hac
+hmc.webroot=/hmc
+
+yacceleratorstorefront.webroot=
+storefrontContextRoot=
+    
+
+
+
+###########################################################################
+## JMX Settings
+###########################################################################
+
+tomcat.generaloptions.jmxsettings=@tomcat.generaloptions.jmxsettings@
+tomcat.jmx.port=@tomcat.jmx.port@
+tomcat.jmx.server.port=@tomcat.jmx.server.port@
+
+
+###########################################################################
+## Datahub Settings
+###########################################################################
+# Example properties file to pre-configure commerce suite for SAP specific integration content
+ 
+# Customer integration
+# please adapte the number ranges according to the settings in the backend
+#keygen.customer.sap_customer_id.start=0000470000
+#keygen.customer.sap_contact_id.start=0000470000
+#sapcustomerexchange.outbound.datahub.feed=SAPCONSUMER_OUTBOUND_FEED
+ 
+# order
+# config async order management - order number
+#keygen.order.code.start=5520000
+ 
+#
+# General configuration
+#
+ 
+# SAP configuration framework
+# config sapcoreconfiguration
+#sapcoreconfiguration.datahuboutbound.enabled=true
+ 
+# SAP asynchronous order management
+#numberseries.cache.size.order_code=1
+#log4j.logger.de.hybris.platform.sap.orderexchange=debug
+#saporderexchange.orderoutbound.maxRetries=3
+#datahubadapter.datahuboutbound.url=http://10.17.2.212:29991/datahub-webapp/v1
+
+# The username and password for basic authentication of DataHub adapter with the DataHub server instance
+#datahubadapter.datahuboutbound.user=admin
+#datahubadapter.datahuboutbound.password=nimda
+
+
+###########################################################################
+## Tomcat Settings
+###########################################################################
+
+tomcat.wrapper.logfile=@tomcat.wrapper.logfile@
+
+standalone.javaoptions=@standalone.javaoptions@
+
+tomcat.generaloptions.jvmsettings=@tomcat.generaloptions.jvmsettings@
+
+tomcat.generaloptions=@tomcat.generaloptions@
+
+#
+# END OF HCS standard config
+# hybris Managed Services
+# 
+# configuration template : v 1.0
+# 
+# customer       : pdh
+# datacenter     : MA
+# environment    : d
+# hybris         : 6.2.0
+#
+###########################################################################
+## Environment Configuration
+###########################################################################
+###########################################################################

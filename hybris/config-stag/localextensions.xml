@@ -1,0 +1,110 @@
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../bin/platform/resources/schemas/extensions.xsd">
+	<extensions>
+		<!-- SAP Integration -->
+		<!-- <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/core" autoload="true" /> <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/masterdata" 
+			autoload="true" /> <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/synchronousPricing" autoload="true" /> <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/asynchronousOM" 
+			autoload="true" /> <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/availability" autoload="true" /> <path dir="${HYBRIS_BIN_DIR}/ext-integration/sap/testsupport" 
+			autoload="true" /> -->
+		<path dir="${HYBRIS_BIN_DIR}" autoload="false" />
+
+		<!-- B2B Acc Plus -->
+        <extension name="mcc" />
+        <extension name="adaptivesearchsolr" />
+        <extension name="adaptivesearchbackoffice" />
+        <extension name="adaptivesearchsamplesaddon" />
+        <extension name="b2bcommercebackoffice" />
+        <extension name="solrfacetsearchbackoffice" />
+        <extension name="b2badmincockpit" />
+
+		<extension name="commercesearch" />
+        <extension name="ycommercewebservices" />
+        <extension name="orderselfserviceaddon" />
+
+        <extension name="powertoolsstore" />
+        <extension name="solrserver" />
+
+        <extension name="acceleratorwebservicesaddon" />
+        <extension name="b2bacceleratoraddon" />
+        <extension name="commerceorgsamplesaddon" />
+        <extension name="b2bpunchoutaddon" />
+        <extension name="secureportaladdon" />
+        <extension name="savedorderformsoccaddon" />
+        <extension name="b2boccaddon" />
+        <extension name="accountsummaryaddon" />
+        <extension name="assistedservicestorefront" />
+        <extension name="captchaaddon" />
+
+        <extension name="customerticketingaddon" />
+        <extension name="customersupportbackoffice" />
+
+        <extension name="rulebuilderbackoffice" />
+        <extension name="couponbackoffice" />
+        <extension name="droolsruleengineservices" />
+        <extension name="couponfacades" />
+        <extension name="promotionenginesamplesaddon" />
+
+        <extension name="textfieldconfiguratortemplatebackoffice" />
+        <extension name="textfieldconfiguratortemplateaddon" />
+
+        <extension name="assistedserviceatddtests" />
+		<extension name="assistedservicewebservices" />
+        <extension name="promotionengineatddtests" />
+        <extension name="textfieldconfiguratortemplateatddtests" />
+
+        <extension name="cmswebservices" />
+        <extension name="smarteditwebservices" />
+        <extension name="permissionswebservices" />
+        <extension name="smarteditaddon" />
+        <extension name="cmssmartedit" />
+        <extension name="previewwebservices" />
+        <extension name="cmssmarteditwebservices" />
+
+        <extension name="previewpersonalizationweb" />
+        <extension name="personalizationcmsweb" />
+        <extension name="personalizationsmartedit" />
+        <extension name="personalizationsampledataaddon" />
+        <extension name="personalizationpromotions" />
+        <extension name="personalizationpromotionsweb" />
+        <extension name="personalizationservicesbackoffice" />
+        <extension name="personalizationpromotionsbackoffice" />
+        <extension name="personalizationcmsbackoffice" />
+        <extension name="consignmenttrackingaddon" />
+		<extension name="consignmenttrackingmock" />
+        <extension name="consignmenttrackingbackoffice" />
+
+        <extension name="pcmbackofficesamplesaddon" />
+
+		<!-- Ascent Store -->
+		<extension name="ascentcockpits" />
+		<extension name="ascentcore" />
+		<extension name="ascentfacades" />
+		<extension name="ascentfulfilmentprocess" />
+		<extension name="ascentinitialdata" />
+		<extension name="ascentstorefront" />
+		<extension name="ascenttest" />		
+		
+		<!-- Subscription -->
+		<extension name="subscriptioncockpits" />
+		<extension name="subscriptionserviceshmc" />
+		<extension name="subscriptionservices" />
+		<extension name="subscriptionfacades" />
+		
+		<!-- Bundle -->
+		<extension name="configurablebundleaddon" />
+		<extension name="configurablebundlecockpits" />
+		<extension name="configurablebundlefacades" />	
+		<extension name="configurablebundleservices" />
+		
+		<!-- Subscription Bundle -->
+		<extension name="subscriptionbundlefacades" />
+		<extension name="subscriptionbundleservices" />	
+		<extension name="subscriptionbundlecockpits" />
+		
+
+		<!-- Entitlement -->
+		<extension name="entitlementcockpits" />
+		<extension name="entitlementfacades" />
+		<extension name="entitlementservices" />
+		
+	</extensions>
+</hybrisconfig>

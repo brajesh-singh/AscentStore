@@ -1,0 +1,103 @@
+# ImpEx for Importing Product taxex into the Store
+
+# Insert Product taxes for US
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+#Software
+;AD000001;us-sales-tax-full;US
+;AD000002;us-sales-tax-full;US
+;SM000001;us-sales-tax-full;US
+;SM000002;us-sales-tax-full;US
+;AP000001;us-sales-tax-full;US
+;AP000002;us-sales-tax-full;US
+;CM000001;us-sales-tax-full;US
+;CM000002;us-sales-tax-full;US
+;BA000001;us-sales-tax-full;US
+;BA000002;us-sales-tax-full;US
+;FD000001;us-sales-tax-full;US
+;FD000002;us-sales-tax-full;US
+
+#CD
+;AD000001CD;us-sales-tax-full;US
+;AD000002CD;us-sales-tax-full;US
+;SM000001CD;us-sales-tax-full;US
+;SM000002CD;us-sales-tax-full;US
+;AP000001CD;us-sales-tax-full;US
+;AP000002CD;us-sales-tax-full;US
+;CM000001CD;us-sales-tax-full;US
+;CM000002CD;us-sales-tax-full;US
+;BA000001CD;us-sales-tax-full;US
+;BA000002CD;us-sales-tax-full;US
+;FD000001CD;us-sales-tax-full;US
+;FD000002CD;us-sales-tax-full;US
+
+#Service
+;AD000001SERVICE1;us-sales-tax-full;US
+;AD000001SERVICE2;us-sales-tax-full;US
+;AD000001SERVICE3;us-sales-tax-full;US
+;AD000001SERVICE4;us-sales-tax-full;US
+;AD000002SERVICE1;us-sales-tax-full;US
+;AD000002SERVICE2;us-sales-tax-full;US
+;AD000002SERVICE3;us-sales-tax-full;US
+;AD000002SERVICE4;us-sales-tax-full;US
+;SM000001SERVICE1;us-sales-tax-full;US
+;SM000001SERVICE2;us-sales-tax-full;US
+;SM000001SERVICE3;us-sales-tax-full;US
+;SM000001SERVICE4;us-sales-tax-full;US
+;SM000002SERVICE1;us-sales-tax-full;US
+;SM000002SERVICE2;us-sales-tax-full;US
+;SM000002SERVICE3;us-sales-tax-full;US
+;SM000002SERVICE4;us-sales-tax-full;US
+;AP000001SERVICE1;us-sales-tax-full;US
+;AP000001SERVICE2;us-sales-tax-full;US
+;AP000001SERVICE3;us-sales-tax-full;US
+;AP000001SERVICE4;us-sales-tax-full;US
+;AP000002SERVICE1;us-sales-tax-full;US
+;AP000002SERVICE2;us-sales-tax-full;US
+;AP000002SERVICE3;us-sales-tax-full;US
+;AP000002SERVICE4;us-sales-tax-full;US
+;CM000001SERVICE1;us-sales-tax-full;US
+;CM000001SERVICE2;us-sales-tax-full;US
+;CM000001SERVICE3;us-sales-tax-full;US
+;CM000001SERVICE4;us-sales-tax-full;US
+;CM000002SERVICE1;us-sales-tax-full;US
+;CM000002SERVICE2;us-sales-tax-full;US
+;CM000002SERVICE3;us-sales-tax-full;US
+;CM000002SERVICE4;us-sales-tax-full;US
+;BA000001SERVICE1;us-sales-tax-full;US
+;BA000001SERVICE2;us-sales-tax-full;US
+;BA000001SERVICE3;us-sales-tax-full;US
+;BA000001SERVICE4;us-sales-tax-full;US
+;BA000002SERVICE1;us-sales-tax-full;US
+;BA000002SERVICE2;us-sales-tax-full;US
+;BA000002SERVICE3;us-sales-tax-full;US
+;BA000002SERVICE4;us-sales-tax-full;US
+;FD000001SERVICE1;us-sales-tax-full;US
+;FD000001SERVICE2;us-sales-tax-full;US
+;FD000001SERVICE3;us-sales-tax-full;US
+;FD000001SERVICE4;us-sales-tax-full;US
+;FD000002SERVICE1;us-sales-tax-full;US
+;FD000002SERVICE2;us-sales-tax-full;US
+;FD000002SERVICE3;us-sales-tax-full;US
+;FD000002SERVICE4;us-sales-tax-full;US
+
+
+# Insert Product taxes for JP
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes for GB
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes fo FR
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes for PL
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes for DE
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes for CA
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# Insert Product taxes for CN
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]

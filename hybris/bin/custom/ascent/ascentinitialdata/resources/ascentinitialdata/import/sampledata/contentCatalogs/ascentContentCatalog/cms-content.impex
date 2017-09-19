@@ -1,0 +1,781 @@
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=ascentContentCatalog
+$contentCatalogName=Ascent Content Catalog
+$productCatalog=ascentProductCatalog
+$productCatalogName=Ascent Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contacentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/cockpits/cmscockpit
+
+
+# CMS Site Settings
+UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
+#;ascent;Solutions;Product1
+
+# Site Logo
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;AscentLogo;logo-ascent.png;$siteResource/images/theme/logo-ascent.png;image/png;Ascent Solution
+;;FootLogo;FootLogo.png;$siteResource/images/theme/FootLogo.png;image/png;Foot Logo
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;SiteLogoComponent;Site Logo Component;SiteLogoComponent;"/"
+;;FootLogoComponent;Foot Logo COmponent;FootLogoComponent;
+
+# CMS Link Components - Advance search
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;styleAttributes;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+#;;AdvanceSearchLink;Advance Search Link;/search/advanced;class="advancedSearchLink";AdvanceSearchLink;AdvanceSearchLink;;;;
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product
+;;HomepageLink;Homepage Link;/;HomepageLink;HomepageLink;
+;;ProductLink;Product Link;/Solutions/c/Solutions;ProductLink;ProductLink;;Solutions
+;;SupportLink;Support Link;/faq;SupportLink;SupportLink;
+;;AccountLink;Account Link;/my-account;AccountLink;AccountLink;
+;;CompanyLink;My Company Link;/my-company/organization-management;CompanyLink;CompanyLink
+
+;;ADLink;Application Delivery Link;/Solutions/AD/c/AD;ADLink;ADLink;;AD
+;;SMLink;Service Management Link;/Solutions/SM/c/SM;SMLink;SMLink;;SM
+;;APLink;Application Performance Monitoring Link;/Solutions/AP/c/AP;APLink;APLink;;AP
+;;CMLink;Cloud Monitoring Link;/Solutions/CM/c/CM;CMLink;CMLink;;CM
+;;BALink;Business Analytics Link;/Solutions/BA/c/BA;BALink;BALink;;BA
+;;FDLink;Fraud Detection Link;/Solutions/FD/c/FD;FDLink;FDLink;;FD
+
+;;SubscriptionLink;Subscription Software Link;/Software-Type/Subscription-Software/c/SubscriptionSoftware;SubscriptionLink;SubscriptionLink;;SubscriptionSoftware
+;;PerpetualLink;Perpetual License Software Link;/Software-Type/Perpetual-License-Software/c/PerpetualSoftware;PerpetualLink;PerpetualLink;;PerpetualSoftware
+
+# Lightbox Banner for Mini Cart
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;LightboxHomeDeliveryBannerComponent;Lightbox Home Delivery Banner Component;LightboxHomeDeliveryBannerComponent;
+
+# CMS Mini Cart Component
+INSERT_UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;totalDisplay(code);shownProductCount;lightboxBannerComponent(&componentRef)
+;;MiniCart;Mini Cart;MiniCart;SUBTOTAL;3;LightboxHomeDeliveryBannerComponent
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;&componentRef
+;;Home;Home;10;HomepageLink;;Home
+;;Product;Product;10;ProductLink;;Product
+;;Support;Support;10;SupportLink;;Support
+;;Account;Account;10;AccountLink;;Account
+;;Company;Company;10;CompanyLink;;Company
+
+# CMS Link Components - My Account
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AccountHomeLink;Account Home Link;/my-account;AccountHomeLink;AccountHomeLink;;;;
+;;AccountProfileLink;AccountProfileLink;/my-account/profile;AccountProfileLink;AccountProfileLink;;;;
+;;AccountPersonalDetailsLink;AccountPersonalDetailsLink;/my-account/profile;AccountPersonalDetailsLink;AccountPersonalDetailsLink;;;;
+;;AccountUpdatePasswordLink;AccountUpdatePasswordLink;/my-account/update-password;AccountUpdatePasswordLink;AccountUpdatePasswordLink;;;;
+;;AccountAddressBookLink;AccountAddressBookLink;/my-account/address-book;AccountAddressBookLink;AccountAddressBookLink;;;;
+;;AccountManageAddressLink;AccountManageAddressLink;/my-account/address-book;AccountManageAddressLink;AccountManageAddressLink;;;;
+;;AccountPaymentDetailsLink;AccountPaymentDetailsLink;/my-account/payment-details;AccountPaymentDetailsLink;AccountPaymentDetailsLink;;;;
+;;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;/my-account/payment-details;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;;;;
+;;AccountMyQuotesLink;My Quotes Link;/my-account/my-quotes;AccountMyQuotesLink;AccountMyQuotesLink
+;;AccountViewQuotesLink;My Quotes Link;/my-account/my-quotes;AccountViewQuotesLink;AccountViewQuotesLink
+;;AccountOrderHistoryLink;AccountOrderHistoryLink;/my-account/orders;AccountOrderHistoryLink;AccountOrderHistoryLink;;;;
+;;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;/my-account/orders;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;;;;
+;;AccountMyReplenishmentOrdersLink;AccountMyReplenishmentOrdersLink;/my-account/my-replenishment;AccountMyReplenishmentOrdersLink;AccountMyReplenishmentOrdersLink;;;;
+;;AccountViewReplenishmentOrdersLink;AccountViewReplenishmentOrdersLink;/my-account/my-replenishment;AccountViewReplenishmentOrdersLink;AccountViewReplenishmentOrdersLink;;;;
+;;AccountApprovalDashboardLink;Approval Dashboard Link;/my-account/approval-dashboard;AccountApprovalDashboardLink;AccountApprovalDashboardLink;;;;
+;;AccountViewApprovalDashboardLink;View Approval Dashboard Link;/my-account/approval-dashboard;AccountViewApprovalDashboardLink;AccountViewApprovalDashboardLink;;;;
+
+# CMS Link Components - My Company
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+;;CompanyHomeLink;Company Home Link;/my-company/organization-management/;CompanyHomeLink;CompanyHomeLink
+;;CompanyOrganizationtLink;Company Manage Organization Link;/my-company/organization-management/;CompanyOrganizationtLink;CompanyOrganizationtLink
+;;CompanyBudgetLink;Company Manage Budget Link;/my-company/organization-management/manage-budgets/;CompanyBudgetLink;CompanyBudgetLink
+;;CompanyBudgetAddLink;Company Add Budget Link;/my-company/organization-management/manage-budgets/add;CompanyBudgetAddLink;CompanyBudgetAddLink
+;;CompanyBudgetEditLink;Company Edit Budget Link;/my-company/organization-management/manage-budgets/;CompanyBudgetEditLink;CompanyBudgetEditLink
+;;CompanyCostCenterLink;Company Manage Cost Centers Link;/my-company/organization-management/manage-costcenters/;CompanyCostCenterLink;CompanyCostCenterLink
+;;CompanyCostCenterAddLink;Company Add Cost Centers Link;/my-company/organization-management/manage-costcenters/add;CompanyCostCenterAddLink;CompanyCostCenterAddLink
+;;CompanyCostCenterEditLink;Company Manage Cost Centers Link;/my-company/organization-management/manage-costcenters/;CompanyCostCenterEditLink;CompanyCostCenterEditLink
+;;CompanyUnitsLink;Company Manage Units Link;/my-company/organization-management/manage-units/;CompanyUnitsLink;CompanyUnitsLink
+;;CompanyUnitsAddLink;Company Add Units Link;/my-company/organization-management/manage-units/;CompanyUnitsAddLink;CompanyUnitsAddLink
+;;CompanyUnitsEditLink;Company Edit Units Link;/my-company/organization-management/manage-units/;CompanyUnitsEditLink;CompanyUnitsEditLink
+;;CompanyUsersLink;Company Manage Users Link;/my-company/organization-management/manage-users/;CompanyUsersLink;CompanyUsersLink
+;;CompanyUsersAddLink;Company Add Users Link;/my-company/organization-management/manage-users/;CompanyUsersAddLink;CompanyUsersAddLink
+;;CompanyUsersEditLink;Company Edit Users Link;/my-company/organization-management/manage-users/;CompanyUsersEditLink;CompanyUsersEditLink
+;;CompanyUserGroupsLink;Company Manage User Groups Link;/my-company/organization-management/manage-usergroups/;CompanyUserGroupsLink;CompanyUserGroupsLink
+;;CompanyUserGroupsAddLink;Company Add User Groups Link;/my-company/organization-management/manage-usergroups/;CompanyUserGroupsAddLink;CompanyUserGroupsAddLink
+;;CompanyUserGroupsEditLink;Company Edit User Groups Link;/my-company/organization-management/manage-usergroups/;CompanyUserGroupsEditLink;CompanyUserGroupsEditLink
+;;CompanyPermissionsLink;Company Manage User Groups Link;/my-company/organization-management/manage-permissions/;CompanyPermissionsLink;CompanyPermissionsLink
+;;CompanyPermissionsAddLink;Company Add User Groups Link;/my-company/organization-management/manage-permissions/;CompanyPermissionsAddLink;CompanyPermissionsAddLink
+;;CompanyPermissionsEditLink;Company Edit User Groups Link;/my-company/organization-management/manage-permissions/;CompanyPermissionsEditLink;CompanyPermissionsEditLink
+
+# CMS Navigation Nodes - My Account
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AccountLeftNavNode;;My Account;SiteRootNode;AccountProfileLink,AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink,AccountMyReplenishmentOrdersLink,AccountApprovalDashboardLink;AccountLeftNavNode
+;AccountProfileNavNode;;Profile;AccountLeftNavNode;AccountPersonalDetailsLink,AccountUpdatePasswordLink;AccountProfileNavNode
+;AccountAddressBookNavNode;;Address Book;AccountLeftNavNode;AccountManageAddressLink;AccountAddressBookNavNode
+;AccountPaymentDetailsNavNode;;Address Book;AccountLeftNavNode;AccountManagePaymentDetailsLink;AccountPaymentDetailsNavNode
+;AccountMyQuotesNavNode;;My Quotes Nav Node;AccountLeftNavNode;AccountViewQuotesLink;AccountMyQuotesNavNode
+;AccountOrderHistoryNavNode;;Order History;AccountLeftNavNode;AccountViewOrderHistoryLink,AccountViewReplenishmentOrdersLink;AccountOrderHistoryNavNode
+;AccountApprovalDashboardNavNode;;Approval Dashboard Nav Node;AccountLeftNavNode;AccountViewApprovalDashboardLink;AccountApprovalDashboardNavNode
+
+# CMS Navigation Nodes - My Company
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;CompanyLeftNavNode;;Company Left Nav Node;SiteRootNode;CompanyOrganizationtLink,CompanyBudgetLink,CompanyCostCenterLink,CompanyUnitsLink,CompanyUsersLink,CompanyUserGroupsLink,CompanyPermissionsLink;CompanyLeftNavNode
+;CompanyBudgetNavNode;;Budget Nav Node;SiteRootNode;CompanyBudgetAddLink,CompanyBudgetEditLink;CompanyBudgetNavNode
+;CompanyCostCenterNavNode;;Cost Center Nav Node;SiteRootNode;CompanyCostCenterAddLink,CompanyCostCenterEditLink;CompanyCostCenterNavNode
+;CompanyUnitsNavNode;;Units Nav Node;SiteRootNode;CompanyUnitsAddLink,CompanyCostCenterEditLink;CompanyUnitsNavNode
+;CompanyUsersNavNode;;Users Nav Node;SiteRootNode;CompanyUsersAddLink,CompanyUsersEditLink;CompanyUsersNavNode
+;CompanyUserGroupsNavNode;;User Groups Nav NOde;SiteRootNode;CompanyUserGroupsAddLink,CompanyUserGroupsEditLink;CompanyUserGroupsNavNode
+;CompanyPermissionsNavNode;;Permissions Nav Node;SiteRootNode;CompanyPermissionsAddLink,CompanyPermissionsEditLink;CompanyPermissionsNavNode
+
+# Account Navigation Bar Components - My Account
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLeftNavigationComponent;Account Left Navigation Component;AccountLeftNavNode;;AccountLeftNavigationComponent
+;;AccountProfileNavigationComponent;Account Profile Navigation Component;AccountProfileNavNode;;AccountProfileNavigationComponent
+;;AccountAddressBookNavigationComponent;Account Address Book NavigationComponent;AccountAddressBookNavNode;;AccountAddressBookNavigationComponent
+;;AccountPaymentDetailsNavigationComponent;Account Payment Details Navigation Component;AccountPaymentDetailsNavNode;;AccountPaymentDetailsNavigationComponent
+;;AccountMyQuotesNavigationComponent;Account My Quotes Navigation Component;AccountMyQuotesNavNode;;AccountMyQuotesNavigationComponent
+;;AccountOrderHistoryNavigationComponent;Account Order History Navigation Component;AccountOrderHistoryNavNode;;AccountOrderHistoryNavigationComponent
+;;AccountApprovalDashboardNavigationComponent;Account Profile Approval Dashboard Component;AccountApprovalDashboardNavNode;;AccountApprovalDashboardNavigationComponent
+
+# Account Navigation Component - My Company
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;CompanyLeftNavigationComponent;Company Left Navigation Component;CompanyLeftNavNode;;CompanyLeftNavigationComponent
+;;CompanyBudgetNavigationComponent;Company Budget Navigation Component;CompanyBudgetNavNode;;CompanyBudgetNavigationComponent
+;;CompanyCostCenterNavigationComponent;Company CostCenter Navigation Component;CompanyCostCenterNavNode;;CompanyCostCenterNavigationComponent
+;;CompanyUnitsNavigationComponent;Company Units Navigation Component;CompanyUnitsNavNode;;CompanyUnitsNavigationComponent
+;;CompanyUsersNavigationComponent;Company Users Navigation Component;CompanyUsersNavNode;;CompanyUsersNavigationComponent
+;;CompanyUserGroupsNavigationComponent;Company UserGroups Navigation Component;CompanyUserGroupsNavNode;;CompanyUserGroupsNavigationComponent
+;;CompanyPermissionsNavigationComponent;Company Permissions Navigation Component;CompanyPermissionsNavNode;;CompanyPermissionsNavigationComponent
+
+####  CMS ACTIONS ######
+# CMS Action Restrictions
+INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
+;;ActionRestriction;A CMSAction restriction;
+
+# CMS AddToCart Action
+INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
+
+# CMS ListAddToCartAction
+INSERT_UPDATE ListAddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ListAddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;ListAddToCartAction
+
+# CMS PickUpInStoreAction Action
+INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+
+# CMS ShareOnSocialNetwork Action
+INSERT_UPDATE ShareOnSocialNetworkAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+
+# CMS View Order Action
+INSERT_UPDATE ViewOrderAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ViewOrderAction;/my-account/order/{orderCode};View Order Action;ActionRestriction;ViewOrderAction
+
+# CMS View Store Action
+INSERT_UPDATE ViewStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+
+# CMS Buy Now Action
+INSERT_UPDATE BuyNowAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;BuyNowAction;/buynow/{productCode};Buy Now Action;ActionRestriction;BuyNowAction
+
+# CMS List Buy Now Action
+INSERT_UPDATE ListBuyNowAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ListBuyNowAction;/buynow/{productCode};List Buy Now Action;ActionRestriction;ListBuyNowAction
+
+# CMS Buy Now Action
+INSERT_UPDATE TryAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;TryAction;/Try/{productCode};Buy Now Action;ActionRestriction;TryAction
+
+# CMS List Buy Now Action
+INSERT_UPDATE ListTryAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ListTryAction;/Try/{productCode};List Buy Now Action;ActionRestriction;ListTryAction
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;AccountHomepageComponent;Account Homepage Component;AccountProfileNavigationComponent,AccountAddressBookNavigationComponent,AccountPaymentDetailsNavigationComponent,AccountMyQuotesNavigationComponent,AccountOrderHistoryNavigationComponent,AccountApprovalDashboardNavigationComponent;AccountHomepageComponent
+;;CompanyHomepageComponent;Company Homepage Component;CompanyBudgetNavigationComponent, CompanyCostCenterNavigationComponent, CompanyUnitsNavigationComponent, CompanyUsersNavigationComponent, CompanyUserGroupsNavigationComponent, CompanyPermissionsNavigationComponent;CompanyHomepageComponent
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;NavBarComponent;Navigation Bar Collection Componeent;Home,Product,Support,Account,Company;NavBarComponent
+
+# CMS tabs components
+INSERT_UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+
+# CMS Footer Component
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef
+;;FooterComponent;2;FooterComponent
+
+# CMS Paragraph Component (Contact information)
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+# CMS VariantSelector Components
+INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+# CMS ProductAddToCart Components
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;AddToCart;Product Add To Cart;TryAction,BuyNowAction;AddToCart
+
+# CMS ProductReferences Components
+INSERT_UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;&componentRef
+;;CrossSelling;Cross Selling;CROSSELLING;5;CrossSelling
+
+# CMS PurchasedCategorySuggestionComponent Components
+INSERT_UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;category(code, $productCV);&componentRef
+
+# CMS CartSuggestion Components
+INSERT_UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;&componentRef
+
+# CMS SearchBox Components
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SearchBox;Search Box;SearchBox
+
+# CMS Language and Currency Component
+INSERT_UPDATE LanguageCurrencyComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+#;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
+
+# CMS Product Refinement Component
+INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent
+
+# CMS Product List Component
+INSERT_UPDATE CMSProductListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;ProductListComponent;Product List Component;ListTryAction,ListBuyNowAction;ProductListComponent
+
+# CMS Product Grid Component
+INSERT_UPDATE ProductGridComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+
+# CMS Search Results List Component
+INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;SearchResultsList;Search Result List Component;ListTryAction,ListBuyNowAction;SearchResultsList
+
+# CMS Search Results List Component
+INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;SearchResultsGrid;Search Result Grid Component;ListTryAction,ListBuyNowAction;SearchResultsGrid
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SolutionNavHeader;SolutionNavHeader;SolutionNavHeader
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+
+#### Breadcrumb Component ####
+INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;breadcrumbComponent;Breadcrumb CMS Component;breadcrumbComponent
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+
+# Category Pages
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+
+# Category Page Restrictions
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid,$contentCV)[mode=append]
+;root;;root;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;SiteRootNode;;SiteRootNode;root;;SiteRootNode
+;HomeNavNode;;Home;SiteRootNode;;HomeNavNode
+;ProductNavNode;;Product;SiteRootNode;;ProductNavNode
+;SupportNavNode;;Support;SiteRootNode;;SupportNavNode
+;AccountNavNode;;Account;SiteRootNode;;AccountNavNode
+;CompanyNavNode;;Company;SiteRootNode;;CompanyNavNode
+;SolutionNavNode;;Solution;ProductNavNode;ADLink,SMLink,APLink,CMLink,BALink,FDLink;SolutionNavNode
+#;SoftwareTypeNavNode;;SoftwareType;ProductNavNode;SubscriptionLink,PerpetualLink;SoftwareTypeNavNode
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
+;;Home;HomeNavNode;
+;;Product;ProductNavNode;
+;;Support;SupportNavNode;
+;;Account;AccountNavNode;
+;;Company;CompanyNavNode;
+
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;navigationNode(&nodeRef);link(uid, $contentCV);styleClass;dropDownLayout(code);&componentRef
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef)
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+
+# Site-wide Homepage
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(uid, $contentCV)
+
+# Functional Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+
+# Simple Content Pages 
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(uid, $contentCV)
+
+#UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(uid, $contentCV)
+
+# Product Details Page
+UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+
+# Category Pages
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+
+##### Jsp Include Component #####
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountPaymentDetailsComponent;Account Payment Details Component;accountPaymentInfoPage.jsp;;AccountPaymentDetailsComponent
+;;AccountMyQuotesComponent;Account My Quotes Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountMyQuotesPage.jsp;;AccountMyQuotesComponent
+;;AccountQuoteDetailsHeadlineComponent;Account Quote Details Headline Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountQuoteDetailHeadline.jsp;;AccountQuoteDetailsHeadlineComponent
+;;AccountQuoteDetailsStatusDecisionComponent;Account Quote Details Status Decision Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountQuoteDetailStatusDecision.jsp;;AccountQuoteDetailsStatusDecisionComponent
+;;AccountQuoteDetailsShippingComponent;Account Quote Details Shipping Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailShippingInfo.jsp;;AccountQuoteDetailsShippingComponent
+;;AccountQuoteDetailsOrderItemsComponent;Account Quote Details Order Items Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailItems.jsp;;AccountQuoteDetailsOrderItemsComponent
+;;AccountQuoteDetailsOrderTotalsComponent;Account Quote Details Order Totals Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailOrderTotals.jsp;;AccountQuoteDetailsOrderTotalsComponent
+;;AccountQuoteDetailsReorderComponent;Account Quote Details Reorder Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailReorder.jsp;;AccountQuoteDetailsReorderComponent
+;;AccountOrderDetailsHeadlineComponent;Account Order Details Headline Component;accountOrderDetailHeadline.jsp;;AccountOrderDetailsHeadlineComponent
+;;AccountOrderDetailsTotalsComponent;Account Order Details Order Totals Component;accountOrderDetailOrderTotals.jsp;;AccountOrderDetailsTotalsComponent
+;;AccountOrderDetailsReorderComponent;Account Order Details Reorder Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailReorder.jsp;;AccountOrderDetailsReorderComponent
+;;AccountOrderDetailsReplenishmentInformationComponent;Account Order Details Replenishment Information Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailReplenishmentInformation.jsp;;AccountOrderDetailsReplenishmentInformationComponent
+;;AccountOrderDetailsShippingComponent;Account Order Details Shipping Info Component;/WEB-INF/views/addons/ascentcheckoutaddon/desktop/pages/account/accountOrderDetailShippingInfo.jsp;;AccountOrderDetailsShippingComponent
+;;AccountOrderDetailsItemsComponent;Account Order Details Items Info Component;/WEB-INF/views/addons/ascentcheckoutaddon/desktop/pages/account/accountOrderDetailItems.jsp;;AccountOrderDetailsItemsComponent
+;;AccountOrderDetailsApprovalDetailsComponent;Account Order Details Approval Details Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderDetailApprovalDetails.jsp;;AccountOrderDetailsApprovalDetailsComponent
+;;AccountOrderHistoryComponent;Account History Component;accountOrderHistoryPage.jsp;ViewOrderAction;AccountOrderHistoryComponent
+;;AccountMyReplenishmentOrdersComponent;Account My Replenishment Orders Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountReplenishmentSchedule.jsp;;AccountMyReplenishmentOrdersComponent
+;;AccountMyReplenishmentCancelConfirmationComponent;Account My Replenishment Cancel Confirmation Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountCancelReplenishmentConfirmationPage.jsp;;AccountMyReplenishmentCancelConfirmationComponent
+;;AccountMyReplenishmentDetailsComponent;Account My Replenishment Order Details Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountReplenishmentScheduleDetails.jsp;;AccountMyReplenishmentDetailsComponent
+;;AccountProfileComponent;Account Profile Component;accountProfilePage.jsp;;AccountProfileComponent
+;;AccountAddressBookComponent;Account Address Book Component;accountAddressBookPage.jsp;;AccountAddressBookComponent
+;;AccountAddEditAddressComponent;Account Add Edit Address Component;accountEditAddressPage.jsp;;AccountAddEditAddressComponent
+;;AccountOrderApprovalDashboardComponent;Account OrderApproval Dashboard Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderApprovalDashboardPage.jsp;;AccountOrderApprovalDashboardComponent
+;;AccountOrderApprovalDetailsComponent;Account OrderApproval Details Component;/WEB-INF/views/addons/b2bacceleratoraddon/desktop/pages/account/accountOrderApprovalDetailsPage.jsp;;AccountOrderApprovalDetailsComponent
+;;UpdatePasswordComponent;Update Password Component;accountChangePasswordPage.jsp;;UpdatePasswordComponent
+;;UpdateProfileComponent;Update Profile Component;accountProfileEditPage.jsp;;UpdateProfileComponent
+;;UpdateEmailComponent;Update Email Component;accountProfileEmailEditPage.jsp;;UpdateEmailComponent
+;;StoreFinderComponent;Store Finder Component;storeFinderContent.jsp;;StoreFinderComponent
+;;CartComponent;Cart Display Component;cartDisplay.jsp;;CartComponent
+;;CartTotalsComponent;Cart Totals Display Component;cartTotalsDisplay.jsp;;CartTotalsComponent
+;;PromotionsComponent;Promotions Component;cartPromotionsDisplay.jsp;;PromotionsComponent
+;;PotentialPromotionsComponent;Potential Promotions Component;potentialPromotionsDisplay.jsp;;PotentialPromotionsComponent
+;;CheckoutComponent;Checkout Display Component;checkoutDisplay.jsp;;CheckoutComponent
+;;ReturningCustomerLoginComponent;Returning Customer Login Component;accountReturningCustomerLogin.jsp;;ReturningCustomerLoginComponent
+;;ReturningCustomerCheckoutLoginComponent;Returning Customer Checkout Login Component;checkoutReturningCustomerLogin.jsp;;ReturningCustomerCheckoutLoginComponent
+;;DownloadComponent;Download Component;/WEB-INF/views/desktop/pages/product/downloadProduct.jsp;;DownloadComponent
+
+INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+###### Homepage ######
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;SeeingIsBeliving;Seeing Is Beliving;SeeingIsBeliving;
+;;Business;Business;Business;
+;;Provider;We are the Solution Provider;Provider;
+;;Solution;Solution;Solution;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SOLUTIONS;Solutuions;SOLUTIONS
+;;Installation;Installation;Installation
+
+INSERT_UPDATE AscentSolutionBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;AD;Application Delivery;AD;/Solutions/AD/c/AD
+;;SM;Service Management;SM;/Solutions/SM/c/SM
+;;AP;Application Performance Monitoring;AP;/Solutions/AP/c/AP
+;;CM;Cloud Monitoring;CM;/Solutions/CM/c/CM
+;;BA;Business Analytics;BA;/Solutions/BA/c/BA
+;;FD;Fraud Detection;FD;/Solutions/FD/c/FD
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+;;AscentHomePageRotatingImagesComponent;Ascent Home Page Rotating Images Component;SeeingIsBeliving,Business,Provider,Solution;AscentHomePageRotatingImagesComponent
+
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-Homepage;Section1 Slot for Homepage;true;AscentHomePageRotatingImagesComponent,SOLUTIONS
+;;Section2ASlot-HomePage;Section2A Slot for Homepage;true;AD,SM
+;;Section2BSlot-HomePage;Section2B Slot for Homepage;true;AP,CM
+;;Section2CSlot-HomePage;Section2C Slot for Homepage;true;BA,FD
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-Homepage;Section1;;Section1Slot-Homepage
+;;Section2A-HomePage;Section2A;;Section2ASlot-HomePage
+;;Section2B-HomePage;Section2B;;Section2BSlot-HomePage
+;;Section2C-HomePage;Section2C;;Section2CSlot-HomePage
+
+###### Category Landing Page ######
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+
+INSERT_UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];name;category(code, $productCV);&componentRef
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='CamerasAccessoriesAndSuppliesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+
+###### Search Results Page ######
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SearchResultsGridSlot;Search Result Grid Slot for Search List;true;SearchResultsGrid;;;
+;;SearchResultsListSlot;Search Result List Slot for Search List;true;SearchResultsList;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='search'];contentSlot(uid,$contentCV)[unique=true]
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='searchEmpty'];contentSlot(uid,$contentCV)[unique=true]
+
+###### Cart Page ######
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;HelpBanner;Help Banner;HelpBanner;#
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;EmptyCartParagraphComponent;Empty Cart Paragraph Component;EmptyCartParagraphComponent
+;;HelpParagraphComponent;Help Paragraph Component;HelpParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;TopContent-cartPage;Top Slot for Cart Page;true;CartComponent
+;;EmptyCartMiddleContent-cartPage;Empty Cart Middle Slot for Cart Page;true;EmptyCartParagraphComponent
+#;;CenterLeftContentSlot-cartPage;Center Left Content Slot for Cart Page;true;PromotionsComponent,PotentialPromotionsComponent
+#;;CenterRightContentSlot-cartPage;Center Right Content Slot for Cart Page;true;CartTotalsComponent
+;;BottomContentSlot-cartPage;Bottom Content Slot for Cart Page;true;CheckoutComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='cartPage'];contentSlot(uid,$contentCV)[unique=true]
+;;TopContentSlotForCartPage;TopContent;;TopContent-cartPage
+;;EmptyCartMiddleForCartPage;EmptyCartMiddleContent;;EmptyCartMiddleContent-cartPage
+#;;CenterLeftContentSlotForCartPage;CenterLeftContentSlot;;CenterLeftContentSlot-cartPage
+#;;CenterRightContentSlotForCartPage;CenterRightContentSlot;;CenterRightContentSlot-cartPage
+;;BottomContentSlotForCartPage;BottomContentSlot;;BottomContentSlot-cartPage
+
+###### Checkout Login Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;LeftContentSlot-checkout-login;Left Content Slot for Checkout Login;true;ReturningCustomerCheckoutLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='checkout-login'];contentSlot(uid,$contentCV)[unique=true]
+;;LeftContentSlot-checkout-login;LeftContentSlot;;LeftContentSlot-checkout-login;;;
+
+###### Checkout Summary / Proceed to Checkout Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+
+###### Store Finder Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;MiddleContent-StoreFinderPage;Middle Slot for Store Finder Page;true;StoreFinderComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='storefinderPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Middle-StoreFinderPage;MiddleContent;;MiddleContent-StoreFinderPage
+
+###### FAQ Page ######
+ 
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;FAQParagraphComponent;FAQ Paragraph;FAQParagraphComponent
+
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-FAQ;Section1 ContentSlot For FAQ Page;true;FAQParagraphComponent
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='faq'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-FAQ;Section1;faq;Section1Slot-FAQ
+
+###### Terms and Conditions Page
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='termsAndConditions'];contentSlot(uid,$contentCV)[unique=true];;;
+
+##### Account Home Page #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
+
+###### Account Homepage ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-Account;Side Content Slot for My Account Homepage;true;AccountLeftNavigationComponent;;;
+;;BodyContent-Account;Body Content Slot for My Account Homepage;true;AccountHomepageComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-Account;SideContent;;SideContent-Account;;;
+;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
+
+###### Account Profile ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-profile;Side Content Slot for My Account Profile;true;AccountLeftNavigationComponent;;;
+;;BodyContent-profile;Body Content Slot for My Account Profile;true;AccountProfileComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-profile;SideContent;;SideContent-profile;;;
+;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
+
+###### Account Address Book ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-address-book;Side Content Slot for Account Address Book;true;AccountLeftNavigationComponent;;;
+;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-address-book;SideContent;;SideContent-address-book;;;
+;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
+
+###### Account Add Edit Address ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-add-edit-address;Side Content Slot for Add Edit Address;true;AccountLeftNavigationComponent;;;
+;;BodyContent-add-edit-address;Body Content Slot for Add Edit Address;true;AccountAddEditAddressComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='add-edit-address'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-add-edit-address;SideContent;;SideContent-add-edit-address;;;
+;;BodyContent-add-edit-address;BodyContent;;BodyContent-add-edit-address;;;
+
+###### Account Payment Detail Page ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-payment-details;Side Content Slot for My Account payment-details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-payment-details;Body Content Slot for My Account payment-details;true;AccountPaymentDetailsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='payment-details'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-payment-details;SideContent;;SideContent-payment-details;;;
+;;BodyContent-payment-details;BodyContent;;BodyContent-payment-details;;;
+
+###### Account My Quotes ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-my-quotes;Side Content Slot for My Account My Quotes;true;AccountLeftNavigationComponent;;;
+;;BodyContent-my-quotes;Body Content Slot for My Account My Quotes;true;AccountMyQuotesComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-quotes'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-my-quotes;SideContent;;SideContent-my-quotes;;;
+;;BodyContent-my-quotes;BodyContent;;BodyContent-my-quotes;;;
+
+###### Account Order History ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-orders;Side Content Slot for My Account Order History;true;AccountLeftNavigationComponent;;;
+;;BodyContent-orders;Body Content Slot for My Account Order History;true;AccountOrderHistoryComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-orders;SideContent;;SideContent-orders;;;
+;;BodyContent-orders;BodyContent;;BodyContent-orders;;;
+
+###### Account My Replenishment Orders ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-my-replenishment-orders;Side Content Slot for My Account Replenishment Orders;true;AccountLeftNavigationComponent;;;
+;;BodyContent-my-replenishment-orders;Body Content Slot for My Account Replenishment Orders;true;AccountMyReplenishmentOrdersComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-replenishment-orders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-my-replenishment-orders;SideContent;;SideContent-my-replenishment-orders;;;
+;;BodyContent-my-replenishment-orders;BodyContent;;BodyContent-my-replenishment-orders;;;
+
+######  Account My Replenishment Cancel Confirmation ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-my-replenishment-cancel-confirmation;Side Content Slot for My Replenishment Cancel Confirmation;true;AccountLeftNavigationComponent;;;
+;;BodyContent-my-replenishment-cancel-confirmation;Body Content Slot for My Replenishment Cancel Confirmation;true;AccountMyReplenishmentCancelConfirmationComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-replenishment-cancel-confirmation'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-my-replenishment-cancel-confirmation;SideContent;;SideContent-my-replenishment-cancel-confirmation;;;
+;;BodyContent-my-replenishment-cancel-confirmation;BodyContent;;BodyContent-my-replenishment-cancel-confirmation;;;
+
+######  Account My Replenishment Order Details ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-my-replenishment-details;Side Content Slot for My Replenishment Order Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-my-replenishment-details;Body Content Slot for My Replenishment Order Details;true;AccountMyReplenishmentDetailsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-replenishment-details'];contentSlot(uid,$contentCV)[unique=true];;;
+#;;SideContent-my-replenishment-details;SideContent;;SideContent-my-replenishment-details;;;
+#;;BodyContent-my-replenishment-details;BodyContent;;BodyContent-my-replenishment-details;;;
+
+###### Account Order Details ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-orderdetail;Side Content Slot for My Account Order Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-orderdetail;Body Content Slot for My Account Order Details;true;AccountOrderDetailsHeadlineComponent,AccountOrderDetailsTotalsComponent,AccountOrderDetailsReplenishmentInformationComponent,AccountOrderDetailsReorderComponent,AccountOrderDetailsShippingComponent,AccountOrderDetailsApprovalDetailsComponent,AccountOrderDetailsItemsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='order'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-orderdetail;SideContent;;SideContent-orderdetail;;;
+;;BodyContent-orderdetail;BodyContent;;BodyContent-orderdetail;;;
+
+###### Account Update Password ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-updatePassword;Side Content Slot for Update Password;true;AccountLeftNavigationComponent;;;
+;;BodyContent-updatePassword;Body Content Slot for Update Password;true;UpdatePasswordComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='updatePassword'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-updatePassword;SideContent;;SideContent-updatePassword;;;
+;;BodyContent-updatePassword;BodyContent;;BodyContent-updatePassword;;;
+
+###### Account Update Profile ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-update-profile;Side Content Slot for Update Profile;true;AccountLeftNavigationComponent;;;
+;;BodyContent-update-profile;Body Content Slot for Update Profile;true;UpdateProfileComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='update-profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-update-profile;SideContent;;SideContent-update-profile;;;
+;;BodyContent-update-profile;BodyContent;;BodyContent-update-profile;;;
+
+###### Account Update Email ######
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-update-email;Side Content Slot for Update Email;true;AccountLeftNavigationComponent;;;
+;;BodyContent-update-email;Body Content Slot for Update Email;true;UpdateEmailComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='update-email'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-update-email;SideContent;;SideContent-update-email;;;
+;;BodyContent-update-email;BodyContent;;BodyContent-update-email;;;
+
+###### Account Quote Details ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-quote-detail;Side Content Slot for My Account Quote Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-quote-detail;Body Content Slot for My Account Quote Details;true;AccountQuoteDetailsHeadlineComponent,AccountQuoteDetailsStatusDecisionComponent,AccountQuoteDetailsShippingComponent,AccountQuoteDetailsOrderItemsComponent,AccountQuoteDetailsOrderTotalsComponent,AccountQuoteDetailsReorderComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='quote-detail'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-quote-detail;SideContent;;SideContent-quote-detail;;;
+;;BodyContent-quote-detail;BodyContent;;BodyContent-quote-detail;;;
+######  Account order approval dashboard ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-order-approval-dashboard;Side Content Slot for Account order approval dashbaord;true;AccountLeftNavigationComponent;;;
+;;BodyContent-order-approval-dashboard;Body Content Slot for Account order approval dashbaord;true;AccountOrderApprovalDashboardComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='order-approval-dashboard'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-order-approval-dashboard;SideContent;;SideContent-order-approval-dashboard;;;
+;;BodyContent-order-approval-dashboard;BodyContent;;BodyContent-order-approval-dashboard;;;
+
+######  Account order approval details ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-order-approval-details;Side Content Slot for Account order approval details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-order-approval-details;Body Content Slot for Account order approval details;true;AccountOrderApprovalDetailsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='order-approval-details'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-order-approval-details;SideContent;;SideContent-order-approval-details;;;
+;;BodyContent-order-approval-details;BodyContent;;BodyContent-order-approval-details;;;
+
+##### ProductListPage #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;ProductListSlot;Product List Slot for Product List;true;ProductListComponent;;;
+
+##### ProductGridPage #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+##### SearchResultListPage #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+##### SearchResultGridPage #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+##### Customer Login #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;LeftContentSlot-login;Left Content Slot for Customer Login;true;ReturningCustomerLoginComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;LeftContentSlot-login;LeftContentSlot;;LeftContentSlot-login;;;;
+
+##### Checkout Login #####
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='checkout-login'];contentSlot(uid,$contentCV)[unique=true];;;
+
+##### Download Product Page #####
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section1Slot-DownloadPage;Section1 Slot For Download Page;true;DownloadComponent,Installation
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='download'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section1-DownloadPage;Section1;;Section1Slot-DownloadPage
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SiteLogoSlot;SiteLogoComponent
+;;NavigationBarSlot;NavBarComponent,breadcrumbComponent
+;;FooterSlot;FootLogoComponent,FooterComponent
+;;SearchBoxSlot;SearchBox
+;;AddToCartSlot;AddToCart
+;;CrossSellingSlot;CrossSelling
+;;ProductLeftRefinements;RefinementFacetComponent
+
+###### Company Page ######
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-Company;Side Content Slot for My Company Homepage;true;CompanyLeftNavigationComponent;;;
+;;BodyContent-Company;Body Content Slot for My Company Homepage;true;CompanyHomepageComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-Company;SideContent;my-company;SideContent-Company;;;
+;;BodyContent-Company;BodyContent;my-company;BodyContent-Company;;;
+;;SideContent-Organization;SideContent;organizationManagement;SideContent-Company;;;
+;;SideContent-Units;SideContent;manageUnits;SideContent-Company;;;
+;;SideContent-UserGroups;SideContent;manageUsergroups;SideContent-Company;;;
+;;SideContent-UnitApprovers;SideContent;manageUnitApprovers;SideContent-Company;;;
+
+
+#### CMS Restriction ####
+# CMS User Group Restrictions
+INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&componentRef)
+;;MyCompanyLinkAdminGroupRestriction;My Company Link Admin Group Restriction;b2badmingroup;true;Company,CompanyLink
+;;MyAccountLinkCustomerGroupRestriction;My Account Link Customer Group Restriction;b2bcustomergroup;true;AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink,AccountMyReplenishmentOrdersLink,AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountMyQuotesNavigationComponent, AccountOrderHistoryNavigationComponent
+;;MyAccountLinkApproverGroupRestriction;My Account Link Approver Group Restriction;b2bapprovergroup;true;AccountApprovalDashboardLink,AccountApprovalDashboardNavigationComponent

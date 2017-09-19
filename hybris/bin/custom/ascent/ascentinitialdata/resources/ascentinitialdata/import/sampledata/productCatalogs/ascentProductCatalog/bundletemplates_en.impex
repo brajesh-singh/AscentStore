@@ -1,0 +1,47 @@
+$productCatalog=ascentProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+
+# Insert BundleTemplates
+# - 1st level bundle templates: ;<package id>;<package name> Package
+# - 2st level bundle templates: ;<package id>_<component id>;<package name> - <component name> Component
+# - <package id> = <package name> without blanks
+# - <component id> = <component name> without blanks
+
+UPDATE BundleTemplate;id[unique=true];name[lang=$lang];version[default=1.0];$catalogVersion
+;AD000001;Ascent Web Accelerator
+;AD000001Software;Ascent Web Accelerator Software
+;AD000001Service;Ascent Web Accelerator Service
+;AD000002;Ascent Web Application Firewall
+;AD000002Software;Ascent Web Application Firewall Software
+;AD000002Service;Ascent Web Application Firewall Service
+;SM000001;Ascent Work 
+;SM000001Software;Ascent Work Software
+;SM000001Service;Ascent Work Service
+;SM000002;Ascent FieldCast 
+;SM000002Software;Ascent FieldCast Software
+;SM000002Service;Ascent FieldCast Service
+;AP000001;Ascent Dynamo 
+;AP000001Software;Ascent Dynamo Software
+;AP000001Service;Ascent Dynamo Service
+;AP000002;Ascent Central 
+;AP000002Software;Ascent Central Software
+;AP000002Service;Ascent Central Service
+;CM000001;Ascent Optics
+;CM000001Software;Ascent Optics Software
+;CM000001Service;Ascent Optics Service
+;CM000002;Ascent Precision 
+;CM000002Software;Ascent Precision Software
+;CM000002Service;Ascent Precision Service
+;BA000001;Ascent WebTrack
+;BA000001Software;Ascent WebTrack Software
+;BA000001Service;Ascent WebTrack Service
+;BA000002;Ascent BigData
+;BA000002Software;Ascent BigData Software
+;BA000002Service;Ascent BigData Service
+;FD000001;Ascent Attack 
+;FD000001Software;Ascent Attack Software
+;FD000001Service;Ascent Attack Service
+;FD000002;Ascent Watch 
+;FD000002Software;Ascent Watch Software
+;FD000002Service;Ascent Watch Service

@@ -1,0 +1,40 @@
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=ascentProductCatalog
+$productCatalogName=Ascent Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;Solutions;;
+;AD;;
+;SM;;
+;AP;;
+;CM;;
+;BA;;
+;FD;;
+
+;Services;;
+;CD;;
+
+;SoftwareType;;
+;SubscriptionSoftware;;
+;PerpetualSoftware;;
+
+
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;AD;Solutions
+;SM;Solutions
+;AP;Solutions
+;CM;Solutions
+;BA;Solutions
+;FD;Solutions
+
+;SubscriptionSoftware;SoftwareType
+;PerpetualSoftware;SoftwareType 

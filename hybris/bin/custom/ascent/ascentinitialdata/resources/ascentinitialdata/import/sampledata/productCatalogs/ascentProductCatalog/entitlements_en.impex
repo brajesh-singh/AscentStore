@@ -1,0 +1,63 @@
+# ImpEx for Importing SBG Entitlement Localizations
+
+# Language
+$lang=en
+
+
+UPDATE Entitlement;id[unique=true];name[lang=$lang];description[lang=$lang]
+;24x7SERVICE;24x7 Service
+
+# Metered
+
+INSERT_UPDATE ProductEntitlement;id[unique=true];description[lang=$lang]
+;AD000001SERVICE1_24x7SERVICE;Ascent Web Accelerator 1 Month(s) 24x7 Service
+;AD000001SERVICE2_24x7SERVICE;Ascent Web Accelerator 6 Month(s) 24x7 Service
+;AD000001SERVICE3_24x7SERVICE;Ascent Web Accelerator 1 Year(s) 24x7 Service
+;AD000001SERVICE4_24x7SERVICE;Ascent Web Accelerator 2 Year(s) 24x7 Service
+;AD000002SERVICE1_24x7SERVICE;Ascent Web Application Firewall 1 Month(s) 24x7 Service
+;AD000002SERVICE2_24x7SERVICE;Ascent Web Application Firewall 6 Month(s) 24x7 Service
+;AD000002SERVICE3_24x7SERVICE;Ascent Web Application Firewall 1 Year(s) 24x7 Service
+;AD000002SERVICE4_24x7SERVICE;Ascent Web Application Firewall 2 Year(s) 24x7 Service
+;SM000001SERVICE1_24x7SERVICE;Ascent Work 1 Month(s) 24x7 Service
+;SM000001SERVICE2_24x7SERVICE;Ascent Work 6 Month(s) 24x7 Service
+;SM000001SERVICE3_24x7SERVICE;Ascent Work 1 Year(s) 24x7 Service
+;SM000001SERVICE4_24x7SERVICE;Ascent Work 2 Year(s) 24x7 Service
+;SM000002SERVICE1_24x7SERVICE;Ascent FieldCast 1 Month(s) 24x7 Service
+;SM000002SERVICE2_24x7SERVICE;Ascent FieldCast 6 Month(s) 24x7 Service
+;SM000002SERVICE3_24x7SERVICE;Ascent FieldCast 1 Year(s) 24x7 Service
+;SM000002SERVICE4_24x7SERVICE;Ascent FieldCast 2 Year(s) 24x7 Service
+;AP000001SERVICE1_24x7SERVICE;Ascent Dynamo 1 Month(s) 24x7 Service
+;AP000001SERVICE2_24x7SERVICE;Ascent Dynamo 6 Month(s) 24x7 Service
+;AP000001SERVICE3_24x7SERVICE;Ascent Dynamo 1 Year(s) 24x7 Service
+;AP000001SERVICE4_24x7SERVICE;Ascent Dynamo 2 Year(s) 24x7 Service
+;AP000002SERVICE1_24x7SERVICE;Ascent Central 1 Month(s) 24x7 Service
+;AP000002SERVICE2_24x7SERVICE;Ascent Central 6 Month(s) 24x7 Service
+;AP000002SERVICE3_24x7SERVICE;Ascent Central 1 Year(s) 24x7 Service
+;AP000002SERVICE4_24x7SERVICE;Ascent Central 2 Year(s) 24x7 Service
+;CM000001SERVICE1_24x7SERVICE;Ascent Optics 1 Month(s) 24x7 Service
+;CM000001SERVICE2_24x7SERVICE;Ascent Optics 6 Month(s) 24x7 Service
+;CM000001SERVICE3_24x7SERVICE;Ascent Optics 1 Year(s) 24x7 Service
+;CM000001SERVICE4_24x7SERVICE;Ascent Optics 2 Year(s) 24x7 Service
+;CM000002SERVICE1_24x7SERVICE;Ascent Precision 1 Month(s) 24x7 Service
+;CM000002SERVICE2_24x7SERVICE;Ascent Precision 6 Month(s) 24x7 Service
+;CM000002SERVICE3_24x7SERVICE;Ascent Precision 1 Year(s) 24x7 Service
+;CM000002SERVICE4_24x7SERVICE;Ascent Precision 2 Year(s) 24x7 Service
+;FD000001SERVICE1_24x7SERVICE;Ascent Attack 1 Month(s) 24x7 Service
+;FD000001SERVICE2_24x7SERVICE;Ascent Attack 6 Month(s) 24x7 Service
+;FD000001SERVICE3_24x7SERVICE;Ascent Attack 1 Year(s) 24x7 Service
+;FD000001SERVICE4_24x7SERVICE;Ascent Attack 2 Year(s) 24x7 Service
+;FD000002SERVICE1_24x7SERVICE;Ascent Watch 1 Month(s) 24x7 Service
+;FD000002SERVICE2_24x7SERVICE;Ascent Watch 6 Month(s) 24x7 Service
+;FD000002SERVICE3_24x7SERVICE;Ascent Watch 1 Year(s) 24x7 Service
+;FD000002SERVICE4_24x7SERVICE;Ascent Watch 2 Year(s) 24x7 Service
+
+# Non metered
+INSERT_UPDATE ProductEntitlement;id[unique=true];description[lang=$lang]
+
+
+# ImpEx for Telco Entitlements - English
+
+# Subscription pricing
+UPDATE UsageUnit;id[unique=true];name[lang=$lang];namePlural[lang=$lang]
+
+UPDATE Entitlement;id[unique=true];name[lang=$lang];description[lang=$lang]

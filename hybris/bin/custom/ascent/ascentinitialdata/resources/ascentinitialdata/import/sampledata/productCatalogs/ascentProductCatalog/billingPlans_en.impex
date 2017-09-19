@@ -1,0 +1,18 @@
+# Impex for Billing Plans - en
+
+# Macros / Replacement Parameter definitions
+$lang=en
+
+UPDATE BillingFrequency;code[unique=true];nameInCart[lang=$lang];nameInOrder[lang=$lang];description[lang=$lang]
+;monthly;Monthly;;Monthly
+;quarterly;Quarterly;;Quarterly
+;yearly;Annually;;Yearly
+
+UPDATE BillingEvent;code[unique=true];nameInCart[lang=$lang];nameInOrder[lang=$lang];description[lang=$lang]
+;paynow;Pay on Checkout;Paid on order;Pay Now
+;onfirstbill;On first bill;;On First Bill
+;oncancellation;On Cancellation;;Charged when subscription is canceled
+
+UPDATE BillingPlan;id[unique=true];name[lang=$lang]
+;MonthlyPlan;Monthly Plan
+;AnnuallyPlan;Annually Plan

@@ -1,0 +1,26 @@
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=ascentProductCatalog
+$productCatalogName=Ascent Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+;Solutions;;Solutions
+;AD;;Application Delivery
+;SM;;Service Management
+;AP;;Application Performance Monitoring
+;CM;;Cloud Monitoring
+;BA;;Business Analytics
+;FD;;Fraud Detection
+;Services;;Services
+;CD;;Software CD
+
+;SoftwareType;;Software Type
+;SubscriptionSoftware;;Subscription Software
+;PerpetualSoftware;;Perpetual License Software

@@ -1,0 +1,3 @@
+# ImpEx for Importing Usage Units
+
+INSERT_UPDATE UsageUnit;id[unique=true];accumulative[default=false]

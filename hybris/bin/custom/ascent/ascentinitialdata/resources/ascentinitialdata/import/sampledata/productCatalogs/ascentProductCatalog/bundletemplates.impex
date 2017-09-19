@@ -1,0 +1,74 @@
+$productCatalog=ascentProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE BundleTemplateStatus;id[unique=true];status(code)[default=approved];$catalogVersion
+;Status_AD000001;
+;Status_AD00002;
+;Status_SM000001;
+;Status_SM000002;
+;Status_AP000001;
+;Status_AP000002;
+;Status_CM000001;
+;Status_CM000002;
+;Status_BA000001;
+;Status_BA000002;
+;Status_FD000001;
+;Status_FD000002;
+
+# Insert BundleTemplates
+INSERT_UPDATE BundleTemplate;id[unique=true];parentTemplate(id, version[default=1.0], $catalogVersion);version[default=1.0][unique=true];status(id, $catalogVersion);$catalogVersion;
+;AD000001;;;Status_AD000001;
+;AD000001Software;;;Status_AD000001;
+;AD000001Service;;;Status_AD000001;
+;AD000002;;;Status_AD000002
+;AD000002Software;;;Status_AD000002;
+;AD000002Service;;;Status_AD000002;
+;SM000001;;;Status_SM000001;
+;SM000001Software;;;Status_SM000001;
+;SM000001Service;;;Status_SM000001;
+;SM000002;;;Status_SM000002
+;SM000002Software;;;Status_SM000002;
+;SM000002Service;;;Status_SM000002;
+;AP000001;;;Status_AP000001;
+;AP000001Software;;;Status_AP000001;
+;AP000001Service;;;Status_AP000001;
+;AP000002;;;Status_AP000002
+;AP000002Software;;;Status_AP000002;
+;AP000002Service;;;Status_AP000002;
+;CM000001;;;Status_CM000001;
+;CM000001Software;;;Status_CM000001;
+;CM000001Service;;;Status_CM000001;
+;CM000002;;;Status_CM000002;
+;CM000002Software;;;Status_CM000002;
+;CM000002Service;;;Status_CM000002;
+;BA000001;;;Status_BA000001;
+;BA000001Software;;;Status_BA000001;
+;BA000001Service;;;Status_BA000001;
+;BA000002;;;Status_BA000002;
+;BA000002Software;;;Status_BA000002;
+;BA000002Service;;;Status_BA000002;
+;FD000001;;;Status_FD000001;
+;FD000001Software;;;Status_FD000001;
+;FD000001Service;;;Status_FD000001;
+;FD000002;;;Status_FD000002;
+;FD000002Software;;;Status_FD000002;
+;FD000002Service;;;Status_FD000002;
+
+# Set the child templates again to make sure that the sequence of child templates is correct
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];childTemplates(id,version[default=1.0],$catalogVersion);$catalogVersion
+;AD000001;;AD000001Software,AD000001Service
+;AD000002;;AD000002Software,AD000002Service
+;SM000001;;SM000001Software,SM000001Service
+;SM000002;;SM000002Software,SM000002Service
+;AP000001;;AP000001Software,AP000001Service
+;AP000002;;AP000002Software,AP000002Service
+;CM000001;;CM000001Software,CM000001Service
+;CM000002;;CM000002Software,CM000002Service
+;BA000001;;BA000001Software,BA000001Service
+;BA000002;;BA000002Software,BA000002Service
+;FD000001;;FD000001Software,FD000001Service
+;FD000002;;FD000002Software,FD000002Service
+
+
+# Bundle dependencies
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];requiredBundleTemplates(id,version[default=1.0],$catalogVersion);$catalogVersion

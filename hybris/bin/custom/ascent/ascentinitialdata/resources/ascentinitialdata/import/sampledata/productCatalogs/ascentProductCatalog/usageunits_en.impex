@@ -1,0 +1,6 @@
+# ImpEx for Importing Usage Unit Localisations
+
+# Language
+$lang=en
+
+UPDATE UsageUnit;id[unique=true];name[lang=$lang];namePlural[lang=$lang]

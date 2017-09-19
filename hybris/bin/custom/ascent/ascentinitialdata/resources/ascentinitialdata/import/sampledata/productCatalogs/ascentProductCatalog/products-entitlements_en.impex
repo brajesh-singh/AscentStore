@@ -1,0 +1,6 @@
+# ImpEx for Importing Entitlement Localizations
+
+# Language
+$lang=en
+
+INSERT_UPDATE ProductEntitlement;id[unique=true];description[lang=$lang]

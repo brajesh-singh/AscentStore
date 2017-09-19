@@ -1,0 +1,216 @@
+# ImpEx for Importing CMS Content
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=ascentContentCatalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+$siteResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+
+# Language
+$lang=en
+
+# Site Logo Component
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;SiteLogoComponent;AscentLogo
+;;FootLogoComponent;FootLogo
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;HomepageLink;Home
+;;ProductLink;Product
+;;SupportLink;Support
+;;AccountLink;My Account
+;;CompanyLink;My Company
+;;ADLink;Application Delivery
+;;SMLink;Service Management
+;;APLink;Application Performance Monitoring
+;;CMLink;Cloud Monitoring
+;;BALink;Business Analytics
+;;FDLink;Fraud Detection
+;;SubscriptionLink;Subscription Software
+;;PerpetualLink;Perpetual License Software
+
+;;AccountAddressBookLink;"Address Book"
+;;AccountApprovalDashboardLink;"Order Approval Dashboard"
+;;AccountHomeLink;"My Account"
+;;AccountManageAddressLink;"Manage your delivery addresses"
+;;AccountManagePaymentDetailsLink;"Manage your payment details"
+;;AccountMyQuotesLink;"My Quotes"
+;;AccountMyReplenishmentOrdersLink;"My Replenishment Orders"
+;;AccountOrderHistoryLink;"Order History"
+;;AccountPaymentDetailsLink;"Payment Details"
+;;AccountPersonalDetailsLink;"Update personal details"
+;;AccountProfileLink;"Profile"
+;;AccountUpdatePasswordLink;"Change your password"
+;;AccountViewApprovalDashboardLink;"View orders that require approval"
+;;AccountViewOrderHistoryLink;"View order history"
+;;AccountViewQuotesLink;"View my quotes"
+;;AccountViewReplenishmentOrdersLink;"My Replenishment Orders"
+
+;;CompanyBudgetAddLink;"Add New Budgets"
+;;CompanyBudgetEditLink;"Edit or disable budgets"
+;;CompanyBudgetLink;"Manage Budgets"
+;;CompanyCostCenterAddLink;"Add new cost center"
+;;CompanyCostCenterEditLink;"Edit or disable cost centers"
+;;CompanyCostCenterLink;"Manage Cost Centers"
+;;CompanyHomeLink;"My Company"
+;;CompanyOrganizationtLink;"Organization Management"
+;;CompanyPermissionsAddLink;"Add new permission"
+;;CompanyPermissionsEditLink;"Edit or disable permissions"
+;;CompanyPermissionsLink;"Manage Permissions"
+;;CompanyUnitsAddLink;"Create new units"
+;;CompanyUnitsEditLink;"Edit or disable units"
+;;CompanyUnitsLink;"Manage Business Units"
+;;CompanyUserGroupsAddLink;"Add new usergroup"
+;;CompanyUserGroupsEditLink;"Edit or disable order usergroups"
+;;CompanyUserGroupsLink;"Manage Usergroups"
+;;CompanyUsersAddLink;"Add new users"
+;;CompanyUsersEditLink;"Edit or disable users"
+;;CompanyUsersLink;"Manage Users"
+
+# Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+# CMS Mini Cart Component
+UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;title[lang=$lang]
+
+# CMS Tab Paragraph Components
+UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];content[lang=$lang]
+
+# CMS Footer Component
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+
+# CMS Paragraph Components
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+
+# CMS Product References Components
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+# CMS PurchasedCategorySuggestionComponent Components
+UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+# CMS CartSuggestion Components
+UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+# Category Pages
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+# CMS Navigation Nodes
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;HomeNavNode;Home
+;;ProductNavNode;Product
+;;SupportNavNode;Support
+;;AccountNavNode;My Account
+;;SolutionNavNode;Solution
+;;SoftwareTypeNavNode;Software Type
+
+;;AccountAddressBookNavNode;"Address Book"
+;;AccountApprovalDashboardNavNode;"Order Approval"
+;;AccountLeftNavNode;"My Account"
+;;AccountMyQuotesNavNode;"Quotes"
+;;AccountOrderHistoryNavNode;"Order History"
+;;AccountPaymentDetailsNavNode;"Payment Details"
+;;AccountProfileNavNode;"Profile"
+
+;;CompanyBudgetNavNode;"Manage Budgets"
+;;CompanyCostCenterNavNode;"Manage Cost Centers"
+;;CompanyLeftNavNode;"My Company"
+;;CompanyPermissionsNavNode;"Manage Permissions"
+;;CompanyUnitsNavNode;"Manage Units"
+;;CompanyUserGroupsNavNode;"Manage Usergroups"
+;;CompanyUsersNavNode;"Manage Users"
+
+# FAQ Page
+
+# CMS Paragraph Component (Contact information)
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+
+
+# Terms and Conditions Page
+
+# CMS Paragraph Component (Contact information)
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+
+
+# Homepage
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;&imageRef;folder(qualifier)[default='images']
+;;SeeingIsBeliving;$siteResource/images/banners/SeeingIsBeliving.png;image/png;Seeing Is Beliving;SeeingIsBeliving
+;;Business;$siteResource/images/banners/Business.png;image/png;Business;Business
+;;Solution;$siteResource/images/banners/Solution.png;image/png;Solution;Solution
+;;Provider;$siteResource/images/banners/Provider.png;image/png;We Are The Solutioin Provider;Provider
+;;AD;$siteResource/images/banners/AD.jpg;;Application Delivery;AD
+;;SM;$siteResource/images/banners/SM.jpg;;Service Management;SM
+;;AP;$siteResource/images/banners/AP.jpg;;Application Performance Monitoring;AP
+;;CM;$siteResource/images/banners/CM.jpg;;Cloud Monitoring;CM
+;;BA;$siteResource/images/banners/BA.jpg;;Business Analytics;BA
+;;FD;$siteResource/images/banners/FD.jpg;;Fraud Detection;FD
+
+#UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+#;;HeaderBanner;SeeingIsBeliving
+
+UPDATE AscentSolutionBannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
+;;AD;Application Delivery;AD;Organizations depend on getting business-critical information to the right people when they need it. Delivering this information gets increasingly challenging as applications span physical data centers, virtual data centers, and the cloud. Ascent Solutions enables organizations to provide reliable, fast, and secure access to applications through an integrated product family spanning traffic management, access control, and security for today’s modern and dispersed application deployment architectures
+;;SM;Service Management;SM;Imagine flawless field service. We help customers of all sizes perfect their service delivery process, drive revenue growth, and not just satisfy customers, but delight them.
+;;AP;Application Performance Monitoring;AP;Ascent Solutions helps make every user interaction a loyalty-building experience. Designed to scale to your organization’s needs, our application performance monitoring solution can manage billions of transactions from any device, automatically correlating multiple metrics to help you sort through the data and act decisively to protect the customer experience.
+;;CM;Cloud Monitoring;CM;<p>Ensuring the availability and performance of hybrid IT environments has never been so simple. Our monitoring solution provides the coverage you need for all areas of your infrastructure:</p><p>Complete IT stack visibility</p><p>Automatic dependency mapping between your onsite and offsite resources The most comprehensive public cloud coverage available</p>
+;;BA;Business Analytics;BA;Now, there's nothing between you and the insights you need. For every business user. Explore any combination of data, get answers instantly, and share with your team. From any device, anywhere, faster than ever before. For analysts. Deliver new insights to your business users however, wherever, and whenever they want them. Uncover every opportunity at the speed of your business.
+;;FD;Fraud Detection;FD;Barracuda’s powerful, best-of-breed security products secure your organizations threat vectors – email, web applications, remote access, web browsing, mobile Internet, and network perimeters whether on premises or in the cloud. Leveraging the benefits of hardware, cloud, and virtual technology, backed by threat intelligence from Barracuda Central — Ascent Solutions consistently deliver total threat protection from zero day, advanced malware, automated threats, and other attacks.
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;SOLUTIONS;"<h1 style=""text-align: center;""><span style=""color: #898c8f;"">SOLUTIONS</span></h1><p style=""text-align: center;""><span style=""color: #c0c0c0;"">TRANSPARENTLY PRICED, DESIGNED TO SCALE, AND ALWAYS AT YOUR SERVICE.</span></p><p style=""text-align: center;""><span style=""color: #c0c0c0;"">________________________________________________</span></p>"
+
+;;FAQParagraphComponent;"<p style=""margin: 0px; padding: 0px 0px 15px; color: #333333; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><strong><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;"">What is your address?</span>&nbsp;</strong></p><p style=""margin: 0px; padding: 0px 0px 15px; color: #333333; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;"">555 North Morton Street, Bloomington, IN 47404</p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><strong><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;"">I would like to purchase a copy of Mike Mattos's Time Bomb video to use in my school. Where can I get it?</span></strong></p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;""></span>Unfortunately, we have not been able to secure the rights to a song used in the video, so it is unavailable at this time.</p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><strong><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;"">I'm a qualified speaker. Can I become a PLC associate or Solution Tree presenter?</span>&nbsp;</strong></p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;"">Visit our&nbsp;<font>Present </font><font></font><span><font>for Us</font>&nbsp;</span>page.</p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><strong><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;"">Can you send me your Federal ID/Form W-9?</span>&nbsp;</strong></p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;"">Download our&nbsp;<font>Federal ID/Form W-9</font>.</p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><strong><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;"">I've changed schools, jobs, districts, etc. How can I update my information or be removed from your mailing list?</span></strong></p><p style=""margin: 0px; padding: 0px 0px 15px; font-family: FrutigerLTW01-55Roman, verdana; font-size: 14px; line-height: 1.25;""><span style=""margin: 0px; padding: 0px; font-family: FrutigerLTW01-75Black, verdana; letter-spacing: 0px;""></span><font>Email us your request</font>.</p>"
+
+;;Installation;"<p style=""text-align: center;""><span style=""font-size: x-large; color: #2c2c2c;"">INSTALLATION</span></p><table border=""1"" align=""left""><tbody></tbody></table><table border=""0""><tbody><tr><td><p><span style=""color: #2c2c2c;""><strong>TOPIC TITILE</strong></span></p><p><span style=""color: #2c2c2c;"">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt   massa.Cras vehicula lobortis elelfend.Nam quis dui a massa vehicula loborties quis at   orci.Donec ultrices sagittis dui non pharetra.Lorem ipsum dolor sit amet, consectetur   adipiscing elit. Pellentesque ut tincidunt massa.Cras vehicula lobortis elelfend.Nam quis   dui a massa vehicula loborties quis at orci.Donec ultrices sagittis dui non pharetra.</span></p></td><td><p><span style=""color: #2c2c2c;""><strong>TOPIC TITLE</strong></span></p><p><span style=""color: #2c2c2c;"">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt   massa.Cras vehicula lobortis elelfend.Nam quis dui a massa vehicula loborties quis at   orci.Donec ultrices sagittis dui non pharetra.Lorem ipsum dolor sit amet, consectetur   adipiscing elit. Pellentesque ut tincidunt massa.Cras vehicula lobortis elelfend.Nam quis   dui a massa vehicula loborties quis at orci.Donec ultrices sagittis dui non pharetra.</span></p></td></tr><tr><td><p><span style=""color: #2c2c2c;""><strong>TOPIC TITLE</strong></span></p><p><span style=""color: #2c2c2c;"">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt   massa.Cras vehicula lobortis elelfend.Nam quis dui a massa vehicula loborties quis at   orci.Donec ultrices sagittis dui non pharetra.Lorem ipsum dolor sit amet, consectetur   adipiscing elit. Pellentesque ut tincidunt massa.Cras vehicula lobortis elelfend.Nam quis   dui a massa vehicula loborties quis at orci.Donec ultrices sagittis dui non pharetra.</span></p></td><td><p><span style=""color: #2c2c2c;""><strong>TOPIC TITLE</strong></span></p><p><span style=""color: #2c2c2c;"">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt   massa.Cras vehicula lobortis elelfend.Nam quis dui a massa vehicula loborties quis at   orci.Donec ultrices sagittis dui non pharetra.Lorem ipsum dolor sit amet, consectetur   adipiscing elit. Pellentesque ut tincidunt massa.Cras vehicula lobortis elelfend.Nam quis   dui a massa vehicula loborties quis at orci.Donec ultrices sagittis dui non pharetra.</span></p></td></tr></tbody></table><table border=""0""><tbody></tbody></table><p style=""text-align: center;""><span style=""font-size: x-large;""><br /></span></p>"
+
+# Media Content
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+
+
+# CMS Banner Components
+UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;&imageRef
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
+;;SeeingIsBeliving;;SeeingIsBeliving
+;;Business;;Business
+;;Provider;;Provider
+;;Solution;;Solution
+
+UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+
+# Camera Accessories and Supplies Category Landing Page
+
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+
+UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];$picture[lang=$lang];description[lang=$lang]
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+# Search Results Page
+
+# Media Content
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+
+# Cart Page
+
+# Media Content
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+
+

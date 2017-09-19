@@ -1,0 +1,106 @@
+# ImpEx for Importing SBG Prices (English)
+
+# Macros / Replacement Parameter definitions
+$productCatalog=ascentProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=Staged])[unique=true,default=$productCatalog:Staged]
+$lang=en
+
+UPDATE SubscriptionPricePlan;product(code, $catalogVersion)[unique=true];name[lang=$lang];$catalogVersion;currency(isocode)[default=USD,unique=true]
+;AD000001SERVICE1;Ascent Web Accelerator 1 Month(s) Service Price Plan
+;AD000001SERVICE2;Ascent Web Accelerator 6 Month(s) Service Price Plan
+;AD000001SERVICE3;Ascent Web Accelerator 1 Year(s) Service Price Plan
+;AD000001SERVICE4;Ascent Web Accelerator 2 Year(s) Service Price Plan
+;AD000002SERVICE1;Ascent Web Application Firewall 1 Month(s) Service Price Plan
+;AD000002SERVICE2;Ascent Web Application Firewall 6 Month(s) Service Price Plan
+;AD000002SERVICE3;Ascent Web Application Firewall 1 Year(s) Service Price Plan
+;AD000002SERVICE4;Ascent Web Application Firewall 2 Year(s) Service Price Plan
+;SM000001SERVICE1;Ascent Work 1 Month(s) Service Price Plan
+;SM000001SERVICE2;Ascent Work 6 Month(s) Service Price Plan
+;SM000001SERVICE3;Ascent Work 1 Year(s) Service Price Plan
+;SM000001SERVICE4;Ascent Work 2 Year(s) Service Price Plan
+;SM000002SERVICE1;Ascent FieldCast 1 Month(s) Service Price Plan
+;SM000002SERVICE2;Ascent FieldCast 6 Month(s) Service Price Plan
+;SM000002SERVICE3;Ascent FieldCast 1 Year(s) Service Price Plan
+;SM000002SERVICE4;Ascent FieldCast 2 Year(s) Service Price Plan
+;AP000001SERVICE1;Ascent Dynamo 1 Month(s) Service Price Plan
+;AP000001SERVICE2;Ascent Dynamo 6 Month(s) Service Price Plan
+;AP000001SERVICE3;Ascent Dynamo 1 Year(s) Service Price Plan
+;AP000001SERVICE4;Ascent Dynamo 2 Year(s) Service Price Plan
+;AP000002SERVICE1;Ascent Central 1 Month(s) Service Price Plan
+;AP000002SERVICE2;Ascent Central 6 Month(s) Service Price Plan
+;AP000002SERVICE3;Ascent Central 1 Year(s) Service Price Plan
+;AP000002SERVICE4;Ascent Central 2 Year(s) Service Price Plan
+;CM000001SERVICE1;Ascent Optics 1 Month(s) Service Price Plan
+;CM000001SERVICE2;Ascent Optics 6 Month(s) Service Price Plan
+;CM000001SERVICE3;Ascent Optics 1 Year(s) Service Price Plan
+;CM000001SERVICE4;Ascent Optics 2 Year(s) Service Price Plan
+;CM000002SERVICE1;Ascent Precision 1 Month(s) Service Price Plan
+;CM000002SERVICE2;Ascent Precision 6 Month(s) Service Price Plan
+;CM000002SERVICE3;Ascent Precision 1 Year(s) Service Price Plan
+;CM000002SERVICE4;Ascent Precision 2 Year(s) Service Price Plan
+;BA000001SERVICE1;Ascent WebTrack 1 Month(s) Service Price Plan
+;BA000001SERVICE2;Ascent WebTrack 6 Month(s) Service Price Plan
+;BA000001SERVICE3;Ascent WebTrack 1 Year(s) Service Price Plan
+;BA000001SERVICE4;Ascent WebTrack 2 Year(s) Service Price Plan
+;BA000002SERVICE1;Ascent BigData 1 Month(s) Service Price Plan
+;BA000002SERVICE2;Ascent BigData 6 Month(s) Service Price Plan
+;BA000002SERVICE3;Ascent BigData 1 Year(s) Service Price Plan
+;BA000002SERVICE4;Ascent BigData 2 Year(s) Service Price Plan
+;FD000001SERVICE1;Ascent Attack 1 Month(s) Service Price Plan
+;FD000001SERVICE2;Ascent Attack 6 Month(s) Service Price Plan
+;FD000001SERVICE3;Ascent Attack 1 Year(s) Service Price Plan
+;FD000001SERVICE4;Ascent Attack 2 Year(s) Service Price Plan
+;FD000002SERVICE1;Ascent Watch 1 Month(s) Service Price Plan
+;FD000002SERVICE2;Ascent Watch 6 Month(s) Service Price Plan
+;FD000002SERVICE3;Ascent Watch 1 Year(s) Service Price Plan
+;FD000002SERVICE4;Ascent Watch 2 Year(s) Service Price Plan
+
+UPDATE OneTimeChargeEntry;id[unique=true];name[lang=$lang];$catalogVersion
+;AD000001SERVICE1ONETIMEPRICE
+;AD000001SERVICE2ONETIMEPRICE
+;AD000001SERVICE3ONETIMEPRICE
+;AD000001SERVICE4ONETIMEPRICE
+;AD000002SERVICE1ONETIMEPRICE
+;AD000002SERVICE2ONETIMEPRICE
+;AD000002SERVICE3ONETIMEPRICE
+;AD000002SERVICE4ONETIMEPRICE
+;SM000001SERVICE1ONETIMEPRICE
+;SM000001SERVICE2ONETIMEPRICE
+;SM000001SERVICE3ONETIMEPRICE
+;SM000001SERVICE4ONETIMEPRICE
+;SM000002SERVICE1ONETIMEPRICE
+;SM000002SERVICE2ONETIMEPRICE
+;SM000002SERVICE3ONETIMEPRICE
+;SM000002SERVICE4ONETIMEPRICE
+;AP000001SERVICE1ONETIMEPRICE
+;AP000001SERVICE2ONETIMEPRICE
+;AP000001SERVICE3ONETIMEPRICE
+;AP000001SERVICE4ONETIMEPRICE
+;AP000002SERVICE1ONETIMEPRICE
+;AP000002SERVICE2ONETIMEPRICE
+;AP000002SERVICE3ONETIMEPRICE
+;AP000002SERVICE4ONETIMEPRICE
+;CM000001SERVICE1ONETIMEPRICE
+;CM000001SERVICE2ONETIMEPRICE
+;CM000001SERVICE3ONETIMEPRICE
+;CM000001SERVICE4ONETIMEPRICE
+;CM000002SERVICE1ONETIMEPRICE
+;CM000002SERVICE2ONETIMEPRICE
+;CM000002SERVICE3ONETIMEPRICE
+;CM000002SERVICE4ONETIMEPRICE
+;BA000001SERVICE1ONETIMEPRICE
+;BA000001SERVICE2ONETIMEPRICE
+;BA000001SERVICE3ONETIMEPRICE
+;BA000001SERVICE4ONETIMEPRICE
+;BA000002SERVICE1ONETIMEPRICE
+;BA000002SERVICE2ONETIMEPRICE
+;BA000002SERVICE3ONETIMEPRICE
+;BA000002SERVICE4ONETIMEPRICE
+;FD000001SERVICE1ONETIMEPRICE
+;FD000001SERVICE2ONETIMEPRICE
+;FD000001SERVICE3ONETIMEPRICE
+;FD000001SERVICE4ONETIMEPRICE
+;FD000002SERVICE1ONETIMEPRICE
+;FD000002SERVICE2ONETIMEPRICE
+;FD000002SERVICE3ONETIMEPRICE
+;FD000002SERVICE4ONETIMEPRICE

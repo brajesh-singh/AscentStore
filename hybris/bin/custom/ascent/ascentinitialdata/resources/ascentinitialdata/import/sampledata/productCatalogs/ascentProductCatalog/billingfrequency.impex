@@ -1,0 +1,4 @@
+
+#Billing Frequency
+INSERT_UPDATE BillingFrequency;code[unique=true];cartAware[default=true]
+;monthly

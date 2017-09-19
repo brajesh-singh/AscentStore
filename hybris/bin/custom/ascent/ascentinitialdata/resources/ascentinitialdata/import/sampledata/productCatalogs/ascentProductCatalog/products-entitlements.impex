@@ -1,0 +1,10 @@
+# ImpEx for Subscription Product Entitlements
+
+# Macros / Replacement Parameter definitions
+$productCatalog=b2ctelcoProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+
+INSERT_UPDATE SubscriptionProduct;code[unique=true];$catalogVersion
+
+
+INSERT_UPDATE ProductEntitlement;id[unique=true];quantity;entitlement(id);subscriptionProduct(code, $catalogVersion);$catalogVersion;timeUnit(code);timeUnitStart;timeUnitDuration
