@@ -27,7 +27,7 @@
 		<property name="sampleDataImportService" ref="ascentSampleDataImportService" />
 	</bean>
 
-	<bean id="ascentSampleDataImportService" class="de.hybris.ascent.initial.services.dataimport.impl.AscentSampleDataImportService"
+	<bean id="ascentSampleDataImportService" class="com.pwc.demo.services.dataimport.impl.AscentSampleDataImportService"
 		parent="sampleDataImportService">
 		<property name="typeService" ref="typeService" />
 		<property name="modelService" ref="modelService" />
