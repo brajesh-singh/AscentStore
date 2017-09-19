@@ -81,7 +81,7 @@ pom.xml
 **/jalo/
 
 
-hybris/bin/custom/cintasb2c/cintasb2cstorefront/web/commonwebsrc
+hybris/bin/custom/ascent/ascentstorefront/web/commonwebsrc
 
 #remove jrebel nature from git.
 rebel.xml
