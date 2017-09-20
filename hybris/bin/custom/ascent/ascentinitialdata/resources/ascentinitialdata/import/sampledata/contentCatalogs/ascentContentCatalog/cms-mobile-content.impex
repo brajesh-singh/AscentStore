@@ -14,9 +14,9 @@ $image=image(code, $contentCV);
 $media=media(code, $contentCV);
 $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
-$siteResource=jar:de.hybris.ascent.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/contentCatalogs/$contentCatalog
-$productResource=jar:de.hybris.ascent.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/productCatalogs/$productCatalog
-$jarResourceCms=jar:de.hybris.ascent.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/cockpits/cmscockpit
+$siteResource=jar:com.pwc.demo.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/contentCatalogs/$contentCatalog
+$productResource=jar:com.pwc.demo.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.pwc.demo.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/cockpits/cmscockpit
 #################################################################
 
 

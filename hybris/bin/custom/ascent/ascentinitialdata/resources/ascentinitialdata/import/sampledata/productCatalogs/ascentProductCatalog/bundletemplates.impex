@@ -20,9 +20,9 @@ INSERT_UPDATE BundleTemplate;id[unique=true];parentTemplate(id, version[default=
 ;AD000001;;;Status_AD000001;
 ;AD000001Software;;;Status_AD000001;
 ;AD000001Service;;;Status_AD000001;
-;AD000002;;;Status_AD000002
-;AD000002Software;;;Status_AD000002;
-;AD000002Service;;;Status_AD000002;
+#;AD000002;;;Status_AD000002
+#;AD000002Software;;;Status_AD000002;
+#;AD000002Service;;;Status_AD000002;
 ;SM000001;;;Status_SM000001;
 ;SM000001Software;;;Status_SM000001;
 ;SM000001Service;;;Status_SM000001;
@@ -57,7 +57,7 @@ INSERT_UPDATE BundleTemplate;id[unique=true];parentTemplate(id, version[default=
 # Set the child templates again to make sure that the sequence of child templates is correct
 UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];childTemplates(id,version[default=1.0],$catalogVersion);$catalogVersion
 ;AD000001;;AD000001Software,AD000001Service
-;AD000002;;AD000002Software,AD000002Service
+#;AD000002;;AD000002Software,AD000002Service
 ;SM000001;;SM000001Software,SM000001Service
 ;SM000002;;SM000002Software,SM000002Service
 ;AP000001;;AP000001Software,AP000001Service

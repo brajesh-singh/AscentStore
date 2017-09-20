@@ -20,7 +20,7 @@
         <extension name="ycommercewebservices" />
         <extension name="orderselfserviceaddon" />
 
-        <extension name="powertoolsstore" />
+       <!--  <extension name="powertoolsstore" /> -->
         <extension name="solrserver" />
 
         <extension name="acceleratorwebservicesaddon" />
@@ -81,7 +81,7 @@
 		<extension name="ascentfulfilmentprocess" />
 		<extension name="ascentinitialdata" />
 		<extension name="ascentstorefront" />
-		<extension name="ascenttest" />		
+	<!-- 	<extension name="ascenttest" />	 -->	
 		
 		<!-- Subscription -->
 		<extension name="subscriptioncockpits" />

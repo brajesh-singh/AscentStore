@@ -16,7 +16,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="solrserver"/>
-
+        <requires-extension name="subscriptionservices" />
 		<coremodule generated="true" manager="com.pwc.demo.core.jalo.AscentCoreManager" packageroot="com.pwc.demo.core"/>
 
 		
