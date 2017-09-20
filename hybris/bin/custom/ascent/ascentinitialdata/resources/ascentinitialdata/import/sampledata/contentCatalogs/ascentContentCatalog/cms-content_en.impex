@@ -106,7 +106,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;SupportNavNode;Support
 ;;AccountNavNode;My Account
 ;;SolutionNavNode;Solution
-;;SoftwareTypeNavNode;Software Type
+#;;SoftwareTypeNavNode;Software Type
 
 ;;AccountAddressBookNavNode;"Address Book"
 ;;AccountApprovalDashboardNavNode;"Order Approval"
