@@ -11,7 +11,7 @@ $lang=en
 # Solr Indexed Property
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true,default=$solrIndexedType];name[unique=true];displayName[lang=$lang]
 ;;solution;Solution
-;;softwareType;Software Type
+#;;softwareType;Software Type
 
 # Define the available sorts
 UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost

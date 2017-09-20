@@ -7,7 +7,7 @@ $storeName=ascent
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $medias=medias(code, $catalogVersion)
-$siteResource=jar:de.hybris.ascent.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/store/$storeName
+$siteResource=jar:com.pwc.demo.initialdata.setup.InitialDataSystemSetup&/ascentinitialdata/import/store/$storeName
 
 # Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);;code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)

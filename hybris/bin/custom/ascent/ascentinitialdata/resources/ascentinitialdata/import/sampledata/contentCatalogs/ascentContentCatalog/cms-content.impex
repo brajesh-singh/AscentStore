@@ -15,9 +15,9 @@ $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
 $product=product(code, $productCV)
 $category=category(code, $productCV)
-$siteResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/contentCatalogs/$contentCatalog
-$productResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/productCatalogs/$productCatalog
-$jarResourceCms=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/cockpits/cmscockpit
+$siteResource=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/cockpits/cmscockpit
 
 
 # CMS Site Settings

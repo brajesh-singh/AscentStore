@@ -12,9 +12,9 @@ UPDATE BundleTemplate;id[unique=true];name[lang=$lang];version[default=1.0];$cat
 ;AD000001;Ascent Web Accelerator
 ;AD000001Software;Ascent Web Accelerator Software
 ;AD000001Service;Ascent Web Accelerator Service
-;AD000002;Ascent Web Application Firewall
-;AD000002Software;Ascent Web Application Firewall Software
-;AD000002Service;Ascent Web Application Firewall Service
+#;AD000002;Ascent Web Application Firewall
+#;AD000002Software;Ascent Web Application Firewall Software
+#;AD000002Service;Ascent Web Application Firewall Service
 ;SM000001;Ascent Work 
 ;SM000001Software;Ascent Work Software
 ;SM000001Service;Ascent Work Service

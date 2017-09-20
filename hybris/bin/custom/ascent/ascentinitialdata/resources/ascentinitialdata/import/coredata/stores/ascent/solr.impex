@@ -97,7 +97,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; categoryPath  	;string;;;Refine		;Alpha;-9999;false;false;categoryPathValueProvider;
 ;$solrIndexedType; category      	;string;;false;Refine		;Alpha; 6000;true;;ascentCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 ;$solrIndexedType; solution         ;string;;;Refine		;Alpha; 5000;true;;ascentSolutionCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-;$solrIndexedType; softwareType	   ;string;;;Refine		;Alpha; 5000;true;;ascentSoftwareTypeCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+#;$solrIndexedType; softwareType	   ;string;;;Refine		;Alpha; 5000;true;;ascentSoftwareTypeCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 
 # Other facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)

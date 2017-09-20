@@ -14,7 +14,7 @@ $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
-$siteResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/productCatalogs/$productCatalog
+$siteResource=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/sampledata/productCatalogs/$productCatalog
 
 INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 ;images;images

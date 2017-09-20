@@ -23,7 +23,7 @@
 		<format pattern="yyyy_MM_dd_hh" property="build.date" unit="hour"/>
 	</tstamp>
 	
-	<property name="release.description" value="PwC SDC Team Build"/>
+	<property name="release.description" value="SAP AMS Team Build"/>
 	<property name="release.version" value="${build.date}"/>
 	<property name="release.date" value="${build.date}"/>
 	

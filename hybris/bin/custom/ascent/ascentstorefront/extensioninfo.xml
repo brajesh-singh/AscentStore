@@ -14,6 +14,10 @@
         
 
 
+<requires-extension name="commerceorgaddon"/>
+<requires-extension name="b2bacceleratoraddon"/>
+
+
 <requires-extension name="pcmbackofficesamplesaddon"/>
 <requires-extension name="consignmenttrackingaddon"/>
 <requires-extension name="adaptivesearchsamplesaddon"/>
@@ -28,8 +32,8 @@
 <requires-extension name="secureportaladdon"/>
 <requires-extension name="b2bpunchoutaddon"/>
 <requires-extension name="commerceorgsamplesaddon"/>
-<requires-extension name="commerceorgaddon"/>
-<requires-extension name="b2bacceleratoraddon"/>
+
+
 <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="ascentfacades"/>
 

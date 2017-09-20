@@ -4,7 +4,7 @@
 $contentCatalog=ascentContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $wideContent=CMSImageComponent,BannerComponent
-$jarEmailResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/coredata/contentCatalogs/$contentCatalog/emails
+$jarEmailResource=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/coredata/contentCatalogs/$contentCatalog/emails
 
 # Import modulegen config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
@@ -207,33 +207,33 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomContent-OrderCollectionReminderEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderApprovalRejectionEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-OrderApprovalRejectionEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-OrderApprovalRejectionEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-OrderApprovalRejectionEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-OrderApprovalRejectionEmail;BottomContent;;EmailBottomSlot;true
 
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteOrderApproveEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-QuoteOrderApproveEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-QuoteOrderApproveEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-QuoteOrderApproveEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-QuoteOrderApproveEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteOrderRejectEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-QuoteOrderRejectEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-QuoteOrderRejectEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-QuoteOrderRejectEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-QuoteOrderRejectEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderPendingApprovalEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-OrderPendingApprovalEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-OrderPendingApprovalEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-OrderPendingApprovalEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-OrderPendingApprovalEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderConfirmationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-ReplenishmentOrderConfirmationEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-ReplenishmentOrderConfirmationEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-ReplenishmentOrderConfirmationEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-ReplenishmentOrderConfirmationEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderPlacedEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-ReplenishmentOrderPlacedEmail;SiteLogo;;SiteLogoSlot;true
+#;;SiteLogo-ReplenishmentOrderPlacedEmail;SiteLogo;;SiteLogoSlot;true
 ;;TopContent-ReplenishmentOrderPlacedEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-ReplenishmentOrderPlacedEmail;BottomContent;;EmailBottomSlot;true
 

@@ -3,7 +3,7 @@
 #
 $contentCatalog=ascentContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$jarEmailResource=jar:de.hybris.ascent.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/coredata/contentCatalogs/$contentCatalog/emails
+$jarEmailResource=jar:com.pwc.demo.initialdata.constants.AscentInitialDataConstants&/ascentinitialdata/import/coredata/contentCatalogs/$contentCatalog/emails
 
 
 # Import config properties into impex macros
