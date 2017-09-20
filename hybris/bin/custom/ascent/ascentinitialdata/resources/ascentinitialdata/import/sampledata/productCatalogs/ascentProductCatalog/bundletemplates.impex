@@ -3,7 +3,7 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 
 INSERT_UPDATE BundleTemplateStatus;id[unique=true];status(code)[default=approved];$catalogVersion
 ;Status_AD000001;
-;Status_AD00002;
+;Status_AD000002;
 ;Status_SM000001;
 ;Status_SM000002;
 ;Status_AP000001;
