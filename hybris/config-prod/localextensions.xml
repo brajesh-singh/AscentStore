@@ -20,7 +20,6 @@
         <extension name="ycommercewebservices" />
         <extension name="orderselfserviceaddon" />
 
-        <extension name="powertoolsstore" />
         <extension name="solrserver" />
 
         <extension name="acceleratorwebservicesaddon" />

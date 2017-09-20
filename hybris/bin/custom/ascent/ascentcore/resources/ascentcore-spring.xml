@@ -49,6 +49,17 @@
         <property name="priceService" ref="priceService"/>
     </bean>
 
+	<bean id="ascentCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="Solutions" />
+	</bean>
+
+	<bean id="ascentSolutionCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="Solutions" />
+	</bean>
+
+	<bean id="ascentSoftwareTypeCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="SoftwareType" />
+	</bean>
 
 	<bean id="electronicsCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="1"/>
@@ -84,6 +95,22 @@
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
+	<bean id="ascentCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="ascentCategorySource" />
+	</bean>
+	<bean id="ascentCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="ascentCategorySource" />
+	</bean>
+	<bean id="ascentSolutionCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="ascentSolutionCategorySource" />
+	</bean>
+	<bean id="ascentSolutionCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="ascentSolutionCategorySource" />
+	</bean>
+	<bean id="ascentSoftwareTypeCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="ascentSoftwareTypeCategorySource" />
+	</bean>
+	
 	<bean id="electronicsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="electronicsCategorySource"/>
 	</bean>

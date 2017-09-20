@@ -74,16 +74,16 @@ If you have already configured your Git and/or Sourcetree installations, please 
 
 3. Create a local Oracle database for the project. Either use SQL Developer (connect using host=localhost, port=1521, user=system and password=manager) or display the SQL command prompt window, for example, on Windows, open a command window and enter `sqlplus`. On Mac, run vagrant ssh then sqlplus system/manager@//localhost:1521/XE
 	* Connect as the system user with password oracle
-	* Run the following (note that user=pdh and password=pdh for the purposes of this example and in the sample files)
+	* Run the following (note that user=ascent and password=ascent for the purposes of this example and in the sample files)
 
 	```SQL
 	alter session set container=ORCLPDB1;
-	create tablespace pdh_tbsp datafile 'pdh_tbsp01.dbf' size 1g autoextend on;
-	create user pdh identified by pdh default tablespace pdh_tbsp temporary tablespace temp; 
-	grant connect to pdh;
-	grant dba to pdh; 
-	grant create session to pdh;
-	grant all privileges to pdh;
+	create tablespace ascent_tbsp datafile 'ascent_tbsp01.dbf' size 1g autoextend on;
+	create user ascent identified by ascent default tablespace ascent_tbsp temporary tablespace temp; 
+	grant connect to ascent;
+	grant dba to ascent; 
+	grant create session to ascent;
+	grant all privileges to ascent;
 	exit  
 	```
 
@@ -97,8 +97,8 @@ If you have already configured your Git and/or Sourcetree installations, please 
 	# Oracle XE  
 	db.url=jdbc:oracle:thin:@localhost:1521/XE
 	db.driver=oracle.jdbc.driver.OracleDriver
-	db.username=pdh
-	db.password=pdh
+	db.username=ascent
+	db.password=ascent
 	db.tableprefix=
 	```
 
