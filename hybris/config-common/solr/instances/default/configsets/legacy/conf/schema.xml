@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2000-2016 SAP SE or an SAP affiliate company.
- All rights reserved.
-
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
-
-
--->
 
 <!--  
  This is the Solr schema file. This file should be named "schema.xml" and
@@ -555,6 +542,7 @@
 		<field name="text" type="textgen" indexed="true" stored="true" />
         <field name="_version_" type="long" indexed="true" stored="true" multiValued="false" />
         <field name="code_string" type="string" indexed="true" stored="true" multiValued="false" />
+        <field name="indexOperationId" type="long" indexed="true" stored="true" multiValued="false" />
         
         <field name="autosuggest" type="text_spell" indexed="true" stored="true" multiValued="true" />
 		<field name="autosuggest_de" type="text_spell_de" indexed="true" stored="true" multiValued="true" />

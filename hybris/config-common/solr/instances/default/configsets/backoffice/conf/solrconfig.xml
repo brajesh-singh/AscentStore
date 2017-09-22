@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2000-2016 SAP SE or an SAP affiliate company.
- All rights reserved.
-
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
-
-
--->
 
 <!--
      For more details about configurations options that may appear in
@@ -828,7 +815,8 @@
        <bool name="preferLocalShards">false</bool>
      </lst>
      <arr name="last-components">
-	   <str>spellcheck</str>
+       <str>spellcheck</str>
+       <str>elevator</str>
 	 </arr>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -1136,11 +1124,6 @@
 			<str name="field">spellcheck_en</str>
 		</lst>
 		<lst name="spellchecker">
-			<str name="name">es</str>
-			<str name="classname">solr.DirectSolrSpellChecker</str>
-			<str name="field">spellcheck_es</str>
-		</lst>
-		<lst name="spellchecker">
 			<str name="name">fr</str>
 			<str name="classname">solr.DirectSolrSpellChecker</str>
 			<str name="field">spellcheck_fr</str>
@@ -1201,15 +1184,6 @@
 			<str name="classname">org.apache.solr.spelling.suggest.Suggester</str>
 			<str name="lookupImpl">org.apache.solr.spelling.suggest.tst.TSTLookup</str>
 			<str name="field">autosuggest_en</str>
-			<str name="buildOnCommit">true</str>
-			<str name="buildOnOptimize">true</str>
-			<str name="accuracy">0.35</str>
-		</lst>
-		<lst name="spellchecker">
-			<str name="name">es</str>
-			<str name="classname">org.apache.solr.spelling.suggest.Suggester</str>
-			<str name="lookupImpl">org.apache.solr.spelling.suggest.tst.TSTLookup</str>
-			<str name="field">autosuggest_es</str>
 			<str name="buildOnCommit">true</str>
 			<str name="buildOnOptimize">true</str>
 			<str name="accuracy">0.35</str>
