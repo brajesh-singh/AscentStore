@@ -31,6 +31,8 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage
 ;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage
 ;;StoreFinderPageTemplate;Store Finder Page Template;storeFinder/storeFinderSearchPage;ContentPage
+;;AscentStoreBuyPageTemplate;Buy Page;buy/buyPage;ContentPage
+;;DownloadPageTemplate;Download Page;download/downloadPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -72,6 +74,30 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
 # There are a standard set of slots and a number of specific slots for each template.
 # Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer. 
+
+#Download Page Template DownloadPageTemplate #
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'DownloadPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+#AscentStore Buy Page Template AscentStoreBuyPageTemplate #
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AscentStoreBuyPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
 
 # Error Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -506,6 +532,28 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;PlaceholderContentSlot;Placeholder for Addon tag files;true
 
 # Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DownloadPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-Download;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-Download;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-Download;MiniCart;;MiniCartSlot;true
+;;Footer-Download;Footer;;FooterSlot;true
+;;HeaderLinks-Download;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-Download;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-Download;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-Download;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-Download;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='AscentStoreBuyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-AscentStoreBuy;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-AscentStoreBuy;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-AscentStoreBuy;MiniCart;;MiniCartSlot;true
+;;Footer-AscentStoreBuy;Footer;;FooterSlot;true
+;;HeaderLinks-AscentStoreBuy;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-AscentStoreBuy;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-AscentStoreBuy;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-AscentStoreBuy;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-AscentStoreBuy;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductDetails1;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ProductDetails1;HomepageNavLink;;HomepageNavLinkSlot;true
@@ -867,6 +915,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;manageUnits;Manage Units Page;CompanyPageTemplate;manageUnits
 ;;manageUsergroups;Manage Usergroup Page;CompanyPageTemplate;manageUsergroups
 ;;manageUnitApprovers;Manage Units Approvers Page;CompanyPageTemplate;manageUnitApprovers
+;;ascentStoreBuyPage;Ascent Store Buy Page;AscentStoreBuyPageTemplate;ascentStoreBuy
+;;downloadPage;Download Page;DownloadPageTemplate;download
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']

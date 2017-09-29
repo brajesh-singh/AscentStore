@@ -9,7 +9,39 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:if test="${not empty facetData.values}">
-<ycommerce:testId code="facetNav_title_${facetData.name}">
+<div id="cat-menu-affix">
+	<nav id="cat-menu"  class="navbar navbar-default  col-sm-2 col-md-2 col-lg-2 " data-spy="affix" data-offset-top="60"  role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<div class="navabr-brand navbar-text text-danger"><h4><spring:theme code="search.nav.facetTitle" arguments="${facetData.name}" /></h4></div>
+			</div>
+			<div id="cat-menu-bar" class="collapse navbar-collapse"  >
+				<div class="clearfix">&nbsp;</div>
+				<ul  class="nav navbar-nav">
+					<input type="hidden" id="selected_menu_item" value="=$selectedMenuId; ?>" /> 
+					<c:forEach items="${facetData.values}" var="facetValue" varStatus="status">
+						<c:choose>
+							<c:when test="${status.index==0}">
+								<li class="active"><a href="#${fn:replace(facetValue.name,' ','')}" ><span class="fa fa-${facetValue }"></span> ${facetValue.name}</a>
+							</c:when>
+							<c:otherwise>
+								<li ><a href="#${fn:replace(facetValue.name,' ','')}"><span  class="fa-${facetValue } "></span> ${facetValue.name }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<!-- <li class="active"><a href="#Solution-1" ><span class="fa fa-cubes"></span> Solution 1</a></li>
+				<li ><a href="#Solution-2"><span  class="fa fa-desktop"></span> Solution 2</a></li>
+				<li ><a href="#Solution-3"><span  class="fa fa-bar-chart"></span> Solution 3</a></li>
+				<li><a href="#Solution-4"><span  class="fa fa-floppy-o"></span> Solution 4</a></li>
+				<li ><a href="#Solution-5"><span  class="fa fa-database"></span> Solution 5</a></li>
+				<li ><a href="#Solution-6"><span  class="fa fa-cloud"></span> Solution 6</a></li> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div> 
+</c:if>
+<%-- <ycommerce:testId code="facetNav_title_${facetData.name}">
 	<div class="facet js-facet">
 		<div class="facet__name js-facet-name">
 			<span class="glyphicon facet__arrow"></span>
@@ -18,8 +50,9 @@
 
 
 		<div class="facet__values js-facet-values js-facet-form">
-
+			
 			<c:if test="${not empty facetData.topValues}">
+			
 				<ul class="facet__list js-facet-list js-facet-top-values">
 					<c:forEach items="${facetData.topValues}" var="facetValue">
 						<li>
@@ -101,4 +134,4 @@
 		</div>
 	</div>
 </ycommerce:testId>
-</c:if>
+</c:if> --%>

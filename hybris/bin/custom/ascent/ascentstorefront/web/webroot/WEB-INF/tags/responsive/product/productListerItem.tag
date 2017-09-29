@@ -14,46 +14,60 @@
 
 <c:set value="${not empty product.potentialPromotions}" var="hasPromotion"/>
 
-<li class="product__list--item">
-	<ycommerce:testId code="test_searchPage_wholeProduct">
-		<a class="product__list--thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}" >
-			<product:productPrimaryImage product="${product}" format="thumbnail"/>
-		</a>
-		<ycommerce:testId code="searchPage_productName_link_${product.code}">
-			<a class="product__list--name" href="${productUrl}">${ycommerce:sanitizeHTML(product.name)}</a>
-		</ycommerce:testId>
-
-		<div class="product__list--price-panel">
-			<c:if test="${not empty product.potentialPromotions}">
-				<div class="product__listing--promo">
-					<c:forEach items="${product.potentialPromotions}" var="promotion">
-						${ycommerce:sanitizeHTML(promotion.description)}
-					</c:forEach>
+<div class="col-sm-6 col-md-4 wow fadeIn" data-wow-delay=".3s">
+	<div class="category-box">
+		<!-- <li class="product__list--item"> -->
+			<ycommerce:testId code="test_searchPage_wholeProduct">
+				<a class="product-link " href="${productUrl}" title="${fn:escapeXml(product.name)}" >
+					<div class="category-icon">
+						<span><product:productPrimaryImage product="${product}" format="thumbnail"/></span>
+					</div>
+					<div class="category-name">
+						<ycommerce:testId code="searchPage_productName_link_${product.code}">
+							<%-- <a class="category-name"  href="${productUrl}"> --%>${ycommerce:sanitizeHTML(product.name)}<!-- </a> -->
+						</ycommerce:testId>
+					</div>
+					<div class="category-desc">
+						<c:if test="${not empty product.summary}">
+							${ycommerce:sanitizeHTML(product.summary)}
+						</c:if>
+					</div>
+				</a>
+				<%-- <div class="product__list--price-panel">
+					<c:if test="${not empty product.potentialPromotions}">
+						<div class="product__listing--promo">
+							<c:forEach items="${product.potentialPromotions}" var="promotion">
+								${ycommerce:sanitizeHTML(promotion.description)}
+							</c:forEach>
+						</div>
+					</c:if>
+		
+					<ycommerce:testId code="searchPage_price_label_${product.code}">
+						<div class="product__listing--price"><product:productListerItemPrice product="${product}"/></div>
+					</ycommerce:testId>
+				</div> --%>
+		
+		
+				<c:set var="product" value="${product}" scope="request"/>
+				<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
+				<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
+				<c:set var="loginUrl" value="${contextPath}/ascent/login" />
+				<c:url var="downloadUrl" value="/download" />
+				<%-- <div class="addtocart">
+					<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
+						<action:actions element="div" parentComponent="${component}"  />
+					</div>
+				</div> --%>
+				<div class="category-link">
+					<a href="${downloadUrl}"  class="btn btn-warning btn-default btn-sm" ><spring:theme code="text.product.list.try" /></a>  
+					<a href="#" class="btn btn-warning btn-default btn-sm"><spring:theme code="text.product.list.buy" /></a>
 				</div>
-			</c:if>
-
-			<ycommerce:testId code="searchPage_price_label_${product.code}">
-				<div class="product__listing--price"><product:productListerItemPrice product="${product}"/></div>
+		
 			</ycommerce:testId>
-		</div>
+		<!-- </li> -->
+	</div>
+</div>
 
-		<c:if test="${not empty product.summary}">
-			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
-		</c:if>
-
-
-
-		<c:set var="product" value="${product}" scope="request"/>
-		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
-		<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
-		<div class="addtocart">
-			<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
-				<action:actions element="div" parentComponent="${component}"  />
-			</div>
-		</div>
-
-	</ycommerce:testId>
-</li>
 
 
 

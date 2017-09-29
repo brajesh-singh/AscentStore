@@ -9,12 +9,15 @@
 
 <c:forEach items="${pageData.facets}" var="facet">
 	<c:choose>
-		<c:when test="${facet.code eq 'availableInStores'}">
+		<%-- <c:when test="${facet.code eq 'availableInStores'}">
 			<nav:facetNavRefinementStoresFacet facetData="${facet}" userLocation="${userLocation}"/>
-		</c:when>
-		<c:otherwise>
+		</c:when> --%>
+		<c:when test="${facet.code != 'price'}">
 			<nav:facetNavRefinementFacet facetData="${facet}"/>
-		</c:otherwise>
+		</c:when> 
+		<%-- <c:otherwise>
+			<nav:facetNavRefinementFacet facetData="${facet}"/>
+		</c:otherwise> --%>
 	</c:choose>
 </c:forEach>
 

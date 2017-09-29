@@ -203,7 +203,7 @@ INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[u
 
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-;;NavBarComponent;Navigation Bar Collection Componeent;Home,Product,Support,Account,Company;NavBarComponent
+;;NavBarComponent;Navigation Bar Collection Component;Home,Product,Support,Account,Company;NavBarComponent
 
 # CMS tabs components
 INSERT_UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef
@@ -290,7 +290,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;SupportNavNode;;Support;SiteRootNode;;SupportNavNode
 ;AccountNavNode;;Account;SiteRootNode;;AccountNavNode
 ;CompanyNavNode;;Company;SiteRootNode;;CompanyNavNode
-;SolutionNavNode;;Solution;ProductNavNode;ADLink,SMLink,APLink,CMLink,BALink,FDLink;SolutionNavNode
+#;SolutionNavNode;;Solution;ProductNavNode;ADLink,SMLink,APLink,CMLink,BALink,FDLink;SolutionNavNode
 #;SoftwareTypeNavNode;;SoftwareType;ProductNavNode;SubscriptionLink,PerpetualLink;SoftwareTypeNavNode
 
 # Navigation Bar Component
@@ -382,20 +382,20 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;Installation;Installation;Installation
 
 INSERT_UPDATE AscentSolutionBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;AD;Application Delivery;AD;/Solutions/AD/c/AD
-;;SM;Service Management;SM;/Solutions/SM/c/SM
-;;AP;Application Performance Monitoring;AP;/Solutions/AP/c/AP
-;;CM;Cloud Monitoring;CM;/Solutions/CM/c/CM
-;;BA;Business Analytics;BA;/Solutions/BA/c/BA
-;;FD;Fraud Detection;FD;/Solutions/FD/c/FD
+;;AD;Application Delivery;AD;/Solutions/c/Solutions
+;;SM;Service Management;SM;/Solutions/c/Solutions
+;;AP;Application Performance Monitoring;AP;/Solutions/c/Solutions
+;;CM;Cloud Monitoring;CM;/Solutions/c/Solutions
+;;BA;Business Analytics;BA;/Solutions/c/Solutions
+;;FD;Fraud Detection;FD;/Solutions/c/Solutions
 
-INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;AscentHomePageRotatingImagesComponent;Ascent Home Page Rotating Images Component;SeeingIsBeliving,Business,Provider,Solution;AscentHomePageRotatingImagesComponent
+#INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+#;;AscentHomePageRotatingImagesComponent;Ascent Home Page Rotating Images Component;SeeingIsBeliving,Business,Provider,Solution;AscentHomePageRotatingImagesComponent
 
 INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;Section1 Slot for Homepage;true;AscentHomePageRotatingImagesComponent,SOLUTIONS
+;;Section1Slot-Homepage;Section1 Slot for Homepage;true;SOLUTIONS
 ;;Section2ASlot-HomePage;Section2A Slot for Homepage;true;AD,SM
 ;;Section2BSlot-HomePage;Section2B Slot for Homepage;true;AP,CM
 ;;Section2CSlot-HomePage;Section2C Slot for Homepage;true;BA,FD
@@ -749,8 +749,9 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;SiteLogoSlot;SiteLogoComponent
-;;NavigationBarSlot;NavBarComponent,breadcrumbComponent
-;;FooterSlot;FootLogoComponent,FooterComponent
+#;;NavigationBarSlot;NavBarComponent,breadcrumbComponent
+;;NavigationBarSlot;NavBarComponent
+;;FooterSlot;
 ;;SearchBoxSlot;SearchBox
 ;;AddToCartSlot;AddToCart
 ;;CrossSellingSlot;CrossSelling

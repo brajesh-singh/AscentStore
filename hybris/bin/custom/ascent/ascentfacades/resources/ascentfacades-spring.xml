@@ -190,4 +190,12 @@
 	</bean>
 
 	<bean id="genderData" class="com.pwc.demo.facades.product.data.GenderData" scope="prototype"/>
+	
+	<bean id="ascentSearchResultProductPopulator" class="com.pwc.demo.facades.populators.AscentSearchResultProductPopulator">
+	
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="ascentSearchResultProductPopulator"/>
+	</bean>
 </beans>

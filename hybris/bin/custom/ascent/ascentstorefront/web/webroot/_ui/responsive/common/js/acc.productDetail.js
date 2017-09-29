@@ -2,7 +2,8 @@ ACC.productDetail = {
 
     _autoload: [
         "initPageEvents",
-        "bindVariantOptions"
+        "bindVariantOptions",
+        "bindChangeNum"
     ],
 
 
@@ -153,5 +154,33 @@ ACC.productDetail = {
         if (currentSize != null) {
             sizeSpan.text(": " + currentSize);
         }
+    },
+    
+    bindChangeNum: function () {
+    	$(document).on("click", '.cpu_up', function (e) {
+            var $cpu_num = $(this).parent().prev().find('input');
+            $cpu_num.val(Number($cpu_num.val())+1);
+        });
+    	$(document).on("click", '.cpu_down', function (e) {
+            var $cpu_num = $(this).parent().prev().find('input');
+    		if ($cpu_num.val() > 0) {
+	          $cpu_num.val(Number($cpu_num.val())-1);
+	        } else {
+	          $cpu_num = 0;
+	        }
+        }); 
+
+    	$(document).on("click", '.myear_up', function (e) {
+            var $myear_num = $(this).parent().prev().find('input');
+            $myear_num.val(Number($myear_num.val())+1);
+        });
+    	$(document).on("click", '.myear_down', function (e) {
+            var $myear_num = $(this).parent().prev().find('input');   
+    		if ($myear_num.val() > 0) {
+	          $myear_num.val(Number($myear_num.val())-1);
+	        } else {
+	          $myear_num = 0;
+	        }
+        }); 
     }
 };
