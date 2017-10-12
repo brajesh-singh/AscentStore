@@ -41,9 +41,10 @@ public class AscentProductFacadeImpl extends DefaultProductFacade implements Asc
 	void buildProductData(final ProductModel subProductModel, final List<ProductData> products)
 	{
 		final List<ProductOption> options = new ArrayList<>(
-				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
+				Arrays.asList(ProductOption.BASIC, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
 						ProductOption.GALLERY,
-				ProductOption.REVIEW, ProductOption.STOCK));
+						ProductOption.REVIEW, ProductOption.STOCK, ProductOption.PRICE, ProductOption.PROMOTIONS,
+						ProductOption.PRICE_RANGE));
 
 		final ProductData productData = (ProductData) getProductConverter().convert(subProductModel);
 		getProductConfiguredPopulator().populate(subProductModel,

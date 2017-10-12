@@ -204,4 +204,10 @@
 			 parent="defaultProductFacade">
 		<property name="productService" ref="productService"/>
     </bean>
+    
+  		<alias name="ascentSubscriptionProductPricePlanPopulator" alias="subscriptionProductPricePlanPopulator"/>
+	<bean id="ascentSubscriptionProductPricePlanPopulator" class="com.pwc.demo.facades.populators.AscentSubscriptionProductPricePlanPopulator"
+			 parent="defaultSubscriptionProductPricePlanPopulator">
+    </bean>  
+    
 </beans>

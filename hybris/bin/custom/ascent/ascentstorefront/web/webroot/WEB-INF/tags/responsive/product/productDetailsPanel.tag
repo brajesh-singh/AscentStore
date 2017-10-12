@@ -128,6 +128,22 @@
 										<div class="col-sm-6 wow fadeInLeft">
 											<div class="content-block-desc">
 												<div class="form-group">
+													<p>Please enter the number of users</p>
+													<div class="row">
+														<div class="col-xs-6">
+															<label class="sr-only" for="cpu_num">Number of
+																users.</label> <input type="text" id="cpu_num"
+																class="form-control" name="cpu_num" value="0">
+														</div>
+														<div class="col-xs-6">
+															<span type="button"
+																class="fa fa-plus-circle pointer cpu_up"></span> <span
+																type="button"
+																class="fa fa-minus-circle pointer cpu_down"></span>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
 													<p>Please select the validity of the service</p>
 													<div class="row">
 														<div class="col-xs-6">
@@ -144,27 +160,26 @@
 											</div>
 										</div>
 									</div>
-									<div class="container">
+									<div class="container" id="servicesContainer">
 										<div class="row">
 											<div class="content-block-line wow fadeIn"
 												data-wow-delay="0.5s"></div>
 										</div>
 										<c:forEach items="${subscriptionProducts}" var="sub">
-											<div class="row">
+											<div class="row" data-select-value="${sub.code}">
 												<div class="row wow fadeIn" data-wow-delay="0.8s">
-													<div class="col-sm-3 text-center">
-														<h3> </h3>
+													<div class="col-xs-1 text-center">														
 														<h2 class="content-block-header text-warning"><product:productPrimaryImage product="${sub}" format="thumbnail"/></h2>
 													</div>
-													<div class="col-sm-3 text-center">
-														<h3>description</h3>
-														<h6 class="text-left">${sub.description}</h6>
+													<div class="col-xs-6 text-center">
+														<h3>name</h3>
+														<h3 class="col-xs-9 text-center">${sub.name}</h3>
 													</div>
-													<div class="col-sm-3 text-center">
+													<div class="col-xs-3 text-center">
 														<h3>price</h3>
 														<h2 class="content-block-header text-warning"><format:fromPrice priceData="${sub.price}"/></h2>
 													</div>
-													<div class="col-sm-3 text-center">
+													<div class="col-xs-2 text-center">
 														<br />
 														<a href="/ascentstorefront/ascent/en/buy"
 															class="btn btn-warning">BUY NOW</a>

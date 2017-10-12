@@ -3,8 +3,34 @@ ACC.productDetail = {
     _autoload: [
         "initPageEvents",
         "bindVariantOptions",
-        "bindChangeNum"
+        "bindChangeNum",
+        "bindChangeValiditySelect"
     ],
+
+    bindChangeValiditySelect: function () {
+        var select = $("select[name=service_validity]");
+        var rows = $("#servicesContainer").children("div");
+        if ("" == select.val()) {
+            rows.hide();
+        }
+        select.change(function () {
+            rows.hide();
+            if ("" != select.val()) {
+                rows.each(function () {
+                    if (select.val() == $(this).attr("data-select-value")) {
+                        $(this).show();
+                    }
+                });
+            }
+            //scroll the page to show rows in case of lazy-load
+            var supportPageOffset = window.pageXOffset !== undefined;
+            var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+            var x = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+            var y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+            window.scrollTo(x, y + 10);
+            window.scrollTo(x, y);
+        });
+    },
 
 
     checkQtySelector: function (self, mode) {
