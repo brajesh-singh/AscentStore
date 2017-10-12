@@ -39,7 +39,6 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -70,6 +69,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Maps;
+import com.pwc.demo.facades.product.AscentProductFacade;
+import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -99,6 +100,9 @@ public class ProductPageController extends AbstractPageController
 
 	@Resource(name = "productVariantFacade")
 	private ProductFacade productFacade;
+
+	@Resource(name = "productFacade")
+	private AscentProductFacade ascentProductFacade;
 
 	@Resource(name = "productService")
 	private ProductService productService;
@@ -138,6 +142,7 @@ public class ProductPageController extends AbstractPageController
 
 
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
+
 
 		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
@@ -399,6 +404,10 @@ public class ProductPageController extends AbstractPageController
 		final ProductModel productModel = productService.getProductForCode(productCode);
 
 		getRequestContextData(request).setProduct(productModel);
+
+		final List<ProductData> subscriptionProducts = ascentProductFacade.getSubscriptionProducts(productModel);
+
+		model.addAttribute("subscriptionProducts", subscriptionProducts);
 
 		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC,
 				ProductOption.URL, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION, ProductOption.GALLERY,

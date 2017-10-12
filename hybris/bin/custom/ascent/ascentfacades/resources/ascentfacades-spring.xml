@@ -198,4 +198,10 @@
 		<property name="list" ref="commerceSearchResultProductConverter"/>
 		<property name="add" ref="ascentSearchResultProductPopulator"/>
 	</bean>
+	
+		<alias name="ascentProductFacade" alias="productFacade"/>
+	<bean id="ascentProductFacade" class="com.pwc.demo.facades.product.impl.AscentProductFacadeImpl"
+			 parent="defaultProductFacade">
+		<property name="productService" ref="productService"/>
+    </bean>
 </beans>

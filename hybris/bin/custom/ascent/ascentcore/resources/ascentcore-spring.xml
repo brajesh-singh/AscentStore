@@ -549,4 +549,10 @@
 
 	<import resource="/ascentcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
 	
+	<alias alias="productService" name="ascentProductServiceImpl"/>
+	<bean id="ascentProductServiceImpl" class="com.pwc.demo.core.services.product.impl.AscentProductServiceImpl"
+			parent="defaultProductService">
+    </bean>
+	
+	
 </beans>
