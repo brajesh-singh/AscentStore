@@ -553,6 +553,15 @@
 	<bean id="ascentProductServiceImpl" class="com.pwc.demo.core.services.product.impl.AscentProductServiceImpl"
 			parent="defaultProductService">
     </bean>
+    
+	<alias name="ascentDeliveryModeLookupStrategy" alias="deliveryModeLookupStrategy"/>
+	<bean id="ascentDeliveryModeLookupStrategy"
+			class="com.pwc.demo.core.strategies.impl.AscentDeliveryModeLookupStrategy" parent="defaultDeliveryModeLookupStrategy">
+		<property name="deliveryService" ref="deliveryService"/>
+	</bean>
 	
+	<alias name="ascentDeliveryService" alias="deliveryService" />
+	<bean id="ascentDeliveryService" class="com.pwc.demo.core.delivery.impl.AscentDeliveryService" parent="defaultDeliveryService">
+	</bean>
 	
 </beans>

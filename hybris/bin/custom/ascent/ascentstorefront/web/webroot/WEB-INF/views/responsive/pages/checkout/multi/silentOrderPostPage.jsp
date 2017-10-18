@@ -107,29 +107,7 @@
                                     <hr/>
                                     <div class="headline">
                                         <spring:theme code="checkout.multi.paymentMethod.addPaymentDetails.billingAddress"/>
-                                    </div>
-
-                                    <c:if test="${cartData.deliveryItemsQuantity > 0}">
-
-                                        <div id="useDeliveryAddressData"
-                                            data-titlecode="${fn:escapeXml(deliveryAddress.titleCode)}"
-                                            data-firstname="${fn:escapeXml(deliveryAddress.firstName)}"
-                                            data-lastname="${fn:escapeXml(deliveryAddress.lastName)}"
-                                            data-line1="${fn:escapeXml(deliveryAddress.line1)}"
-                                            data-line2="${fn:escapeXml(deliveryAddress.line2)}"
-                                            data-town="${fn:escapeXml(deliveryAddress.town)}"
-                                            data-postalcode="${fn:escapeXml(deliveryAddress.postalCode)}"
-                                            data-countryisocode="${fn:escapeXml(deliveryAddress.country.isocode)}"
-                                            data-regionisocode="${fn:escapeXml(deliveryAddress.region.isocodeShort)}"
-                                            data-address-id="${fn:escapeXml(deliveryAddress.id)}"
-                                        ></div>
-                                        <formElement:formCheckbox
-                                            path="useDeliveryAddress"
-                                            idKey="useDeliveryAddress"
-                                            labelKey="checkout.multi.sop.useMyDeliveryAddress"
-                                            tabindex="11"/>
-                                    </c:if>
-				  
+                                    </div>	  
                                     <input type="hidden" value="${fn:escapeXml(silentOrderPageData.parameters['billTo_email'])}" class="text" name="billTo_email" id="billTo_email">
                                     <address:billAddressFormSelector supportedCountries="${countries}" regions="${regions}" tabindex="12"/>
 				
@@ -177,7 +155,7 @@
 	</div>
 
 	<div class="col-sm-6 hidden-xs">
-		<multiCheckout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="true" showPaymentInfo="false" showTaxEstimate="false" showTax="true" />
+		<multiCheckout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="false" showPaymentInfo="false" showTaxEstimate="false" showTax="true" />
     </div>
 
     <div class="col-sm-12 col-lg-12">

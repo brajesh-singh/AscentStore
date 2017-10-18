@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <header id="navbar" class="header">
 	<nav class="navbar navbar-custom detail-nav" role="navigation">
 
@@ -104,21 +105,25 @@
 		</div>
 	</div>
 	<div class="container">
+	<c:url value="/buy/${product.code}" var="buyUrl" />
 		<ul class="nav nav-tabs dcp-tabs" role="tablist">
+		<c:choose>
+			<c:when test="${fn:length(subscriptionProducts) > 0 }">
 			<li role="presentation" class="active"><a class="pointer"
 				data-target="#saas" role="tab" data-toggle="tab">Subscription</a></li>
-			<c:if test="${fn:length(subscriptionProducts) == 0 }">
-				<li role="presentation" class=""><a class="pointer"
+			</c:when>
+			<c:otherwise>
+				<li role="presentation" class="active"><a class="pointer"
 					data-target="#local" role="tab" data-toggle="tab">On-Premises</a></li>
-			</c:if>
+			</c:otherwise>
+		</c:choose>
 		</ul>
 		<c:choose>
 			<c:when test="${fn:length(subscriptionProducts) > 0 }">
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active " id="saas">
 						<section id="pricing" class="content-block">
-							<form id="configure" role="form">
-								<div class="container">
+							<form:form id="buyToCartForm" role="form" action="${buyUrl}" commandName="addToCartForm">						
 									<div class="row">
 										<div class="col-sm-6 wow fadeInLeft">
 											<div class="content-block-desc">
@@ -133,7 +138,7 @@
 														<div class="col-xs-6">
 															<label class="sr-only" for="cpu_num">Number of
 																users.</label> <input type="text" id="cpu_num"
-																class="form-control" name="cpu_num" value="0">
+																class="form-control" name="qty" value="1">
 														</div>
 														<div class="col-xs-6">
 															<span type="button"
@@ -147,7 +152,7 @@
 													<p>Please select the validity of the service</p>
 													<div class="row">
 														<div class="col-xs-6">
-															<select class="form-control" name="service_validity">
+															<select class="form-control" id="service_validity" name ="subProductCode">
 																<option value="">Please select a valid service
 																	time</option>
 																<c:forEach items="${subscriptionProducts}" var="sub">
@@ -160,6 +165,7 @@
 											</div>
 										</div>
 									</div>
+								
 									<div class="container" id="servicesContainer">
 										<div class="row">
 											<div class="content-block-line wow fadeIn"
@@ -168,28 +174,28 @@
 										<c:forEach items="${subscriptionProducts}" var="sub">
 											<div class="row" data-select-value="${sub.code}">
 												<div class="row wow fadeIn" data-wow-delay="0.8s">
-													<div class="col-xs-1 text-center">														
+													<div class="col-xs-1 text-center">	
+													<br />													
 														<h2 class="content-block-header text-warning"><product:productPrimaryImage product="${sub}" format="thumbnail"/></h2>
 													</div>
 													<div class="col-xs-6 text-center">
-														<h3>name</h3>
+														<br />
 														<h3 class="col-xs-9 text-center">${sub.name}</h3>
 													</div>
 													<div class="col-xs-3 text-center">
-														<h3>price</h3>
+														<br />
 														<h2 class="content-block-header text-warning"><format:fromPrice priceData="${sub.price}"/></h2>
 													</div>
 													<div class="col-xs-2 text-center">
 														<br />
-														<a href="/ascentstorefront/ascent/en/buy"
-															class="btn btn-warning">BUY NOW</a>
+														<button type="submit" class="btn btn-warning">BUY NOW</button>	
 													</div>
 												</div>
 											</div>
 										</c:forEach>
 
 									</div>
-							</form>
+							</form:form>
 						</section>
 					</div>
 				</div>
@@ -197,9 +203,9 @@
 			</c:when>
 			<c:otherwise>
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active " id="saas">
+					<div role="tabpanel" class="tab-pane active " id="local">
 						<section id="pricing" class="content-block">
-							<form id="configure" role="form">
+							<form:form id="buyToCartForm" role="form" action="${buyUrl}" commandName="addToCartForm">
 								<div class="container">
 									<div class="row">
 										<div class="col-sm-6 wow fadeInLeft">
@@ -210,12 +216,16 @@
 										<div class="col-sm-6 wow fadeInLeft">
 											<div class="content-block-desc">
 												<div class="form-group">
-													<p>Please enter the number of months</p>
+												<h2 class="content-block-header text-warning"><format:fromPrice priceData="${product.price}"/></h2>
+												
+												</div>
+												<div class="form-group">
+													<p>Please enter the number of users</p>
 													<div class="row">
 														<div class="col-xs-6">
 															<label class="sr-only" for="cpu_num">Number of
 																CPUs.</label> <input type="text" id="cpu_num"
-																class="form-control" name="cpu_num" value="0">
+																class="form-control" name="qty" value="1">
 														</div>
 														<div class="col-xs-6">
 															<span type="button"
@@ -225,145 +235,19 @@
 														</div>
 													</div>
 												</div>
-												<div class="form-group">
-													<p>Please enter number of seats.</p>
-													<div class="row">
-														<div class="col-xs-6">
-															<label class="sr-only" for="myear_num">Years of
-																maintenance</label> <input type="text" id="myear_num"
-																class="form-control" name="myear_num" value="0">
-														</div>
-														<div class="col-xs-6">
-															<span type="button"
-																class="fa fa-plus-circle pointer myear_up"></span> <span
-																type="button"
-																class="fa fa-minus-circle pointer myear_down"></span>
-														</div>
-													</div>
-												</div>
 											</div>
-										</div>
+										</div>										
 									</div>
+									<input type="hidden" name="subProductCode" value="">
 									<div class="row">
 										<div class="col-sm-6 wow fadeInLeft">&nbsp;</div>
 										<div class="col-sm-6 wow fadeInLeft">
 											&nbsp;&nbsp;
-											<button type="submit" class="btn btn-warning btn-lg">UPDATE
-												Pricing</button>
+											<button type="submit" class="btn btn-warning">BUY NOW</button>										
 										</div>
 									</div>
 								</div>
-								<div class="container">
-									<div class="row">
-										<div class="content-block-line wow fadeIn"
-											data-wow-delay="0.5s"></div>
-									</div>
-									<div class="row">
-										<div class="row wow fadeIn" data-wow-delay="0.8s">
-											<div class="col-sm-3 text-center">
-												<h3>PER SEAT</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<h3>TOTAL</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<h3>DUE TODAY</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<br />
-												<a href="/ascentstorefront/ascent/en/buy"
-													class="btn btn-warning">BUY NOW</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
-						</section>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="local">
-						<section id="pricing" class="content-block">
-							<form id="configure" role="form">
-								<div class="container">
-									<div class="row">
-										<div class="col-sm-6 ">
-											<div class="content-block-desc">
-												<p>${ycommerce:sanitizeHTML(product.summary)}</p>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="content-block-desc">
-												<div class="form-group">
-													<p>Please enter the number of CPUs</p>
-													<div class="row">
-														<div class="col-xs-6">
-															<label class="sr-only" for="cpu_num">Number of
-																CPUs.</label> <input type="text" id="cpu_num"
-																class="form-control" name="cpu_num" value="0">
-														</div>
-														<div class="col-xs-6">
-															<span type="button"
-																class="fa fa-plus-circle pointer cpu_up"></span> <span
-																type="button"
-																class="fa fa-minus-circle pointer cpu_down"></span>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<p>Please enter number of years of maintenance.</p>
-													<div class="row">
-														<div class="col-xs-6">
-															<label class="sr-only" for="myear_num">Years of
-																maintenance</label> <input type="text" id="myear_num"
-																class="form-control" name="myear_num" value="0">
-														</div>
-														<div class="col-xs-6">
-															<span type="button"
-																class="fa fa-plus-circle pointer myear_up"></span> <span
-																type="button"
-																class="fa fa-minus-circle pointer myear_down"></span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6 ">&nbsp;</div>
-										<div class="col-sm-6">
-											&nbsp;&nbsp;
-											<button type="submit" class="btn btn-lg btn-warning">UPDATE
-												Pricing</button>
-										</div>
-									</div>
-									<div class="row">
-										<div class="content-block-line"></div>
-									</div>
-									<div class="row">
-										<div class="row">
-											<div class="col-sm-3 text-center">
-												<h3>PER SEAT</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<h3>TOTAL</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<h3>DUE TODAY</h3>
-												<h2 class="content-block-header text-warning">$0</h2>
-											</div>
-											<div class="col-sm-3 text-center">
-												<br />
-												<a href="/ascentstorefront/ascent/en/buy"
-													data-toggle="modal" class="btn btn-warning">BUY NOW</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
+							</form:form>
 						</section>
 					</div>
 				</div>

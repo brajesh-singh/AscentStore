@@ -32,10 +32,8 @@ import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
-import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
-import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,6 +54,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 
 
@@ -232,10 +232,6 @@ public class CheckoutController extends AbstractCheckoutController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CHECKOUT_ORDER_CONFIRMATION_CMS_PAGE_LABEL));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		if (ResponsiveUtils.isResponsive())
-		{
-			return getViewForPage(model);
-		}
 
 		return ControllerConstants.Views.Pages.Checkout.CheckoutConfirmationPage;
 	}

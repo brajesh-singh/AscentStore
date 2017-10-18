@@ -63,6 +63,8 @@
         <extension name="ascentfulfilmentprocess" />
         <extension name="ascentinitialdata" />
         <extension name="ascentstorefront" />
+        <extension name="ascentcheckoutaddon" />
+        
     <!--    <extension name="ascenttest" />  -->    
         
         <!-- Subscription -->

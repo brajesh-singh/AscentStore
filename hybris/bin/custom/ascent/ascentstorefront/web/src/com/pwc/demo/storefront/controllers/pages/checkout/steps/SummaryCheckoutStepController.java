@@ -1,12 +1,5 @@
-/*
- * [y] hybris Platform
+/**
  *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
  */
 package com.pwc.demo.storefront.controllers.pages.checkout.steps;
 
@@ -28,10 +21,10 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
-import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +36,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pwc.demo.facades.order.AscentCheckoutFacade;
+import com.pwc.demo.storefront.controllers.ControllerConstants;
 
+
+/**
+ * @author kyao011
+ *
+ */
 @Controller
 @RequestMapping(value = "/checkout/multi/summary")
 public class SummaryCheckoutStepController extends AbstractCheckoutStepController
@@ -51,6 +51,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	private static final Logger LOGGER = Logger.getLogger(SummaryCheckoutStepController.class);
 
 	private static final String SUMMARY = "summary";
+	@Resource(name = "ascentCheckoutFacade")
+	private AscentCheckoutFacade ascentCheckoutFacade;
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -237,5 +239,23 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		return getCheckoutStep(SUMMARY);
 	}
 
+	/**
+	 * @return the ascentCheckoutFacade
+	 */
+	public AscentCheckoutFacade getAscentCheckoutFacade()
+	{
+		return ascentCheckoutFacade;
+	}
+
+	/**
+	 * @param ascentCheckoutFacade
+	 *           the ascentCheckoutFacade to set
+	 */
+	public void setAscentCheckoutFacade(final AscentCheckoutFacade ascentCheckoutFacade)
+	{
+		this.ascentCheckoutFacade = ascentCheckoutFacade;
+	}
+
 
 }
+

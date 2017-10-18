@@ -32,4 +32,6 @@ public final class AscentCoreConstants extends GeneratedAscentCoreConstants
 	public static final String QUOTE_EXPIRED_EMAIL_PROCESS = "quote-expired-email-process";
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
 
+	public final static String DEFAULT_DELIVERY_CODE = "free-standard-shipping";
+
 }

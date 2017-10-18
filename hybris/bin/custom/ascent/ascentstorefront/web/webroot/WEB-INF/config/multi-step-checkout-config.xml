@@ -297,7 +297,36 @@
 	</bean>
 
 	<!---Default Responsive checkout group END-->
-
+  <!-- ascent checkout step Start -->
+		<alias name="ascentMultiStepCheckoutGroup" alias="ascentCheckoutGroup" />
+	<bean id="ascentMultiStepCheckoutGroup"  class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup">
+		<property name="groupId"  value="defaultGroup"/>
+		<property name="checkoutStepMap">
+			<map merge="true">
+				<entry key="multi" value-ref="multiStepCheckout"/>
+				<entry key="payment-type" value-ref="ascentPaymentTypeCheckoutStep"/>
+				<entry key="payment-method" value-ref="ascentPaymentMethodCheckoutStep"/>
+				<entry key="summary" value-ref="ascentSummaryCheckoutStep"/>
+			</map>
+		</property>
+		<property name="validationResultsMap">
+			<map merge="true">
+				<entry key="FAILED" value-ref="REDIRECT_TO_CART"/>
+				<entry key="REDIRECT_TO_PAYMENT_TYPE" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
+				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="checkoutProgressBar">
+			<map merge="true">
+			    <entry key="1" value-ref="ascentPaymentTypeCheckoutStep"/>
+				<entry key="2" value-ref="ascentPaymentMethodCheckoutStep"/>
+				<entry key="3" value-ref="ascentSummaryCheckoutStep"/>
+			</map>
+		</property>
+	</bean>
+	<!-- End -->
 	<!--Validation-->
 
 	<bean id="abstractCheckoutStepValidator" class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.AbstractCheckoutStepValidator" abstract="true">
@@ -318,6 +347,18 @@
 	<bean id="defaultResponsivePaymentMethodCheckoutValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.ResponsivePaymentCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
 	<bean id="defaultResponsiveSummaryCheckoutValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.ResponsiveSummaryCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
 	
+	
+	<bean id="paymentTypeFormValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.PaymentTypeFormValidator" />
+    <bean id="ascentPaymentTypeCheckoutValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.AscentPaymentTypeCheckoutValidator" parent="ascentAbstractCheckoutStepValidator" />
+	<bean id="ascentPaymentMethodCheckoutValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.AscentPaymentMethodCheckoutValidator" parent="ascentAbstractCheckoutStepValidator" />
+	<bean id="ascentSummaryCheckoutStepValidator" class="com.pwc.demo.storefront.checkout.steps.validation.impl.AscentSummaryCheckoutStepValidator" parent="ascentAbstractCheckoutStepValidator" />
+	
+
+	<bean id="ascentAbstractCheckoutStepValidator" class="com.pwc.demo.storefront.checkout.steps.validation.AbstractAscentB2BCheckoutStepValidator" abstract="true">
+		<property name="checkoutFlowFacade" ref="b2bMultiStepCheckoutFlowFacade"/>
+		<property name="checkoutFacade" ref="b2bCheckoutFacade"/>
+	</bean>
+	
 	<!--Validation-->
 
 	<!--Checkout GroupMap-->
@@ -325,9 +366,67 @@
 		<entry key="apparelCheckoutGroup"  value-ref="apparelCheckoutGroup"/>
 		<entry key="defaultCheckoutGroup" value-ref="defaultCheckoutGroup"/>
 		<entry key="responsiveCheckoutGroup" value-ref="responsiveCheckoutGroup"/>
+		<entry key="ascentCheckoutGroup" value-ref="ascentCheckoutGroup"/>		
 	</util:map>
 	<!--Checkout GroupMap-->
 
+	<bean name="paymentTypeCheckoutStepController" class="com.pwc.demo.storefront.controllers.pages.checkout.steps.PaymentTypeCheckoutStepController" />		
+	<bean name="summaryCheckoutStepController" class="com.pwc.demo.storefront.controllers.pages.checkout.steps.SummaryCheckoutStepController" />
+
+	
+	<alias name="ascentB2bMultiStepCheckout" alias="multiStepCheckout" />
+	<bean id="ascentB2bMultiStepCheckout" parent="defaultB2bMultiStepCheckout">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
+		<property name="transitions">
+			<map>
+				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
+				<entry key="current" value-ref="REDIRECT_MULTI_STEP_CHECKOUT"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="multi"/>
+	</bean>
+	
+	<bean id="ascentPaymentTypeCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentPaymentTypeCheckoutValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentType"/>
+	</bean>
+	
+	<bean id="ascentPaymentMethodCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentPaymentMethodCheckoutValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentMethod"/>
+	</bean>
+	
+	<bean id="ascentSummaryCheckoutStep"  parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentSummaryCheckoutStepValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="current" value-ref="REDIRECT_TO_SUMMARY"/>
+				<entry key="next" value="redirect:/checkout/orderConfirmation/%s"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="confirmOrder"/>
+	</bean>
+	
 
 	<!-- Redirects -->
 

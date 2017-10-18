@@ -210,4 +210,11 @@
 			 parent="defaultSubscriptionProductPricePlanPopulator">
     </bean>  
     
+    	<alias name="ascentCheckoutFacade" alias="acceleratorCheckoutFacade"/>
+	<bean id="ascentCheckoutFacade" class="com.pwc.demo.facades.order.impl.AscentCheckoutFacadeImpl" parent="defaultB2BAcceleratorCheckoutFacade">
+	</bean>
+	
+	<alias name="ascentB2BCheckoutFacade" alias="b2bCheckoutFacade"/>
+	<bean id="ascentB2BCheckoutFacade" class="com.pwc.demo.facades.order.impl.AscentB2BCheckoutFacade" parent="defaultB2BCheckoutFacade" >	
+	</bean>
 </beans>

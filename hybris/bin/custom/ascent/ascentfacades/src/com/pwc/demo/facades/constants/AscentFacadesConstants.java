@@ -22,4 +22,5 @@ public class AscentFacadesConstants extends GeneratedAscentFacadesConstants
 	{
 		//empty
 	}
+
 }

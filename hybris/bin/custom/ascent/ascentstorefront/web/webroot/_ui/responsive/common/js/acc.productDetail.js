@@ -8,7 +8,7 @@ ACC.productDetail = {
     ],
 
     bindChangeValiditySelect: function () {
-        var select = $("select[name=service_validity]");
+        var select = $("select[id=service_validity]");
         var rows = $("#servicesContainer").children("div");
         if ("" == select.val()) {
             rows.hide();

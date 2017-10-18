@@ -32,7 +32,6 @@ import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
-import com.pwc.demo.storefront.controllers.ControllerConstants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,6 +55,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pwc.demo.facades.order.AscentCheckoutFacade;
+import com.pwc.demo.storefront.controllers.ControllerConstants;
+
 
 @Controller
 @RequestMapping(value = "/checkout/multi/payment-method")
@@ -69,6 +71,10 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+
+	@Resource(name = "ascentCheckoutFacade")
+	private AscentCheckoutFacade ascentCheckoutFacade;
+
 
 	@ModelAttribute("billingCountries")
 	public Collection<CountryData> getBillingCountries()
@@ -138,7 +144,6 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	@PreValidateCheckoutStep(checkoutStep = PAYMENT_METHOD)
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		getCheckoutFacade().setDeliveryModeIfAvailable();
 		setupAddPaymentPage(model);
 
 		// Use the checkout PCI strategy for getting the URL for creating new subscriptions.
@@ -375,7 +380,7 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("silentOrderPostForm", new PaymentDetailsForm());
 		model.addAttribute(CART_DATA_ATTR, cartData);
-		model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
+		//		model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
 		model.addAttribute("sopPaymentDetailsForm", sopPaymentDetailsForm);
 		model.addAttribute("paymentInfos", getUserFacade().getCCPaymentInfos(true));
 		model.addAttribute("sopCardTypes", getSopCardTypes());
@@ -417,5 +422,6 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 		CYBERSOURCE_SOP_CARD_TYPES.put("diners", "005");
 		CYBERSOURCE_SOP_CARD_TYPES.put("maestro", "024");
 	}
+
 
 }
