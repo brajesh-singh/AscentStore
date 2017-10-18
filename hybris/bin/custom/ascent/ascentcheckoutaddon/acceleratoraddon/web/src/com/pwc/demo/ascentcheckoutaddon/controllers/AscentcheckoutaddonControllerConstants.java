@@ -23,10 +23,10 @@ public interface AscentcheckoutaddonControllerConstants
 		{
 			interface MultiStepCheckout
 			{
-				String ChoosePaymentTypePage = ADDON_PREFIX + "pages/checkout/multi/choosePaymentTypePage";
-				String CheckoutSummaryPage = ADDON_PREFIX + "pages/checkout/multi/checkoutSummaryPage";
-				String AddPaymentMethodPage = ADDON_PREFIX + "pages/checkout/multi/addPaymentMethodPage";
-				String SilentOrderPostPage = ADDON_PREFIX + "pages/checkout/multi/silentOrderPostPage";
+				String ChoosePaymentTypePage = STOREFRONT_PREFIX + "pages/checkout/multi/choosePaymentTypePage";
+				String CheckoutSummaryPage = STOREFRONT_PREFIX + "pages/checkout/multi/checkoutSummaryPage";
+				String AddPaymentMethodPage = STOREFRONT_PREFIX + "pages/checkout/multi/addPaymentMethodPage";
+				String SilentOrderPostPage = STOREFRONT_PREFIX + "pages/checkout/multi/silentOrderPostPage";
 				String HostedOrderPostPage = STOREFRONT_PREFIX + "pages/checkout/multi/hostedOrderPostPage";
 			}
 		}
