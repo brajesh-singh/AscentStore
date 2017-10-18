@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/> 
+
+	<!--Checkout GroupMap-->	
+	<bean id="b2bCheckoutFlowGroupMapMergeDirective" depends-on="checkoutFlowGroupMap" parent="mapMergeDirective" >
+		<property name="key" value="ascentCheckoutGroup" />
+		<property name="value" ref="ascentCheckoutGroup" />
+	</bean>
+	
+
+  <!-- ascent checkout step Start -->
+		<alias name="ascentMultiStepCheckoutGroup" alias="ascentCheckoutGroup" />
+	<bean id="ascentMultiStepCheckoutGroup"  class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup">
+		<property name="groupId"  value="defaultGroup"/>
+		<property name="checkoutStepMap">
+			<map merge="true">
+				<entry key="multi" value-ref="multiStepCheckout"/>
+				<entry key="payment-type" value-ref="ascentPaymentTypeCheckoutStep"/>
+				<entry key="payment-method" value-ref="ascentPaymentMethodCheckoutStep"/>
+				<entry key="summary" value-ref="ascentSummaryCheckoutStep"/>
+			</map>
+		</property>
+		<property name="validationResultsMap">
+			<map merge="true">
+				<entry key="FAILED" value-ref="REDIRECT_TO_CART"/>
+				<entry key="REDIRECT_TO_PAYMENT_TYPE" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
+				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="checkoutProgressBar">
+			<map merge="true">
+			    <entry key="1" value-ref="ascentPaymentTypeCheckoutStep"/>
+				<entry key="2" value-ref="ascentPaymentMethodCheckoutStep"/>
+				<entry key="3" value-ref="ascentSummaryCheckoutStep"/>
+			</map>
+		</property>
+	</bean>
+	<!-- End -->
+
+    <bean id="ascentPaymentTypeCheckoutValidator" class="com.pwc.demo.ascentcheckoutaddon.checkout.steps.validation.impl.AscentPaymentTypeCheckoutValidator" parent="abstractB2BCheckoutStepValidator" />
+	<bean id="ascentPaymentMethodCheckoutValidator" class="com.pwc.demo.ascentcheckoutaddon.checkout.steps.validation.impl.AscentPaymentMethodCheckoutValidator" parent="abstractB2BCheckoutStepValidator" />
+	<bean id="ascentSummaryCheckoutStepValidator" class="com.pwc.demo.ascentcheckoutaddon.checkout.steps.validation.impl.AscentSummaryCheckoutStepValidator" parent="abstractB2BCheckoutStepValidator" />
+	
+	<bean name="paymentTypeCheckoutStepController" class="com.pwc.demo.ascentcheckoutaddon.controllers.pages.checkout.steps.PaymentTypeCheckoutStepController" />		
+	<bean name="paymentMethodCheckoutStepController" class="com.pwc.demo.ascentcheckoutaddon.controllers.pages.checkout.steps.PaymentMethodCheckoutStepController" />
+	<bean name="summaryCheckoutStepController" class="com.pwc.demo.ascentcheckoutaddon.controllers.pages.checkout.steps.SummaryCheckoutStepController" />
+
+	
+	<alias name="ascentB2bMultiStepCheckout" alias="multiStepCheckout" />
+	<bean id="ascentB2bMultiStepCheckout" parent="defaultB2bMultiStepCheckout">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
+		<property name="transitions">
+			<map>
+				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
+				<entry key="current" value-ref="REDIRECT_MULTI_STEP_CHECKOUT"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="multi"/>
+	</bean>
+	
+	<bean id="ascentPaymentTypeCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentPaymentTypeCheckoutValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentType"/>
+	</bean>
+	
+	<bean id="ascentPaymentMethodCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentPaymentMethodCheckoutValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_TYPE"/>
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentMethod"/>
+	</bean>
+	
+	<bean id="ascentSummaryCheckoutStep"  parent="checkoutStep">
+		<property name="checkoutGroup" ref="ascentCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="ascentSummaryCheckoutStepValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="current" value-ref="REDIRECT_TO_SUMMARY"/>
+				<entry key="next" value="redirect:/checkout/orderConfirmation/%s"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="confirmOrder"/>
+	</bean>
+	
+	</beans>

@@ -13,6 +13,7 @@
 	<extension abstractclassprefix="Generated" classprefix="AscentStorefront" name="ascentstorefront" usemaven="false">		
         
 
+<requires-extension name="ascentcheckoutaddon"/>
 <requires-extension name="commerceorgaddon"/>
 <requires-extension name="b2bacceleratoraddon"/>
 

@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.pwc.demo.storefront.controllers.pages.checkout.steps;
+package com.pwc.demo.ascentcheckoutaddon.controllers.pages.checkout.steps;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
@@ -11,6 +11,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.b2bacceleratoraddon.forms.PaymentTypeForm;
+import de.hybris.platform.b2bacceleratoraddon.forms.validation.PaymentTypeFormValidator;
 import de.hybris.platform.b2bacceleratorfacades.api.cart.CheckoutFacade;
 import de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData;
 import de.hybris.platform.b2bacceleratorservices.enums.CheckoutPaymentType;
@@ -37,10 +39,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pwc.demo.ascentcheckoutaddon.controllers.AscentcheckoutaddonControllerConstants;
 import com.pwc.demo.facades.order.AscentCheckoutFacade;
-import com.pwc.demo.storefront.checkout.steps.validation.impl.PaymentTypeFormValidator;
-import com.pwc.demo.storefront.controllers.ControllerConstants;
-import com.pwc.demo.storefront.controllers.pages.forms.PaymentTypeForm;
 
 
 
@@ -99,7 +99,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		setCheckoutStepLinksForModel(model, getCheckoutStep());
 
-		return ControllerConstants.Views.Pages.MultiStepCheckout.ChoosePaymentTypePage;
+		return AscentcheckoutaddonControllerConstants.Views.Pages.MultiStepCheckout.ChoosePaymentTypePage;
 	}
 
 	@RequestMapping(value = "/choose", method = RequestMethod.POST)
@@ -120,7 +120,7 @@ public class PaymentTypeCheckoutStepController extends AbstractCheckoutStepContr
 					getResourceBreadcrumbBuilder().getBreadcrumbs("checkout.multi.paymentType.breadcrumb"));
 			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 			setCheckoutStepLinksForModel(model, getCheckoutStep());
-			return ControllerConstants.Views.Pages.MultiStepCheckout.ChoosePaymentTypePage;
+			return AscentcheckoutaddonControllerConstants.Views.Pages.MultiStepCheckout.ChoosePaymentTypePage;
 		}
 		ascentCheckoutFacade.setDefaultDeliveryMode();
 
