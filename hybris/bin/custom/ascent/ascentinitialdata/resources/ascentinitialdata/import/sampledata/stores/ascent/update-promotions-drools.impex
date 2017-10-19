@@ -1,0 +1,2 @@
+INSERT_UPDATE AbstractRulesModule;name[unique=true];active;
+;promotions-preview-module;false

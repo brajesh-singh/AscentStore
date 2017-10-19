@@ -124,8 +124,19 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getSampleDataImportService().execute(this, context, importData);
 		getSampleDataImportService().importCommerceOrgData(context);
 		getSampleDataImportService().getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		importUpdatePromotionsData(context);
 	}
 
+
+	public void importUpdatePromotionsData(final SystemSetupContext context)
+	{
+
+		final String extensionName = context.getExtensionName();
+
+		getSetupImpexService().importImpexFile(
+				String.format("/%s/import/sampledata/stores/ascent/update-promotions-drools.impex", extensionName), false);
+
+	}
 	public CoreDataImportService getCoreDataImportService()
 	{
 		return coreDataImportService;
