@@ -16,7 +16,7 @@
 		<requires-extension name="addonsupport"/>
 		<requires-extension name="b2bacceleratoraddon" />
 		<requires-extension name="subscriptionfacades"/>
-		
+		<requires-extension name="ascentfacades"/>
 		<coremodule generated="true" manager="com.pwc.demo.ascentcheckoutaddon.jalo.AscentcheckoutaddonManager" packageroot="com.pwc.demo.ascentcheckoutaddon"/>
 
 		

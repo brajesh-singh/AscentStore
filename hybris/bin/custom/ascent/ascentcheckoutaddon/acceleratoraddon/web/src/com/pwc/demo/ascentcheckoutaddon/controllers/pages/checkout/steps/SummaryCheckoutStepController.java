@@ -11,7 +11,10 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutSt
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.PlaceOrderForm;
+import de.hybris.platform.b2bacceleratoraddon.forms.PlaceOrderForm;
+import de.hybris.platform.b2bacceleratorfacades.api.cart.CheckoutFacade;
+import de.hybris.platform.b2bacceleratorfacades.checkout.data.PlaceOrderData;
+import de.hybris.platform.b2bacceleratorfacades.exception.EntityValidationException;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
@@ -25,7 +28,6 @@ import de.hybris.platform.payment.AdapterException;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -37,7 +39,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pwc.demo.ascentcheckoutaddon.controllers.AscentcheckoutaddonControllerConstants;
-import com.pwc.demo.facades.order.AscentCheckoutFacade;
 
 
 /**
@@ -51,8 +52,10 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	private static final Logger LOGGER = Logger.getLogger(SummaryCheckoutStepController.class);
 
 	private static final String SUMMARY = "summary";
-	@Resource(name = "ascentCheckoutFacade")
-	private AscentCheckoutFacade ascentCheckoutFacade;
+
+	@Resource(name = "b2bCheckoutFacade")
+	private CheckoutFacade ascentB2BCheckoutFacade;
+
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -101,42 +104,56 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	@PreValidateQuoteCheckoutStep
 	@RequireHardLogIn
 	public String placeOrder(@ModelAttribute("placeOrderForm") final PlaceOrderForm placeOrderForm, final Model model,
-			final HttpServletRequest request, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, // NOSONAR
-			InvalidCartException, CommerceCartModificationException
+			final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException, InvalidCartException, CommerceCartModificationException
 	{
 		if (validateOrderForm(placeOrderForm, model))
 		{
 			return enterStep(model, redirectModel);
 		}
 
-		//Validate the cart
-		if (validateCart(redirectModel))
-		{
-			// Invalid cart. Bounce back to the cart page.
-			return REDIRECT_PREFIX + "/cart";
-		}
-
 		// authorize, if failure occurs don't allow to place the order
-		boolean isPaymentUthorized = false;
+		boolean isPaymentAuthorized = false;
 		try
 		{
-			isPaymentUthorized = getCheckoutFacade().authorizePayment(placeOrderForm.getSecurityCode());
+			isPaymentAuthorized = getCheckoutFacade().authorizePayment(placeOrderForm.getSecurityCode());
 		}
 		catch (final AdapterException ae)
 		{
 			// handle a case where a wrong paymentProvider configurations on the store see getCommerceCheckoutService().getPaymentProvider()
 			LOGGER.error(ae.getMessage(), ae);
 		}
-		if (!isPaymentUthorized)
+		if (!isPaymentAuthorized)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.error.authorization.failed");
 			return enterStep(model, redirectModel);
 		}
 
+		final PlaceOrderData placeOrderData = new PlaceOrderData();
+		placeOrderData.setNDays(placeOrderForm.getnDays());
+		placeOrderData.setNDaysOfWeek(placeOrderForm.getnDaysOfWeek());
+		placeOrderData.setNthDayOfMonth(placeOrderForm.getNthDayOfMonth());
+		placeOrderData.setNWeeks(placeOrderForm.getnWeeks());
+		placeOrderData.setReplenishmentOrder(Boolean.valueOf(placeOrderForm.isReplenishmentOrder()));
+		placeOrderData.setReplenishmentRecurrence(placeOrderForm.getReplenishmentRecurrence());
+		placeOrderData.setReplenishmentStartDate(placeOrderForm.getReplenishmentStartDate());
+		placeOrderData.setSecurityCode(placeOrderForm.getSecurityCode());
+		placeOrderData.setTermsCheck(Boolean.valueOf(placeOrderForm.isTermsCheck()));
+
 		final OrderData orderData;
 		try
 		{
-			orderData = getCheckoutFacade().placeOrder();
+			orderData = getAscentB2BCheckoutFacade().placeOrder(placeOrderData);
+		}
+		catch (final EntityValidationException e)
+		{
+			LOGGER.error("Failed to place Order", e);
+			GlobalMessages.addErrorMessage(model, e.getLocalizedMessage());
+
+			placeOrderForm.setTermsCheck(false);
+			model.addAttribute(placeOrderForm);
+
+			return enterStep(model, redirectModel);
 		}
 		catch (final Exception e)
 		{
@@ -147,6 +164,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 
 		return redirectToOrderConfirmationPage(orderData);
 	}
+
 
 	/**
 	 * Validates the order form before to filter out invalid order states
@@ -233,21 +251,23 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		return getCheckoutStep(SUMMARY);
 	}
 
-	/**
-	 * @return the ascentCheckoutFacade
-	 */
-	public AscentCheckoutFacade getAscentCheckoutFacade()
-	{
-		return ascentCheckoutFacade;
-	}
 
 	/**
-	 * @param ascentCheckoutFacade
-	 *           the ascentCheckoutFacade to set
+	 * @return the ascentB2BCheckoutFacade
 	 */
-	public void setAscentCheckoutFacade(final AscentCheckoutFacade ascentCheckoutFacade)
+	public CheckoutFacade getAscentB2BCheckoutFacade()
 	{
-		this.ascentCheckoutFacade = ascentCheckoutFacade;
+		return ascentB2BCheckoutFacade;
+	}
+
+
+	/**
+	 * @param ascentB2BCheckoutFacade
+	 *           the ascentB2BCheckoutFacade to set
+	 */
+	public void setAscentB2BCheckoutFacade(final CheckoutFacade ascentB2BCheckoutFacade)
+	{
+		this.ascentB2BCheckoutFacade = ascentB2BCheckoutFacade;
 	}
 
 

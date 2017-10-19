@@ -216,5 +216,15 @@
 	
 	<alias name="ascentB2BCheckoutFacade" alias="b2bCheckoutFacade"/>
 	<bean id="ascentB2BCheckoutFacade" class="com.pwc.demo.facades.order.impl.AscentB2BCheckoutFacade" parent="defaultB2BCheckoutFacade" >	
+	<property name="subscriptionFacade" ref="subscriptionFacade" />
 	</bean>
+
+	<alias name="ascentSubscriptionFacade" alias="subscriptionFacade" />
+    <bean id="ascentSubscriptionFacade" class="com.pwc.demo.facades.subscription.impl.AscentSubscriptionFacade" parent="defaultSubscriptionFacade">
+	    <property name="subscriptionService" ref="subscriptionService" />
+	    <property name="productService" ref="productService" />
+		<property name="termOfServiceRenewalConverter" ref="termOfServiceRenewalConverter" />
+	    <property name="termOfServiceFrequencyConverter" ref="termOfServiceFrequencyConverter" />
+	</bean>
+		
 </beans>

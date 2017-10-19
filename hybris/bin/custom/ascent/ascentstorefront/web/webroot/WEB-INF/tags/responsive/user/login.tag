@@ -9,7 +9,57 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
+<form:form action="${action}" method="post" commandName="loginForm">
+	   <h2 class="content-block-header">Sign In</h2>
+  
+  <c:if test="${not empty message}">
+		<span class="has-error"> <spring:theme code="${message}" />
+		</span>
+	</c:if>	
+	<%-- 
+		<formElement:formInputBox idKey="j_username" labelKey="login.email"
+			path="j_username" mandatory="true" />
+		<formElement:formPasswordBox idKey="j_password"
+			labelKey="login.password" path="j_password" inputCSS="form-control"
+			mandatory="true" /> --%>
+			
+	<div class="form-group">
+    	<label for="exampleInputEmail1" class="sr-only">Email address</label>
+   		<input type="email" class="form-control" id="exampleInputEmail1" name="j_username" placeholder="Enter email">
+  	</div>
+	<div class="form-group">
+	    <label for="exampleInputPassword1" class="sr-only">Password</label>
+	    <input type="password" class="form-control" id="exampleInputPassword1" name="j_password" placeholder="Password">
+	</div>
+			
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Remember me
+    </label>
+	  <!-- <p><a href="#" style="color:#fff;">Forgot your password?</a></p> --> 
+	  <div class="forgotten-password">
+			<ycommerce:testId code="login_forgotPassword_link">
+				<a href="#" style="color:#fff;" data-link="<c:url value='/login/pw/request'/>" class="js-password-forgotten" data-cbox-title="<spring:theme code="forgottenPwd.title"/>">
+					<spring:theme code="login.link.forgottenPwd" />
+				</a>
+			</ycommerce:testId>
+	  </div>
+  </div>
+  
+  <div class="form-group">
+	<!-- <a href="download.html" type="button" class="btn  btn-default ">Sign In</a> -->
+	<ycommerce:testId code="loginAndCheckoutButton">
+			<button type="submit" class="btn  btn-default ">
+				<spring:theme code="${actionNameKey}" />
+			</button>
+	</ycommerce:testId>
+  </div>
+  <div class="clearfix">&nbsp;</div>  
+
+</form:form>
+<div class="clearfix">&nbsp;</div>
+
+<%-- <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
 <div class="login-page__headline">
 	<spring:theme code="login.title" />
@@ -52,5 +102,5 @@
 		<input id="expressCheckoutCheckbox" name="expressCheckoutEnabled" type="checkbox" class="form left doExpressCheckout display-none" />
 	</c:if>
 
-</form:form>
+</form:form> --%>
 

@@ -33,5 +33,6 @@ public final class AscentCoreConstants extends GeneratedAscentCoreConstants
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
 
 	public final static String DEFAULT_DELIVERY_CODE = "free-standard-shipping";
-
+	public static final String SUBSCRIPTION_PRODUCT_STATUS_VALID = "Valid";
+	public static final String SUBSCRIPTION_PRODUCT_STATUS_INVALID = "Invalid";
 }

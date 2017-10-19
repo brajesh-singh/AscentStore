@@ -564,4 +564,120 @@
 	<bean id="ascentDeliveryService" class="com.pwc.demo.core.delivery.impl.AscentDeliveryService" parent="defaultDeliveryService">
 	</bean>
 	
+	<alias name="ascentSubscriptionService" alias="subscriptionService" />
+	<bean id="ascentSubscriptionService" class="com.pwc.demo.core.subscription.impl.AscentSubscriptionServiceImpl" >
+	<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<alias name="ascentPaymentService" alias="paymentService"/>
+	<bean name="ascentPaymentService" class="com.pwc.demo.core.payment.impl.AscentPaymentServiceImpl" >
+	<property name="ascentCardPaymentService" ref="ascentCardPaymentService"/> 
+	</bean>
+	
+	<alias name="ascentCardPaymentService" alias="ascentCardPaymentService"/>
+    <bean id="ascentCardPaymentService" class="com.pwc.demo.core.payment.impl.AscentCardPaymentServiceImpl" >
+    <property name="ascentCommandFactoryRegistry" ref="commandFactoryRegistry"/>
+	</bean> 
+	
+<!-- Payment mockup implementation -->
+	<bean name="mockupCommandFactory" class="de.hybris.platform.payment.commands.factory.impl.DefaultCommandFactoryImpl" >
+		<property name="paymentProvider" value="Mockup"/>
+		<property name="commands">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.IsApplicableCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.IsApplicableMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.AuthorizationCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.AuthorizationMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.SubscriptionAuthorizationCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.SubscriptionAuthorizationMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.CaptureCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.CaptureMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.PartialCaptureCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.PartialCaptureMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.EnrollmentCheckCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.EnrollmentCheckMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.VoidCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.VoidMockCommand" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.FollowOnRefundCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.FollowOnRefundMockCommand" />
+				</entry>
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.StandaloneRefundCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.StandaloneRefundMockCommand" />
+				</entry>
+
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.CreateSubscriptionCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.CreateSubscriptionMockCommand" />
+				</entry>
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.DeleteSubscriptionCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.DeleteSubscriptionMockCommand" />
+				</entry>
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.GetSubscriptionDataCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.GetSubscriptionDataMockCommand" />
+				</entry>
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.UpdateSubscriptionCommand</value>
+					</key>
+					<bean class="de.hybris.platform.payment.commands.impl.UpdateSubscriptionMockCommand" />
+				</entry>
+				
+                <entry>
+					<key>
+                        <value type="java.lang.Class">com.pwc.demo.core.payment.commands.AscentAuthorizationCommand</value>
+					</key>
+					<bean class="com.pwc.demo.core.payment.commands.impl.AscentAuthorizationMockCommand" />
+				</entry>
+                <entry>
+					<key>
+                        <value type="java.lang.Class">com.pwc.demo.core.payment.commands.AscentSubscriptionAuthorizationCommand</value>
+					</key>
+					<bean class="com.pwc.demo.core.payment.commands.impl.AscentSubscriptionAuthorizationMockCommand" />
+				</entry>				
+			</map>
+		</property>
+	</bean>
+	
 </beans>

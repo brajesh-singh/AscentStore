@@ -7,7 +7,7 @@
 <template:page pageTitle="${pageTitle}">
 	<div class="checkout-login">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="checkout-login-left-content-slot">
 					<cms:component component="${feature}" element="div"  class="checkout-login-left-content-component"/>
 				</cms:pageSlot>

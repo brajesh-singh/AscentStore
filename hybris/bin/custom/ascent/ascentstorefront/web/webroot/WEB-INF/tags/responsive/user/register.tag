@@ -9,14 +9,8 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
-<div class="user-register__headline">
-	<spring:theme code="register.new.customer" />
-</div>
-<p>
-	<spring:theme code="register.description" />
-</p>
-
 <form:form method="post" commandName="registerForm" action="${action}">
+	<h2 class="content-block-header">Create Account</h2>
 	<formElement:formSelectBox idKey="register.title"
 		labelKey="register.title" selectCSSClass="form-control"
 		path="titleCode" mandatory="true" skipBlank="false"
