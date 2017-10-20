@@ -16,6 +16,7 @@
 
 <div class="col-sm-6 col-md-4 wow fadeIn" data-wow-delay=".3s">
 	<div class="category-box">
+		
 		<!-- <li class="product__list--item"> -->
 			<ycommerce:testId code="test_searchPage_wholeProduct">
 				<a class="product-link " href="${productUrl}" title="${fn:escapeXml(product.name)}" >
@@ -53,6 +54,7 @@
 				<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
 				<c:set var="loginUrl" value="${contextPath}/ascent/login" />
 				<c:url var="downloadUrl" value="/download" />
+				<c:url var="buyUrl" value="/${product.name}/p/${product.code }" />
 				<%-- <div class="addtocart">
 					<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
 						<action:actions element="div" parentComponent="${component}"  />
@@ -60,18 +62,10 @@
 				</div> --%>
 				<div class="category-link">
 					<a href="${downloadUrl}"  class="btn btn-warning btn-default btn-sm" ><spring:theme code="text.product.list.try" /></a>  
-					<a href="#" class="btn btn-warning btn-default btn-sm"><spring:theme code="text.product.list.buy" /></a>
+					<a href="${buyUrl }" class="btn btn-warning btn-default btn-sm"><spring:theme code="text.product.list.buy" /></a>
 				</div>
 		
 			</ycommerce:testId>
 		<!-- </li> -->
 	</div>
 </div>
-
-
-
-
-
-
-
-

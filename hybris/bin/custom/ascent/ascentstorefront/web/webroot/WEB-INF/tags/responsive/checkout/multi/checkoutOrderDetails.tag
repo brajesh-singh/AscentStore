@@ -10,7 +10,7 @@
 <%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi" %>
 <%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 
-<div class="checkout-summary-headline"><spring:theme code="checkout.multi.order.summary" /></div>
+<%-- <div class="checkout-summary-headline"><spring:theme code="checkout.multi.order.summary" /></div> --%>
 
 <div class="checkout-order-summary">
     <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />

@@ -22,7 +22,7 @@
 
 <ul class="checkout-order-summary-list">
 <c:if test="${hasShippedItems}">
-	<li class="checkout-order-summary-list-heading">
+	<%-- <li class="checkout-order-summary-list-heading">
 		<c:choose>
 			<c:when test="${showDeliveryAddress and not empty deliveryAddress}">
 				<div class="title"><spring:theme code="checkout.pickup.items.to.be.shipped"/></div>
@@ -58,7 +58,7 @@
 			</c:otherwise>
 		</c:choose>
 
-	</li>
+	</li> --%>
 </c:if>
 
 <c:forEach items="${cartData.entries}" var="entry" varStatus="loop">

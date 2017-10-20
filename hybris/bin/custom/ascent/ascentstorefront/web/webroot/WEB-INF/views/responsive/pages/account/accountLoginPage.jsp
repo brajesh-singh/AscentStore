@@ -4,8 +4,8 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="row">
-		<div>
+	<div class="ascent-login-frame">
+		<div >
 			<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="login-left-content-slot">
 				<cms:component component="${feature}"  element="div" class="login-left-content-component"/>
 			</cms:pageSlot>

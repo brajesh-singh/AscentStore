@@ -24,6 +24,8 @@ import de.hybris.platform.acceleratorcms.model.components.SubCategoryListCompone
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
 
+import com.pwc.demo.core.model.cms2.components.ProductSpotlightComponentModel;
+
 
 /**
  */
@@ -62,6 +64,7 @@ public interface ControllerConstants
 			String SubCategoryListComponent = _Prefix + SubCategoryListComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String SimpleResponsiveBannerComponent = _Prefix + SimpleResponsiveBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String CMSTabParagraphContainer = _Prefix + CMSTabParagraphContainerModel._TYPECODE + _Suffix; // NOSONAR
+			String ProductSpotlightComponent = _Prefix + ProductSpotlightComponentModel._TYPECODE + _Suffix;
 		}
 	}
 
@@ -112,7 +115,6 @@ public interface ControllerConstants
 				String SilentOrderPostPage = "pages/checkout/multi/silentOrderPostPage"; // NOSONAR
 				String GiftWrapPage = "pages/checkout/multi/giftWrapPage"; // NOSONAR
 				String ChoosePaymentTypePage = "pages/checkout/multi/choosePaymentTypePage";
-
 			}
 
 			interface Password // NOSONAR

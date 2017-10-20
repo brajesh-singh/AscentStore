@@ -14,42 +14,118 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <template:page pageTitle="${pageTitle}">
+	<cms:pageSlot position="TopContent" var="feature" element="div" class="span-24 top-content-slot cms_disp-img_slot">
+		<cms:component component="${feature}" />
+	</cms:pageSlot>
+	<section id="detail-head" class="content-block yellow">
+	
+		<div class="container">
+			<div class="row wow fadeIn" data-wow-delay="0.5s">
+   				 <div class="col-sm-8">
+	
+					<h2 class="content-block-header"><spring:theme code="checkout.orderConfirmation.productDownload" /></h2>
+					<h4 class="content-block-header"><span class="fa fa-cube"></span>
+						<c:forEach items="${orderData.entries}" var="entry">
+							${entry.product.name }
+						</c:forEach>
+					</h4>
+					
+					<div class="content-block-line"></div>
+					
+					<div class="content-block-desc">
+						<p class="lead">
+							<div class="orderConfirmationMsg">
+								<spring:theme code="checkout.orderConfirmation.thankYouForOrder" />&nbsp;
+								<spring:theme code="checkout.orderConfirmation.copySentTo" arguments="${email}" />
+							</div>
+							<div><spring:theme code="text.account.order.orderNumber" text="Order number is {0}" arguments="${orderData.code}" /></div>
+							<div><spring:theme code="text.account.order.orderPlaced" text="Placed on {0}" arguments="${orderData.created}" /></div>
+							<c:if test="${not empty orderData.statusDisplay}">
+								<spring:theme code="text.account.order.status.display.${orderData.statusDisplay}" var="orderStatus" />
+								<div>
+									<spring:theme code="text.account.order.orderStatus" text="The order is {0}" arguments="${orderStatus}" />
+								</div>
+							</c:if>
+						</p>	
+					</div>
+					
+					<div>
+						<a href="${request.contextPath}" class="button btn-jumbo positive right">
+							<spring:theme code="checkout.orderConfirmation.continueShopping" />
+						</a>
+					</div>
+	
+					<div class="clearfix">&nbsp;</div>
+					<a id="trial-form" style="margin-top:60px;"></a>
+				</div>
+    			<div class=" col-xs-12 col-sm-4  wow fadeInRight">
+				<div class="clearfix"><br /><br /></div>
+			    	<div class="content-block-links "><a href="#" class="btn btn-default btn-jumbo pull-right">DOWNLOAD PRODUCT</a></div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="products" class="content-block">
+		<div class="container">
+			<div class="row">
+
+				
+
+					<div class=" col-sm-12 wow fadeInUp">
+						<h2 class="content-block-header center">INSTALLATION</h2>
+						<div class="content-block-line center"></div>
+						
+					</div>
+
+				
+
+			</div>
+
+			<div class="row">
+			<div class="col-sm-6 ">
+			<h3>Topic Title</h3>
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. 
+			</p>
+			<div class="clearfix">&nbsp;</div>
+
+			</div>
+			<div class="col-sm-6 ">
+			<h3>Topic Title</h3>
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. 
+			</p>
+						<div class="clearfix">&nbsp;</div>
+
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-sm-6 ">
+			<h3>Topic Title</h3>
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. 
+			</p>
+			<div class="clearfix">&nbsp;</div>
+
+			</div>
+			<div class="col-sm-6 ">
+			<h3>Topic Title</h3>
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. 
+			</p>
+						<div class="clearfix">&nbsp;</div>
+
+			</div>
+			</div>
+			
+		</div>
+	</section>
 <%-- 	 <div id="globalMessages">
 		<common:globalMessages />
 	</div> --%>
-	<div class="span-24">
-		<cms:pageSlot position="TopContent" var="feature" element="div" class="span-24 top-content-slot cms_disp-img_slot">
-			<cms:component component="${feature}" />
-		</cms:pageSlot>
-		<div>
-			<a href="${request.contextPath}" class="button positive right">
-				<spring:theme code="checkout.orderConfirmation.continueShopping" />
-			</a>
-		</div>
-		<div class="orderHead">
-			<ycommerce:testId code="orderConfirmation_yourOrderResults_text">
-				<div class="orderConfirmationMsg">
-					<spring:theme code="checkout.orderConfirmation.thankYouForOrder" />
-				</div>
-				<div>
-					<spring:theme code="checkout.orderConfirmation.copySentTo" arguments="${email}" />
-				</div>
-			</ycommerce:testId>
-			<div>
-				<spring:theme code="text.account.order.orderNumber" text="Order number is {0}" arguments="${orderData.code}" />
-			</div>
-			<div>
-				<spring:theme code="text.account.order.orderPlaced" text="Placed on {0}" arguments="${orderData.created}" />
-			</div>
-			<c:if test="${not empty orderData.statusDisplay}">
-				<spring:theme code="text.account.order.status.display.${orderData.statusDisplay}" var="orderStatus" />
-				<div>
-					<spring:theme code="text.account.order.orderStatus" text="The order is {0}" arguments="${orderStatus}" />
-				</div>
-			</c:if>
-		</div>
-<%-- 
-		<div class="orderBoxes clearfix">
+
+		<%-- <div class="orderBoxes clearfix">
 
 			<c:set var="isService" value="false" />
 
@@ -96,6 +172,6 @@
 		<a href="${request.contextPath}" class="button positive right">
 			<spring:theme code="checkout.orderConfirmation.continueShopping" />
 		</a>
-	</div>  --%>
-
+	</div>  
+ --%>
 </template:page>

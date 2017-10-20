@@ -10,31 +10,52 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <ycommerce:testId code="checkoutSteps">
-    <div class="checkout-steps ${cssClass}">
+    <div class="checkout-steps ${cssClass} container">
+    	<ul class="nav nav-tabs dcp-tabs" role="tablist" >
+			
         <c:forEach items="${checkoutSteps}" var="checkoutStep" varStatus="status">
             <c:url value="${checkoutStep.url}" var="stepUrl"/>
             <c:choose>
                 <c:when test="${progressBarId eq checkoutStep.progressBarId}">
                     <c:set scope="page"  var="activeCheckoutStepNumber"  value="${checkoutStep.stepNumber}"/>
-                    <a href="${stepUrl}" class="step-head js-checkout-step active">
+                   <%--  <a href="${stepUrl}" class="step-head js-checkout-step active">
                         <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
-                    </a>
-                    <div class="step-body"><jsp:doBody/></div>
+                    </a> --%>
+                    <li role="presentation" class="active">
+                    	<a href="${stepUrl}" class="pointer  js-checkout-step active">
+                    	<div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
+                    	</a>
+                    </li>
+                   <%--  <div class="step-body"><jsp:doBody/></div>  --%>
                 </c:when>
                 <c:when test="${checkoutStep.stepNumber > activeCheckoutStepNumber}">
-                    <a href="${stepUrl}" class="step-head js-checkout-step ">
+                   <%--  <a href="${stepUrl}" class="step-head js-checkout-step ">
                         <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
-                    </a>
+                    </a> --%>
+                    <li role="presentation" class="">
+                    	<a href="${stepUrl}" class="pointer js-checkout-step ">
+	                        <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
+	                    </a>
+                 	</li>
                 </c:when>
                 <c:otherwise>
-                    <a href="${stepUrl}" class="step-head js-checkout-step ">
+                   <%--  <a href="${stepUrl}" class="step-head js-checkout-step ">
                         <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
                         <div class="edit">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </div>
-                    </a>
+                    </a> --%>
+                    <li role="presentation" class="">
+                    	<a href="${stepUrl}" class="pointer js-checkout-step">
+                    		<div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
+	                        <!-- <div class="edit">
+	                            <span class="glyphicon glyphicon-pencil"></span>
+	                        </div> -->
+                 		</a>
+                 	</li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+		</ul>
     </div>
 </ycommerce:testId>

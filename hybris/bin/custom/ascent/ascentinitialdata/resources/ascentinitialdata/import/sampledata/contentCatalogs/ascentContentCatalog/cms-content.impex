@@ -389,6 +389,10 @@ INSERT_UPDATE AscentSolutionBannerComponent;$contentCV[unique=true];uid[unique=t
 ;;BA;Business Analytics;BA;/Solutions/c/Solutions
 ;;FD;Fraud Detection;FD;/Solutions/c/Solutions
 
+#Product Spotlight Component
+INSERT_UPDATE ProductSpotlightComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;spotlightProducts(code,$productCV)
+;;ProductSpotlightComponent;Product Spotlight Component;ProductSpotlightComponent;AD000001,AD000002,AP000001,BA000001
+
 #INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
 #;;AscentHomePageRotatingImagesComponent;Ascent Home Page Rotating Images Component;SeeingIsBeliving,Business,Provider,Solution;AscentHomePageRotatingImagesComponent
 
@@ -399,12 +403,18 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;Section2ASlot-HomePage;Section2A Slot for Homepage;true;AD,SM
 ;;Section2BSlot-HomePage;Section2B Slot for Homepage;true;AP,CM
 ;;Section2CSlot-HomePage;Section2C Slot for Homepage;true;BA,FD
+;;Section3Slot-HomePage;Section3 Slot for Homepage;true;ProductSpotlightComponent
+;;Section3Slot-ProductDetails;Section3 Slot for ProductDetails;true;ProductSpotlightComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section1-Homepage;Section1;;Section1Slot-Homepage
 ;;Section2A-HomePage;Section2A;;Section2ASlot-HomePage
 ;;Section2B-HomePage;Section2B;;Section2BSlot-HomePage
 ;;Section2C-HomePage;Section2C;;Section2CSlot-HomePage
+;;Section3-HomePage;Section3;;Section3Slot-HomePage
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)[unique=true]
+;;Section3-ProductDetails;Section3;;Section3Slot-ProductDetails
 
 ###### Category Landing Page ######
 

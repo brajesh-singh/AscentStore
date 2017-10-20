@@ -6,40 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<header id="navbar" class="header">
-	<nav class="navbar navbar-custom detail-nav" role="navigation">
 
-		<div class="container-fluid">
-
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#custom-collapse-sub">
-					<span class="sr-only"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand"><span class="fa fa-cube"></span>
-					${fn:escapeXml(product.name)}</a>
-			</div>
-
-			<!-- 		<div class="collapse navbar-collapse" id="custom-collapse-sub">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#overview-details" role="tab" data-toggle="tab">Overview</a></li>
-						<li><a href="#pricing-info" role="tab" data-toggle="tab">Pricing</a></li>
-                        <li><a href="#account">Skills</a></li>
-						<li><a href="#testimonials">Testimonials</a></li>
-						<li><a href="login.html" ><span class="btn btn-warning">FREE TRAIL</span></a></li> 
-						<li><a href="#buy" data-toggle="modal"><span class="btn btn-warning">Buy</span></a></li>
-					</ul>
-				</div> -->
-
-
-
-		</div>
-		<!-- .container -->
-
-	</nav>
-
-</header>
+<product:productHeader productName="${fn:escapeXml(product.name)}" />
 <%-- <div class="product-details page-title">
 	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 		<div class="name">${fn:escapeXml(product.name)}<span class="sku">ID</span><span class="code">${fn:escapeXml(product.code)}</span></div>
@@ -255,89 +223,6 @@
 		</c:choose>
 	</div>
 </section>
-<!-- Products start -->
-<section id="products" class="content-block homepage-spotlight">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 wow fadeInUp">
-				<h2 class="content-block-header left">Additional Products</h2>
-				<div class="content-block-line"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-md-6 col-lg-3">
-				<div class="spotlight-box wow bounceInRight" data-wow-delay="0.1s">
-					<a class="product-box-link" href="detail.html">
-						<div class="spotlight-box-name">Product Name</div>
-						<div class="spotlight-box-category">
-							<span class="fa fa-cubes"></span> Solution Name
-						</div>
-						<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit.</div>
-					</a>
-					<div>
-						<a href="#trial" data-toggle="modal"
-							class="btn btn-warning btn-default btn-sm">Try</a> <a
-							href="detail.html#pricing"
-							class="btn btn-warning btn-default btn-sm">BUY</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-6 col-lg-3">
-				<div class="spotlight-box wow bounceInRight" data-wow-delay="0.3s">
-					<a class="product-box-link" href="detail.html"><div
-							class="spotlight-box-name">Product Name</div>
-						<div class="spotlight-box-category">
-							<span class="fa fa-cubes"></span> Solution Name
-						</div>
-						<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit.</div> </a>
-					<div>
-						<a href="#trial" data-toggle="modal"
-							class="btn btn-warning btn-default btn-sm">Try</a> <a
-							href="detail.html#pricing"
-							class="btn btn-warning btn-default btn-sm">BUY</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-6 col-lg-3">
-				<div class="spotlight-box wow bounceInRight" data-wow-delay="0.5s">
-					<a class="product-box-link" href="detail.html"><div
-							class="spotlight-box-name">Product Name</div>
-						<div class="spotlight-box-category">
-							<span class="fa fa-cubes"></span> Solution Name
-						</div>
-						<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit.</div> </a>
-					<div>
-						<a href="#trial" data-toggle="modal"
-							class="btn btn-warning btn-default btn-sm">Try</a> <a
-							href="detail.html#pricing"
-							class="btn btn-warning btn-default btn-sm">BUY</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-6 col-lg-3">
-				<div class="spotlight-box wow bounceInRight" data-wow-delay="0.7s">
-					<a class="product-box-link" href="detail.html"><div
-							class="spotlight-box-name">Product Name</div>
-						<div class="spotlight-box-category">
-							<span class="fa fa-cubes"></span> Solution Name
-						</div>
-						<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit.</div> </a>
-					<div>
-						<a href="#trial" data-toggle="modal"
-							class="btn btn-warning btn-default btn-sm">Try</a> <a
-							href="detail.html#pricing"
-							class="btn btn-warning btn-default btn-sm">BUY</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Products end -->
 <div class="scroll-up">
 	<a href="#top"><i class="fa fa-angle-up"></i></a>
 </div>

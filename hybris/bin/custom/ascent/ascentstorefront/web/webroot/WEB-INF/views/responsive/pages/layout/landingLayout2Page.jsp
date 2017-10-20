@@ -30,7 +30,7 @@
 				<cms:pageSlot position="Section2C" var="feature" element="div">
 					<cms:component component="${feature}" element="div" class="col-xs-12 col-sm-6 no-space yComponentWrapper"/>
 				</cms:pageSlot>
-			</div>				
+			</div>	
 		</div>
 	</section>
 
@@ -62,87 +62,6 @@
 	</cms:pageSlot>
 
 	<!-- Product Spotlight start -->
-	<section id="product-spolight" class="content-block homepage-spotlight">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 wow fadeInUp">
-					<h2 class="content-block-header center">Product Spotlight</h2>
-					<div class="content-block-line"></div>
-					<!--<p class="content-block-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut tincidunt massa. Cras vehicula lobortis eleifend. Nam quis dui a massa vehicula lobortis quis at orci. Donec ultrices sagittis dui non pharetra. 
-				</p>-->
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-6 col-lg-3">
-					<div class="spotlight-box wow bounceInRight" data-wow-delay="0.1s">
-						<a class="product-box-link" href="detail.html">
-							<div class="spotlight-box-name">Product Name</div>
-							<div class="spotlight-box-category">
-								<span class="fa fa-cubes"></span> Solution Name
-							</div>
-							<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit.</div>
-						</a>
-						<div>
-							<a href="login.html" class="btn btn-warning btn-default btn-sm">Try</a>
-							<a href="detail.html#pricing"
-								class="btn btn-warning btn-default btn-sm">BUY</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-6 col-lg-3">
-					<div class="spotlight-box wow bounceInRight" data-wow-delay="0.3s">
-						<a class="product-box-link" href="detail.html"><div
-								class="spotlight-box-name">Product Name</div>
-							<div class="spotlight-box-category">
-								<span class="fa fa-cubes"></span> Solution Name
-							</div>
-							<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit.</div> </a>
-						<div>
-							<a href="login.html" class="btn btn-warning btn-default btn-sm">Try</a>
-							<a href="detail.html#pricing"
-								class="btn btn-warning btn-default btn-sm">BUY</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-6 col-lg-3">
-					<div class="spotlight-box wow bounceInRight" data-wow-delay="0.5s">
-						<a class="product-box-link" href="detail.html"><div
-								class="spotlight-box-name">Product Name</div>
-							<div class="spotlight-box-category">
-								<span class="fa fa-cubes"></span> Solution Name
-							</div>
-							<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit.</div> </a>
-						<div>
-							<a href="login.html" class="btn btn-warning btn-default btn-sm">Try</a>
-							<a href="detail.html#pricing"
-								class="btn btn-warning btn-default btn-sm">BUY</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-6 col-lg-3">
-					<div class="spotlight-box wow bounceInRight" data-wow-delay="0.7s">
-						<a class="product-box-link" href="detail.html"><div
-								class="spotlight-box-name">Product Name</div>
-							<div class="spotlight-box-category">
-								<span class="fa fa-cubes"></span> Solution Name
-							</div>
-							<div class="spotlight-box-desc">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit.</div> </a>
-						<div>
-							<a href="login.html" class="btn btn-warning btn-default btn-sm">Try</a>
-							<a href="detail.html#pricing"
-								class="btn btn-warning btn-default btn-sm">BUY</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- .row -->
-		</div>
-		<!-- .container -->
-	</section>
 	<!-- Product Spotlight end -->
 
 	<!-- Product Testimonials -->

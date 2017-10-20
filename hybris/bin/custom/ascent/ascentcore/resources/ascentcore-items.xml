@@ -14,8 +14,8 @@
 
     <collectiontypes>
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
-        <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
-                        type="set"/>
+        <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true" type="set"/>
+        <collectiontype code="ProductList" elementtype="Product" autocreate="true" generate="true" type="list"/>
     </collectiontypes>
 
     <enumtypes>
@@ -112,7 +112,16 @@
             </itemtype>
         </typegroup>
   <typegroup name="Ascent">
-		
+  
+		    <itemtype code="ProductSpotlightComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="com.pwc.demo.core.jalo.cms2.components.ProductSpotlightComponent">
+				<attributes>
+					<attribute qualifier="spotlightProducts" type="ProductList">
+						<persistence type="property" />
+						<modifiers  />
+					</attribute>
+				</attributes>
+			</itemtype>
 			<itemtype code="AscentSolutionBannerComponent" generate="true"
 				jaloclass="com.pwc.demo.core.jalo.cms2.components.AscentSolutionBannerComponent" extends="BannerComponent" autocreate="true">
 				<description>Ascent Solution Banner</description>

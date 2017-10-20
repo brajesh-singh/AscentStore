@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="checkout-login">
+	<div class="checkout-login ascent-login-frame">
 		<div class="row">
 			<div class="col-md-12">
 				<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="checkout-login-left-content-slot">

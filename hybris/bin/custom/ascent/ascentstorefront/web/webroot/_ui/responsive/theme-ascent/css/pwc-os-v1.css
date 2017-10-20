@@ -10033,7 +10033,7 @@ a,
 
 /* Scss Document */
 .content-block {
-  padding: 80px 0 80px; }
+  padding: 50px 0 80px; }
 
 .content-block-header {
   font-weight: 300;
@@ -11359,3 +11359,29 @@ section {
   background-repeat: no-repeat;
   background-position: center right;
   background-size: cover; }
+
+.ascent-login-frame{	
+	background-color:#7AAED6;
+}  
+.ascentDetails {
+	height:178px;
+}
+.category-desc {
+	height:300px;
+}
+.category-name {
+	width:350px;
+}
+.spotlight-box-desc{
+    width: 200px;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.spotlight-box-category,.spotlight-box-name{
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;}
