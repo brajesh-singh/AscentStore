@@ -10,10 +10,8 @@ ACC.productDetail = {
     bindChangeValiditySelect: function () {
         var select = $("select[id=service_validity]");
         var rows = $("#servicesContainer").children("div");
-        if ("" == select.val()) {
-            rows.hide();
-        }
-        select.change(function () {
+
+        function showSelected() {
             rows.hide();
             if ("" != select.val()) {
                 rows.each(function () {
@@ -29,6 +27,15 @@ ACC.productDetail = {
             var y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
             window.scrollTo(x, y + 10);
             window.scrollTo(x, y);
+        }
+
+        if ("" == select.val()) {
+            rows.hide();
+        } else {
+            showSelected();
+        }
+        select.change(function () {
+            showSelected();
         });
     },
 
