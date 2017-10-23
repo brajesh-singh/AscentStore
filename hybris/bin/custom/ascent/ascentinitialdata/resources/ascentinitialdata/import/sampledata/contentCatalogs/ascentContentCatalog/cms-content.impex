@@ -43,7 +43,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;HomepageLink;Homepage Link;/;HomepageLink;HomepageLink;
 ;;ProductLink;Product Link;/Solutions/c/Solutions;ProductLink;ProductLink;;Solutions
 ;;SupportLink;Support Link;/faq;SupportLink;SupportLink;
-;;AccountLink;Account Link;/my-account;AccountLink;AccountLink;
+;;AccountLink;Account Link;/my-account/update-profile;AccountLink;AccountLink;
 ;;CompanyLink;My Company Link;/my-company/organization-management;CompanyLink;CompanyLink
 
 ;;ADLink;Application Delivery Link;/Solutions/AD/c/AD;ADLink;ADLink;;AD

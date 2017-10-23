@@ -230,10 +230,28 @@
 
 	<alias name="ascentSubscriptionFacade" alias="subscriptionFacade" />
     <bean id="ascentSubscriptionFacade" class="com.pwc.demo.facades.subscription.impl.AscentSubscriptionFacade" parent="defaultSubscriptionFacade">
+	    <property name="orderFacade" ref="orderFacade" />
 	    <property name="subscriptionService" ref="subscriptionService" />
+	    <property name="subscriptionConverter" ref="subscriptionConverter" />
 	    <property name="productService" ref="productService" />
 		<property name="termOfServiceRenewalConverter" ref="termOfServiceRenewalConverter" />
 	    <property name="termOfServiceFrequencyConverter" ref="termOfServiceFrequencyConverter" />
 	</bean>
-		
+   
+   <alias name="defaultSubscriptionConverter" alias="subscriptionConverter" />
+	<bean id="defaultSubscriptionConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="subscriptionData" />
+		<property name="populators">
+			<list>
+				<ref bean="subscriptionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSubscriptionPopulator" alias="subscriptionPopulator" />
+	<bean id="defaultSubscriptionPopulator" class="com.pwc.demo.facades.subscription.converters.populator.DefaultSubscriptionPopulator">
+		<property name="productFacade" ref="productFacade" />
+		<property name="orderFacade" ref="orderFacade" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>		
 </beans>

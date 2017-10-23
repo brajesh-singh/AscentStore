@@ -564,9 +564,14 @@
 	<bean id="ascentDeliveryService" class="com.pwc.demo.core.delivery.impl.AscentDeliveryService" parent="defaultDeliveryService">
 	</bean>
 	
+	<alias name="defaultSubscriptionDao" alias="subscriptionDao" />
+		<bean id="defaultSubscriptionDao" class="com.pwc.demo.core.subscription.dao.impl.DefaultSubscriptionDao" parent="abstractItemDao">
+	</bean>
+		
 	<alias name="ascentSubscriptionService" alias="subscriptionService" />
 	<bean id="ascentSubscriptionService" class="com.pwc.demo.core.subscription.impl.AscentSubscriptionServiceImpl" >
-	<property name="modelService" ref="modelService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="subscriptionDao" ref="subscriptionDao" />
 	</bean>
 	
 	<alias name="ascentPaymentService" alias="paymentService"/>
@@ -680,4 +685,9 @@
 		</property>
 	</bean>
 	
+	
+	<alias alias="subscriptionCommerceCartService" name="ascentSubscriptionCommerceCartService"/>
+	<bean id="ascentSubscriptionCommerceCartService"  class="com.pwc.demo.core.subscription.impl.AscentSubscriptionCommerceCartServiceImpl"
+	    	 parent="defaultSubscriptionCommerceCartService">
+	</bean>
 </beans>

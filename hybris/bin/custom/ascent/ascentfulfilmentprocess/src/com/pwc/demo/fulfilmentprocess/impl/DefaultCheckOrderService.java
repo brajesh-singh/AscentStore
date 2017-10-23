@@ -10,8 +10,8 @@
  */
 package com.pwc.demo.fulfilmentprocess.impl;
 
-import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
+
 import com.pwc.demo.fulfilmentprocess.CheckOrderService;
 
 
@@ -52,18 +52,6 @@ public class DefaultCheckOrderService implements CheckOrderService
 		{
 			// Order must have an overall delivery mode 
 			return false;
-		}
-
-		if (order.getDeliveryAddress() == null)
-		{
-			for (final AbstractOrderEntryModel entry : order.getEntries())
-			{
-				if (entry.getDeliveryPointOfService() == null && entry.getDeliveryAddress() == null)
-				{
-					// Order and Entry have no delivery address and some entries are not for pickup
-					return false;
-				}
-			}
 		}
 
 		return true;

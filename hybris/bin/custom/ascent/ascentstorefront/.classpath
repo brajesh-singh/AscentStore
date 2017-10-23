@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
@@ -9,7 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/accountsummaryaddon"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/customerticketingaddon"/>
-	
 	<classpathentry combineaccessrules="false" kind="src" path="/commerceorgsamplesaddon"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -21,7 +20,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/textfieldconfiguratortemplateaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/adaptivesearchsamplesaddon"/>
 	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/addon-captchaaddon-json-taglib-0.4.1.jar"/>
-	
 	<classpathentry combineaccessrules="false" kind="src" path="/consignmenttrackingaddon"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.7.9.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
@@ -30,10 +28,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/pcmbackofficesamplesaddon"/>
 	<classpathentry exported="true" kind="src" path="/ascentfacades"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/b2bacceleratoraddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/commerceorgaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ascentcheckoutaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/subscriptionfacades"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
-
-
-<classpathentry combineaccessrules="false" kind="src" path="/b2bacceleratoraddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/commerceorgaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/ascentcheckoutaddon"/>
 </classpath>

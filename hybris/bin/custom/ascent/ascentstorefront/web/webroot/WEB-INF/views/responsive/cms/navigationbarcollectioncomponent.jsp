@@ -11,11 +11,11 @@
 		</c:forEach>
 	<c:url value="/login" var="loginUrl"/>
 	<c:url value="/logout" var="logoutUrl"/>
-	<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+<%-- 	<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 	<li ><a href="${loginUrl}"><span  class="fa fa-sign-in"></span>LOGIN</a></li>
-	</sec:authorize>
-	<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+	</sec:authorize> --%>
+	<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 	<li ><a href="${logoutUrl}"><span  class="fa fa-sign-out"></span>LOGOUT</a></li>
-	</sec:authorize>
+	</sec:authorize> 
 	</ul>
 </c:if>

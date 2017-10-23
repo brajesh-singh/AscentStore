@@ -15,4 +15,6 @@ import java.util.List;
 public interface AscentSubscriptionService
 {
 	public void createSubscriptions(List<SubscriptionModel> subscriptions);
+
+	public abstract SubscriptionModel getSubscription(String subscriptionId);
 }

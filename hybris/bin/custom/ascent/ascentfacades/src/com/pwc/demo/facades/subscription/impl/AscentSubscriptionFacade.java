@@ -3,15 +3,19 @@
  */
 package com.pwc.demo.facades.subscription.impl;
 
+import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.subscriptionfacades.data.OrderEntryPriceData;
+import de.hybris.platform.subscriptionfacades.data.SubscriptionData;
 import de.hybris.platform.subscriptionfacades.data.SubscriptionPaymentData;
 import de.hybris.platform.subscriptionfacades.data.TermOfServiceFrequencyData;
 import de.hybris.platform.subscriptionfacades.data.TermOfServiceRenewalData;
@@ -23,6 +27,7 @@ import de.hybris.platform.subscriptionservices.model.SubscriptionModel;
 import de.hybris.platform.subscriptionservices.model.SubscriptionProductModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +47,10 @@ import com.pwc.demo.core.subscription.AscentSubscriptionService;
 public class AscentSubscriptionFacade extends DefaultSubscriptionFacade
 {
 	private static final Logger LOG = Logger.getLogger(AscentSubscriptionFacade.class);
-
+	private OrderFacade orderFacade;
 	private AscentSubscriptionService subscriptionService;
 	private ProductService productService;
+	private Converter<SubscriptionModel, SubscriptionData> subscriptionConverter;
 	private Converter<TermOfServiceRenewal, TermOfServiceRenewalData> termOfServiceRenewalConverter;
 	private Converter<TermOfServiceFrequency, TermOfServiceFrequencyData> termOfServiceFrequencyConverter;
 
@@ -125,7 +131,56 @@ public class AscentSubscriptionFacade extends DefaultSubscriptionFacade
 		return null;
 	}
 
+	@Override
+	@Nonnull
+	public Collection<SubscriptionData> getSubscriptions() throws SubscriptionFacadeException
+	{
+		// YTODO Auto-generated method stub
+		final ArrayList<SubscriptionData> subscriptions = new ArrayList<>();
+		//
+		final List<OrderHistoryData> orderHistories = getOrderFacade().getOrderHistoryForStatuses(OrderStatus.APPROVED,
+				OrderStatus.COMPLETED, OrderStatus.ASSIGNED_TO_ADMIN);
+		//
+		for (final OrderHistoryData orderHistory : orderHistories)
+		{
+			final OrderData order = orderFacade.getOrderDetailsForCode(orderHistory.getCode());
+			for (final OrderEntryData entry : order.getEntries())
+			{
+				final ProductData productData = entry.getProduct();
+				final ProductModel productModel = getProductService().getProductForCode(productData.getCode());
+				if (productModel instanceof SubscriptionProductModel)
+				{
+					final String subscriptionId = order.getCode() + entry.getEntryNumber();
 
+					final SubscriptionData subscription = getSubscription(subscriptionId);
+
+					if (subscription != null)
+					{
+						subscriptions.add(subscription);
+					}
+				}
+			}
+		}
+		return subscriptions;
+	}
+
+	@Override
+	public SubscriptionData getSubscription(final String subscriptionId) throws SubscriptionFacadeException
+	{
+		LOG.info("Get Subscriptions");
+		// YTODO Auto-generated method stub
+		final SubscriptionModel subscriptionModel = getSubscriptionService().getSubscription(subscriptionId);
+		if (subscriptionModel != null)
+		{
+			final SubscriptionData subscriptionData = getSubscriptionConverter().convert(subscriptionModel);
+
+			return subscriptionData;
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	/**
 	 * @return the subscriptionService
@@ -199,6 +254,40 @@ public class AscentSubscriptionFacade extends DefaultSubscriptionFacade
 			final Converter<TermOfServiceFrequency, TermOfServiceFrequencyData> termOfServiceFrequencyConverter)
 	{
 		this.termOfServiceFrequencyConverter = termOfServiceFrequencyConverter;
+	}
+
+	/**
+	 * @return the orderFacade
+	 */
+	public OrderFacade getOrderFacade()
+	{
+		return orderFacade;
+	}
+
+	/**
+	 * @param orderFacade
+	 *           the orderFacade to set
+	 */
+	public void setOrderFacade(final OrderFacade orderFacade)
+	{
+		this.orderFacade = orderFacade;
+	}
+
+	/**
+	 * @return the subscriptionConverter
+	 */
+	public Converter<SubscriptionModel, SubscriptionData> getSubscriptionConverter()
+	{
+		return subscriptionConverter;
+	}
+
+	/**
+	 * @param subscriptionConverter
+	 *           the subscriptionConverter to set
+	 */
+	public void setSubscriptionConverter(final Converter<SubscriptionModel, SubscriptionData> subscriptionConverter)
+	{
+		this.subscriptionConverter = subscriptionConverter;
 	}
 
 

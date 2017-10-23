@@ -97,6 +97,7 @@
 	<bean id="notifyCustomerAboutFraudAction" class="com.pwc.demo.fulfilmentprocess.actions.order.NotifyCustomerAboutFraudAction"  parent="abstractAction">
 		<property name="eventService" ref="eventService"/>
 	</bean>
-
+	
+   <bean id="completedOrderAction" class="com.pwc.demo.fulfilmentprocess.actions.order.CompletedOrderAction"  parent="abstractAction"/>
 
 </beans>
